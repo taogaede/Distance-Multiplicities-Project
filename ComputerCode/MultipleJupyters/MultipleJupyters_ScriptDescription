@@ -1,0 +1,19 @@
+Write the desired file F.ipynb so that:
+1. (Descriptive text) All descriptive text gets saved in a .txt file
+2. (Relevant Visualizations) All visualizations get saved as a .png file and placed in a compressed folder
+3. (Data Tables) All relevant statistics saved in a matrix, which gets saved as a .csv file.
+
+Input:
+.ipynb file F
+integers n and a
+
+Process:
+1. copy F.ipynb into F_n1.ipynb, F_n2.ipynb, ..., F_na.ipynb
+2. create folder for each copy
+3. run each copy
+4. collect descriptive text, png file folder (compressed), and csv file for each and place in a folder F_ni_Data
+5. create "F_Data" folder containing each F_n1_Data, F_n2_Data, ..., F_na_Data folder
+
+Idea:
+
+After searching for each desired n, can merge the F_Data folders so that the main result is relevant descriptive text, visualizations, and data tables for the structure F over all desired n.

@@ -4,3 +4,4 @@
 \contentsline {subsection}{\numberline {3.1}Conjectures}{5}{subsection.3.1}%
 \contentsline {paragraph}{Construction 1:}{6}{section*.3}%
 \contentsline {paragraph}{Construction 2:}{6}{section*.4}%
+\contentsline {section}{\numberline {4}Crescent Vertices}{7}{section.4}%

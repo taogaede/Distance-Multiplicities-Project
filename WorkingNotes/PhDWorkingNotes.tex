@@ -358,6 +358,10 @@
 	\end{proof}
 	\fi
 	
+	\section{Crescent Vertices}
+	
+	Let $v$ be a vertex of a graph $G$.  We say that $v$ is a \emph{crescent vertex} if the multiset of distances from $v$ to every other vertex in $G$ is of the form $\{d_1^{1},d_2^2,\ldots,d_k^{k}\}$ for some $k$.  For example, every vertex in the $4$-cycle $C_4$ is a crescent vertex.  A crescent vertex $v$ has the property that the rest of the vertices can be partitioned into $k$ classes based on the distance from $v$ such that the numbers of vertices in each class is given by a permutation.  We call such a permutation a \emph{crescent permutation}.  For instance, each crescent vertex in $C_4$ induces the crescent permutation $(2,1)$, or $(12)$.  Note that a vertex $v$ is crescent if and only if every other vertex similar to $v$ is crescent, so we are concerned with finding orbits of the given graph that contain crescent vertices.
+	
 	\newpage
 	\begin{thebibliography}{100}
 		\bibitem{alon} Alon, N. (1999). Combinatorial Nullstellensatz. Combinatorics, Probability and Computing, 8(1-2), 7-29. doi:10.1017/S0963548398003411
