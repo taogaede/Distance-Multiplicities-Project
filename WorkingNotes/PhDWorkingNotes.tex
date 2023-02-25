@@ -510,23 +510,264 @@
 	\end{obs}
 	
 	\begin{prop}
-		The grid graph with dimensions $a$ and $b$ has distance multiset $\{\}$.
+		Let $a$ and $b$ be positive integers such that $a \geq b$.  Then the multiplicity of each distance $x$ in the $a$ by $b$ grid graph is given by
+		\begin{align*}
+			\mult(x) = 
+			\begin{cases}
+				(2bx-x^2)a + 2{x+1 \choose 3} - bx^2, &\text{if } x \in [1,b-1];	\\
+				b^2(a-x) + 2{b+1 \choose 3}, &\text{if }x \in [b,a-1];	\\
+				2{b+1 - (x-a) \choose 3}, &\text{if }x \in [a,a-1+b-1].
+			\end{cases}
+		\end{align*}
 	\end{prop}
 	
 	\begin{proof}
-		Let $a$ and $b$ be the dimensions of a grid graph $G_{a,b}$.  Note that the distance of $G_{a,b}$ are the internal distances of $G_{a,b-1}$ and $P_a$ along with the external distances between a $G_{a,b-1}$ and $P_a$.
+	%	Let $a$ and $b$ be the dimensions of a grid graph $G_{a,b}$.  Note that the distance of $G_{a,b}$ are the internal distances of $G_{a,b-1}$ and $P_a$ along with the external distances between a $G_{a,b-1}$ and $P_a$.
 		
-		Let $P_a = (v_1,v_2,\ldots, v_{a})$.  Note for each $i \in [0,\floor{n/2}]$ that $v_i$ and $v_{a-i}$ have the same distances with $G_{a,b-1}$.  We can partition $V(G_{a,b-1})$ into $a$ $P_{b-1}$s, call them $P(1), P(2), \ldots, P(a)$.  Suppose $v_i$ is adjacent to an end-vertex in $P(i)$.  For a given $i \in [0,\tfrac{a}{2}]$, for all $j \in [i,a]$, then the distances between $v_i$ and $P(j)$ are $\{1, 2, \ldots, b-1\} + j-i$; similarly, for all $j \in [1,i-1]$, the distances between $v_i$ and $P(j)$ are $\{1, 2, \ldots, b-1\} + i-j$.
+	%	Let $P_a = (v_1,v_2,\ldots, v_{a})$.  Note for each $i \in [0,\floor{a/2}]$ that $v_i$ and $v_{a-i}$ have the same distances with $G_{a,b-1}$.  We can partition $V(G_{a,b-1})$ into $a$ $P_{b-1}$s, call them $P(1), P(2), \ldots, P(a)$.  Suppose $v_i$ is adjacent to an end-vertex in $P(i)$.  For a given $i \in [0,\tfrac{a}{2}]$, for all $j \in [i,a]$, then the distances between $v_i$ and $P(j)$ are $\{1, 2, \ldots, b-1\} + j-i$; similarly, for all $j \in [1,i-1]$, the distances between $v_i$ and $P(j)$ are $\{1, 2, \ldots, b-1\} + i-j$.
 		
-		So, the distances $\{1, 2, \ldots, b-1\}$ occur $a$ times, $\{1, 2, \ldots, b-1\}+1$ occur $a-1$ times, and in general $\{1, 2, \ldots, b-1\} + i$ occur $a-i$ times.  Similarly, the distances $\{1, 2, \ldots, b-1\} + a-i$ occurs $i$ times.  So, when $i = 0$, distance $d$ occurs $a$ times...[need to finish].
+	%	So, the distances $\{1, 2, \ldots, b-1\}$ occur $a$ times, $\{1, 2, \ldots, b-1\}+1$ occur $a-1$ times, and in general $\{1, 2, \ldots, b-1\} + i$ occur $a-i$ times.  Similarly, the distances $\{1, 2, \ldots, b-1\} + a-i$ occurs $i$ times.  So, when $i = 0$, distance $d$ occurs $a$ times...[need to finish].
+		
+	%	Nevermind the above setup.
+		
+	%	We want to calculate the distances between each $v_1, v_2, \ldots, v_a$ and the vertices in $P(1), P(2), \ldots, P(a)$.  There are $a^2$ such $(v_i,P(j))$ pairs where $i, j \in [a]$.  Note that the distances between $v_i$ and $v_j$ are $\{1, 2, \ldots, b-1\}+|i-j|$.  Since $v_1, v_2, \ldots, v_a$ form a path, it is straightforward to see that when $d \in \{1, 2, \ldots, a-1\}$, there are $2(a-d)$ pairs $(i,j)$ such that $|i-j| = d$.  When $d = 0$, then $i = j$ and there are $a$ such pairs.  So, for $d \in [a-1]$, there are $2(a-d)$ occurrences of the distances $\{1, 2, \ldots, b-1\} + d$ between $P_a$ and $G_{a,b-1}$ and $a$ occurrences of $\{1, 2, \ldots, b-1\}$.  Thus we have for the distances between $1$ and $b-1$: $1^a$, $2^{a+2(a-1)}$, $3^{a+2(a-1)+2(a-2)}$, $\ldots$, $(b-1)^{a+\sum_{d=1}^{b-2}2(a-d)}$.  In general, we have external distance $x \in [b-1]$ occurs with multiplicity ${a + \sum_{d=1}^{x-1}2(a-d)}$.  Then the multiplicities of the rest of the external distances $b$ through $a-1 + b-1$ are calculated differently: $b^{\sum_{d=1}^{b-1} 2(a-d)}$, $(b+1)^{\sum_{d=2}^{b}2(a-d)}$, and in general, for all $\ell \in \{0, 1, \ldots, a-2\}$, we have $(b+\ell)^{\sum_{d=\ell+1}^{\ell + b-1} 2(a-d)}$.
+		
+	%	We can simplify these sums.  Note that $\sum_{d=1}^{x-1}2(a-d) = 2a(x-1) - x(x-1) = (x-1)(2a-x)$, and $\sum_{d=\ell+1}^{\ell + b-1} 2(a-d) = 2a(b-1) - 2\sum_{d=\ell+1}^{\ell+b-1}d = 2a(b-1) - 2(b-1)(\ell+1) - 2{b-1 \choose 2} = 2a(b-1)-2(b-1)(\ell+1) - (b-1)(b-2) = (b-1)(2a-2(\ell+1)-(b-2))$.  Therefore, if $x = b + \ell$, then substituting $x-b$ for $\ell$ we get that distance $x \in \{b, b+1, \ldots, b+a-2\}$ has multiplicity $(b-1)(2a-2(x-b+1)-(b-2))$.  Thus the external distances between $G_{a,{b-1}}$ and $P_a$ are 
+	%	$$\{x^{a+(x-1)(2a-x)}: x \in \{1, 2, \ldots b-1\}\} \cup \{x^{(b-1)(2a-2(x-b+1)-(b-2))}: x \in \{b, b+1, \ldots, b-1 + a-1\}\}.$$
+		
+	%	We still need to determine the distances of $G_{a,b-1}$ though.  We can start with $G_{a,1}$ and since we know how many distances are added, we can count recursively.  $G_{a,1}$ has distances $\{1^{a-1}, 2^{a-2}, \ldots, (a-1)^1\}$, then by above, $G_{a,2}$ has distances $\{1^{a-1}, 2^{a-2}, \ldots, (a-1)^1\}$ from $G_{a,1}$ and $P_a$ and also
+	%	$$\{1^{a}\} \cup \{x^{2a-2(x-1)}: x \in \{2, 3, \ldots, a\}\}.$$
+		
+	%	Altogether $G_{a,2}$ has distance multiset $\{1^{3a-2}\} \cup \{x^{2a-2(x-1) + 2(a-x)}: x \in \{2, 3, \ldots, a-1\}\} \cup \{a^{2}\}$.  \textbf{More simplified:} $\{1^{3a-2}\} \cup \{x^{4(a-x)+2}: x \in \{2, 3, \ldots, a-1\}\} \cup \{a^{2}\}$.
+		
+	%	To find the closed form expression, we will need to find the distances in $G_{a,3}$.  Note the distances are
+		
+	%	$\{1^{3a-2}\} \cup \{x^{4(a-x)+2}: x \in \{2, 3, \ldots, a-1\}\} \cup \{a^{2}\}$ unioned with $\{1^{a-1}, 2^{a-2}, \ldots, (a-1)^1\}$ and also
+		
+	%	$$\{x^{a+(x-1)(2a-x)}: x \in \{1, 2\}\} \cup \{x^{(2)(2a-2(x-2)-1)}: x \in \{3, 4, \ldots, a+1\}\}.$$
+		
+	%	So the distance multiset of $G_{a,3}$ is
+		
+	%	$$\{1^{3a-2+(a-1)+a}\} \cup \{2^{4(a-2)+2 + (a-2) +a + (2a-2)}\} \cup \{x^{4(a-x)+2 + (a-x) + 2(2a-2(x-2)-1)}: x \in \{3, 4, \ldots, a-1\}\}$$
+		
+	%	unioned with $\{a^{2 + 2(2a-2(a-2)-1)}\} \cup \{(a+1)^{2(2a-2(a-1)-1)}\}$.
+		
+	%	\textbf{More simply:}
+		
+	%	$$\{1^{5a-3}, 2^{8a-10}\} \cup \{x^{9(a-x)+8}: x \in \{3, 4, \ldots, a-1\}\} \cup \{a^{8}, (a+1)^{2}\}.$$
+		
+	%	Gotta figure out $G_{a,4}$... Okay, it is the union of:
+	%	\begin{enumerate}
+	%		\item $\{1^{5a-3}, 2^{8a-10}\} \cup \{x^{9(a-x)+8}: x \in \{3, 4, \ldots, a-1\}\} \cup \{a^{8}, (a+1)^{2}\}.$
+	%		\item $\{1^{a-1}, 2^{a-2}, \ldots, (a-1)^1\}$,
+	%		\item $\{x^{a+(x-1)(2a-x)}: x \in \{1, 2, 3\}\} \cup \{x^{3(2a-2(x-3)-2)}: x \in \{4, 5, \ldots, a+2\}\}.$
+	%	\end{enumerate}
+	
+	%Altogether, we have that the distances in $G_{a,4}$ are:
+	
+	%$\{1^{5a-3+a-1+a}, 2^{8a-10 + a-2 + a+2a-2}, 3^{9(a-3)+8 + a-3 + a+2(2a-3)}\}$ along with $\{x^{9(a-x)+8 + a-x + 3(2a-2(x-3)-2)}: x \in \{4, 5, \ldots, a-1\}\}$, %along with $\{a^{8 + 3(2a-2(a-3)-2)}, (a+1)^{2 + 3(2a-2(a-2)-2)}, (a+2)^{3(2a-2(a-1)-2)}\}$.
+	
+	%More simply, we have:
+	
+	%$$\{1^{7a-4}, 2^{12a-14}, 3^{15a -28}\} \cup \{x^{16(a-x) + 20}: x \in \{4, 5, \ldots, a-1\}\} \cup \{a^{20}, (a+1)^{8}, (a+2)^{2}\}$$
+	
+	%Dang okay, I made a mistake in the external distance calculation.  The fix is below.  Fortunately, it's much simpler!
+	
+	We first find a recurrence relation by calculating the distances between $G_{a,b-1}$ and a path of length $a-1$, which we call $P_a$.  We call such distances ``external distances", and the distances between vertices within $G_{a,b-1}$ and within $P_{a}$ ``internal distances".  Throughout this proof, for a distance $x \in [1, a-1+b-1]$, we often distinguish between the internal and external multiplicities of $x$.  It is straightforward to see that the distances of $G_{a,b}$ are the union of external and internal distances between $G_{a,b-1}$ and $P_a$.  Once we know how to find the external distances, we will use this relation in a proof by induction to obtain a closed form expression for the distance multiset of $G_{a,b}$.  
+	
+	Let $v_1, v_2, \ldots, v_a$ be the vertices of $P_a$, and let $P(j)$ denote the path of length $b-1$ with $v_j$ as an end-vertex in $G_{a,b}$.  Note that there are $a^2$ ways to pair the vertices of $P_a$ with the paths $P(1), P(2), \ldots, P(a)$.  
+	
+	For a distance $x \in [b-1]$, its external multiplicity is given by $a + \sum_{d=1}^{x-1}2(a-d)$, where the $x-1$ in the upper limit ensures we are ignoring distances within $P_a$.  There are $2(a-d)$ ordered pairs $(i,j) \in [a]^2$ such that $|i-j| = d$, and each of these corresponds to an external distance $x$.  The $a$ term comes from the $a$ pairs $(i,j)$ such that $|i-j| = 0$.  
+	
+	When $x \in [b,a-1]$, the external multiplicity is given by $\sum_{d=x-(b-1)}^{x-1}2(a-d)$.  In this case, we have to ignore smaller differences (\textit{i.e.}, less than $x-(b-1)$) in $P_a$ since $x \geq b-1$.  When $x \in [a,a-1+b-1]$, the external multiplicity of $x$ is $\sum_{d=x-(b-1)}^{a-1}2(a-d)$.  We can simplify these expressions as follows:
+	
+	\begin{enumerate}
+		\item If $x \in [b-1]$:
+		\begin{align*}
+			a + \sum_{d=1}^{x-1}2(a-d) &= a + 2a(x-1) - x(x-1) 	\\
+			&= a+(x-1)(2a-x)
+		\end{align*}
+		
+		\item If $x \in [b,a-1]$: 
+		\begin{align*}
+			\sum_{d=x-(b-1)}^{x-1}2(a-d) &= 2a(b-1) - 2(b-1)(x-(b-1)) - (b-1)(b-2)	\\
+			&= (b-1)(2a - 2(x-(b-1)) - (b-2))	\\
+			&= (b-1)(2a - 2x + 2b - 2 - b + 2)	\\
+			&= (b-1)(2a -2x + b)
+		\end{align*}
+	
+		\item If $x \in [a,a-1 + b-1]$:
+		\begin{align*}
+			\sum_{d=x-(b-1)}^{a-1}2(a-d) &= 2a(a-x+b-1) - 2(a-x+b-1)(x-(b-1)) - (a-x+b-1)(a-x+b-2)	\\
+			&= (a-x+b-1)(2a-2(x-b+1) - a + x - b + 2)	\\
+			&= (a+b-1-x)(2a-2x + 2b - 2 - a + x - b + 2)	\\
+			&= (a+b-x-1)(a+b-x)
+		\end{align*}
+	\end{enumerate}
+
+	Altogether, the external distances between $G_{a,b-1}$ and $P_a$ are:
+	\begin{align*}
+		\mult(x)_{Ext} =
+		\begin{cases}
+			a+(x-1)(2a-x), &\text{if } x \in [1,b-1];	\\
+			(b-1)(2a-2x+b), &\text{if } x \in [b,a-1];	\\
+			2{a+b-x \choose 2}, &\text{if } x \in [a,a-1+b-1].
+		\end{cases}
+	\end{align*}
+	
+	
+	
+	\iffalse
+	In $G_{a,1}$, we have $\{x^{a-x}: x \in [a-1]\}$.  In $G_{a,2}$, the internal distances are $\{x^{2(a-x)}: x \in [a-1]\}$ and the external distances are:
+	
+	$$\{1^{a}\} \cup \{x^{2a-2x+2}: x \in [2,a-1]\} \cup \{a^{2}\}.$$
+	
+	Altogether, the distances of $G_{a,2}$ are:
+	
+	$$\{1^{3a-2}\} \cup \{x^{4(a-x)+2}: x \in [2,a-1]\} \cup \{a^2\}.$$
+	
+	For $G_{a,3}$, the internal distances are $\{1^{3a-2}\} \cup \{x^{4(a-x)+2}: x \in [2,a-1]\} \cup \{a^2\}$ and $\{x^{a-x}: x \in [a-1]\}$, which together is:
+	$$\{1^{4a-3}\} \cup \{x^{5(a-x)+2}: x \in [2,a-1]\} \cup \{a^2\},$$
+	and the external distances are:
+	$$ \{1^{a}, 2^{3a-2}\} \cup \{x^{2(2a-2x+3)}: x \in [3,a-1]\} \cup \{a^{6}, (a+1)^2\}.$$
+	
+	Then altogether we have that the distances of $G_{a,3}$ are:
+	
+	$$\{1^{5a-3}, 2^{8a-10}\} \cup \{x^{9(a-x)+8}: x \in [3,a-1]\} \cup \{a^8,(a+1)^2\}.$$
+	
+	
+	Now for $G_{a,4}$.
+	
+	The internal distances are 
+	$$\{1^{6a-4}, 2^{9a-12}\} \cup \{x^{10(a-x)+8}: x \in [3,a-1]\} \cup \{a^8,(a+1)^2\}.$$
+	
+	The external distances:
+	
+	$$ \{1^{a}, 2^{3a-2}, 3^{5a-6}\} \cup \{x^{3(2a-2x+4)}: x \in [4,a-1]\} \cup \{a^{12},(a+1)^{6},(a+2)^{2}\}.$$
+	
+	Altogether, the distances for $G_{a,4}$ are:
+	
+	$$ \{1^{7a-4}, 2^{12a-14}, 3^{15a-28}\} \cup \{x^{16(a-x)+20}: x \in \{4,a-1\}\} \cup \{a^{20}, (a+1)^{8}, (a+2)^2\}.$$
+	
+	I think I need one more:
+	
+	The internal distances of $G_{a,5}$ are:
+	
+	$$ \{1^{8a-5}, 2^{13a-16}, 3^{16a-31}\} \cup \{x^{17(a-x)+20}: x \in \{4,a-1\}\} \cup \{a^{20}, (a+1)^{8}, (a+2)^2\}.$$
+	
+	The external distances are:
+	
+	$$ \{1^{a}, 2^{3a-2}, 3^{5a-6}, 4^{7a-12}\} \cup \{x^{4(2a-2x+5)}: x \in [5,a-1]\} \cup \{a^{20}, (a+1)^{12}, (a+2)^{6}, (a+3)^2\}.$$
+	
+	Altogether the distances of $G_{a,5}$ are:
+	
+	$$\{1^{9a-5}, 2^{16a-18}, 3^{21a - 37}, 4^{24a - 60}\} \cup \{x^{25(a-x)+40}: x \in [5,a-1]\} \cup \{a^{40}, (a+1)^{20}, (a+2)^8, (a+3)^2\}.$$
+	\fi
+	
+	Now we use this to find the distances in $G_{a,b}$.  Below are the distance multisets of $G_{a,2}$, $G_{a,3}$, $G_{a,4}$, and $G_{a,5}$.
+	\begin{align*}
+		G_{a,2} &\Rightarrow \{1^{3a-2}\} \cup \{x^{4(a-x)+2}: x \in [2,a-1]\} \cup \{a^2\}.	\\
+		G_{a,3} &\Rightarrow \{1^{5a-3}, 2^{8a-10}\} \cup \{x^{9(a-x)+8}: x \in [3,a-1]\} \cup \{a^8,(a+1)^2\}.	\\
+		G_{a,4} &\Rightarrow \{1^{7a-4}, 2^{12a-14}, 3^{15a-28}\} \cup \{x^{16(a-x)+20}: x \in \{4,a-1\}\} \cup \{a^{20}, (a+1)^{8}, (a+2)^2\}.	\\
+		G_{a,5} &\Rightarrow \{1^{9a-5}, 2^{16a-18}, 3^{21a - 37}, 4^{24a - 60}\} \cup \{x^{25(a-x)+40}: x \in [5,a-1]\} \cup \{a^{40}, (a+1)^{20}, (a+2)^8, (a+3)^2\}.
+	\end{align*}
+	
+	
+	%I think I see it.
+	
+	We claim that the distance multiset of $G_{a,b}$ is given by
+	\begin{align*}
+		\mult(x) = 
+		\begin{cases}
+			(2bx-x^2)a + 2{x+1 \choose 3} - bx^2, &\text{if } x \in [1,b-1];	\\
+			b^2(a-x) + 2{b+1 \choose 3}, &\text{if }x \in [b,a-1];	\\
+			2{b+1 - (x-a) \choose 3}, &\text{if }x \in [a,a-1+b-1].
+		\end{cases}
+	\end{align*}
+	This is our inductive hypothesis.  Note that the base cases are satisfied by our claimed solution.
+	
+	%We have $\{x^{2{b+1 - (x-a) \choose 3}}: x \in [a,a-1+b-1]\}$.  Also, $\{x^{b^2(a-x) + 2{b+1 \choose 3}}: x \in [b,a-1]\}$.  Additionally, $\{x^{(2bx-x^2)a - \tfrac{x(x+1)(2x+1)}{3} - (b-1-x)x^2}: x \in [1,b-1]\}$.
+	
+	%For the latter multiplicities, we can simplify the expression further:
+	%\begin{align*}
+	%	(2bx-x^2)a - \tfrac{x(x+1)(2x+1)}{3} - (b-1-x)x^2 &= (2bx-x^2)a + \frac{(x-1)x(x+1)}{3} - bx^2	\\
+	%	&= (2bx-x^2)a + 2{x+1 \choose 3} - bx^2
+	%\end{align*}
+	
+	We now begin the inductive step of the proof.  By the inductive hypothesis, the cumulative internal distance multiplicities of $G_{a,b-1}$ and $P_a$ for distance $x$ are
+		\begin{align*}
+			\mult(x)_{Int} = 
+			\begin{cases}
+				(2(b-1)x-x^2)a + 2{x+1 \choose 3} - (b-1)x^2 + (a-x), &\text{if } x \in [1,b-2];	\\
+				(b-1)^2(a-x) + 2{b \choose 3} + (a-x), &\text{if }x \in [b-1,a-1];	\\
+				2{b - (x-a) \choose 3}, &\text{if }x \in [a,a-1+b-2].
+			\end{cases}
+		\end{align*}
+	Note that we simply add $(a-x)$ (from $P_a$) when $x \in [1,a-1]$.
+	We showed earlier that the external distances between $G_{a,b-1}$ and $P_a$ are
+	\begin{align*}
+		\mult(x)_{Ext} =
+		\begin{cases}
+			a+(x-1)(2a-x), &\text{if } x \in [1,b-1];	\\
+			(b-1)(2a-2x+b), &\text{if } x \in [b,a-1];	\\
+			2{a+b-x \choose 2}, &\text{if } x \in [a,a-1+b-1].
+		\end{cases}
+	\end{align*}
+	
+	%$$ \{x^{a+(x-1)(2a-x)}: x \in [b-1]\} \cup \{x^{(b-1)(2a-2x+b)}: x \in [b,a-1]\} \cup \{x^{2{a+b-x \choose 2}}:x \in [a,a-1+b-1]\}.$$
+	
+	Now all we do is add these multiplicities together.  When $x \in [a,a-1+b-1]$, we have 
+	\begin{align*}
+		\mult(x) &= 2{b-(x-a) \choose 3} + 2{a+b-x \choose 2}	\\
+		&= \frac{(b-x+a)(b-x+a-1)(b-x+a-2)}{3} + (b-x+a)(b-x+a-1)	\\
+		&= (b-x+a)(b-x+a-1)(\frac{b-x+a-2}{3} + 1)	\\
+		&= (b-x+a)(b-x+a-1)(\frac{b-x+a+1}{3})	\\
+		&= 2{b+1-(x-a) \choose 3},
+	\end{align*}
+	as desired.
+	
+	When $x \in [b,a-1]$, we have
+	\begin{align*}
+		\mult(x) &= (b-1)^2(a-x) + 2{b \choose 3} + (a-x) + (b-1)(2a-2x+b)	\\
+		&= (b-1)(a-x)(b-1 + 2) + b(b-1) + (a-x) + 2{b \choose 3}	\\
+		&= (b-1)(a-x)(b+1) + b(b-1) + (a-x) + \frac{b(b-1)(b-2)}{3}	\\
+		&= (a-x)(1+ (b-1)(b+1)) b(b-1) + \frac{b(b-1)(b-2)}{3}	\\
+		&= b^2(a-x) + b(b-1)(1 + \frac{b-2}{3})	\\
+		&= b^2(a-x) + \frac{(b+1)b(b-1)}{3}	\\
+		&= b^2(a-x) + 2{b+1 \choose 3},
+	\end{align*}
+	as desired.
+	
+	When $x= b-1$, we have
+	\begin{align*}
+		\mult(x) &= (b-1)^2(a-x) + 2{b \choose 3} + (a-x) + a+(x-1)(2a-x)	\\
+		&=(b-1)^2(a-x) + 2{b \choose 3} + a-x + a + 2ax - x^2 - 2a + x	\\
+		&=(b-1)^2(a-x) + 2{b \choose 3} + 2ax - x^2	\\
+		&=x^2(a-x) + 2{x+1 \choose 3} + 2ax - x^2	\\
+		&= a(x^2+2x) + 2{x+1 \choose 3} - x^2(x+1)	\\
+		&= (x^2 + 2x)a + 2{x+1 \choose 3} - bx^2	\\
+		&= (2(x+1)x - x^2) + 2{x+1 \choose 3} - bx^2	\\
+		&= (2bx-x^2)a+2 {x+1 \choose 3} - bx^2,
+	\end{align*}
+	as desired.
+	
+	When $x \in [1,b-2]$, we have
+	\begin{align*}
+		\mult(x) &= (2(b-1)x-x^2)a + 2{x+1 \choose 3} - (b-1)x^2 + a+(x-1)(2a-x) + (a-x)	\\
+		&= a(2(b-1)x-x^2) + 2{x+1 \choose 3} - bx^2 + x^2 + a + 2ax - x^2 - 2a + x + a - x	\\
+		&= a(2(b-1)x-x^2) + 2{x+1 \choose 3} -bx^2 + 2ax	\\
+		&= a(2(b-1)x-x^2 + 2x) + 2{x+1 \choose 3} - bx^2	\\
+		&= a(2bx - x^2) + 2{x+1 \choose 3} - bx^2,
+	\end{align*}
+	as desired.  Thus the proposition holds. \qedhere
 	\end{proof}
 
 	\begin{prop}
-		There does not exist a tree of order $n$ with uniform distance multiplicities.
+		Let $T$ be a tree of order $n$ that is neither $K_2$ nor $K_{1,3}$.  Then $T$ does not have uniform distance multiplicities.
 	\end{prop}
 
 	\begin{proof}
-		Let $m$ be the multiplicity of each graph distance in $T$ and $d$ its diameter.  Then ${n \choose 2} = md$.  Since $T$ is a tree, $\mult(1) = n-1$, so $m = n-1$.  Thus $d = \tfrac{n}{2}$.  Let $T_0 = (v_1, v_2, \ldots, v_d)$ be a diametrical path.  Order the vertices of $V(T) \setminus P = (u_1, u_2, \ldots, u_{n-d})$ in a way so that for all $i \in \{1, 2, \ldots, n-d\}$, each graph $T_i$ induced by $P \cup \{u_1, u_2, \ldots, u_i\}$ is connected.  Since $d$ is the diameter, $u_1$ in $T_1$ is adjacent to a vertex in $T_{0}$ with degree $2$; thus both distances $1$ and $2$ in $T_1$ have multiplicity $\tfrac{n}{2}$.  Since $T_i$ is connected, the neighbour of $u_i$ in $T_i$ has degree at least $1$ in $T_{i-1}$, so the multiplicity of distance $2$ in $T_i$ increases by at least $1$ compared to $T_{i-1}$.  So if for some $i \in \{2, 3, \ldots, n-d\}$, the neighbour of $u_i$ in $T_{i-1}$ has degree at least $2$, then $\mult(2) > \mult(1)$ in $T$.  So, the only way for $\mult(2) = \mult(1)$ in $T$ is if every added vertex gets joined with a leaf such that the resulting tree has diameter $d$.  But in this case $T$ has exactly $3$ leaves, which means $T$ has at most $3$ diametrical paths and so $m \leq 3$.  The only solutions are $K_2$ and $K_{1,3}$.
+		Let $m$ be the multiplicity of each graph distance in $T$ and $d$ its diameter.  Then ${n \choose 2} = md$.  Since $T$ is a tree, $\mult(1) = n-1$, so $m = n-1$ and thus $d = \tfrac{n}{2}$.  Let $T_0 = (v_1, v_2, \ldots, v_d)$ be a diametrical path.  Order the vertices of $V(T) \setminus T_0 = (u_1, u_2, \ldots, u_{n-d})$ in a way so that for all $i \in \{1, 2, \ldots, n-d\}$, each graph $T_i$ induced by $T_0 \cup \{u_1, u_2, \ldots, u_i\}$ is connected.  Since $T_0$ is a diametrical path, $u_1$ in $T_1$ has to be adjacent to a vertex in $T_{0}$ with degree $2$; thus both distances $1$ and $2$ in $T_1$ have multiplicity $\tfrac{n}{2}$.  Note that $u_i$ has a unique neighbour in $T_i$.  Since $T_{i-1}$ is connected, the neighbour of $u_i$ in $T_i$ has degree at least $1$ in $T_{i-1}$, so the multiplicity of distance $2$ in $T_i$ increases by at least $1$ compared to $T_{i-1}$.  Observe that if for some $i \in \{2, 3, \ldots, n-d\}$, the neighbour of $u_i$ in $T_{i-1}$ has degree at least $2$, then $\mult(2) > \mult(1)$ in $T$.  So the only way for $\mult(2) = \mult(1)$ in $T$ is if every added vertex gets joined with a leaf such that the resulting tree has diameter $d$.  But in this case $T$ has exactly $3$ leaves, which means $T$ has at most $3$ diametrical paths and so $n-1 = m \leq 3$.  The only solutions are $K_2$ and $K_{1,3}$.  \qedhere
 	\end{proof}
 	
 	\begin{prop}
@@ -538,7 +779,9 @@
 	\end{proof}
 
 	\begin{obs}
-		Note that the structure of $T$ is necessary to determine $\sum_{u_1u_2 \in E(T)}(\deg(u_1)-1)(\deg(u_2)-1)$.  So for the case when $d=4$, we have $\mult(3) = \sum_{u_1u_2 \in E(T)}(\deg(u_1)-1)(\deg(u_2)-1)$, and so 
+		Note that the edges of $T$ must be known to determine the distance multiset when $d \geq 4$, because 
+		$$\mult(3) = \sum_{u_1u_2 \in E(T)}(\deg(u_1)-1)(\deg(u_2)-1).$$  
+		So for the case when $d=4$, we have $\mult(3) = \sum_{u_1u_2 \in E(T)}(\deg(u_1)-1)(\deg(u_2)-1)$, and so 
 		$$\mult(4) = {n \choose 2} - \sum_{u_1u_2 \in E(T)}(\deg(u_1)-1)(\deg(u_2)-1) - \sum_{u \in V(T)}\deg(u) - (n-1).$$
 	\end{obs}
 	
@@ -553,6 +796,58 @@
 			\Leftrightarrow d &= \frac{1}{M}\biggr[{n \choose 2} - \sum_{i=1}^{m-1}m_ix_i\biggr] + \sum_{i=1}^{m-1}x_i 	\\
 		\end{align*}
 	\end{proof}
+	
+	\section{Graph Distance Multiplicity Vector Space}
+	
+	In this section, we propose the study of a subset of vectors on a bounded surface in $\R^d$, in which the vectors are the multiplicity lists for graphs with diameter $d$.  The ``corners" of this surface are multiplicity vectors for special standard graphs whose multiplicities are well understood, like cycles, paths, grid graphs, and so on.  One goal is to characterize general graph classes relative to the special graph ``corners" in the following sense: if the multiplicity vector of a graph $G$ is a linear combination of a pair of standard graph multiplicity vectors, then we say that $G$ is similar to these two standard graphs.  Subsequently, if $G$ is similar to a pair of standard graphs $H_1$ and $H_2$, then using the inner products of the multiplicity vectors, we can determine whether $G$ is closer (wrt to angle and/or norm) to $H_1$ or $H_2$ in $\R^d$.  So, the goal is to try to classify graphs based on their distance multiplicities relative to standard graphs.  There are two phases to this endeavor: (1) find and argue for good candidate standard graphs, and (2) try to build up a large and comprehensive surface in $\R^d$ in which a wide variety of graphs live.
+	
+	Let $P$ be a path of length $d$, then we say that $m(P) = (d, d-1, \ldots, 1)$ is the multiplicity vector of $P$.  Let $G$ be a graph of order $n$ with multiplicity vector $m(G) = (m_1, m_2, \ldots, m_d)$, where $m_i$ is the multiplicity of distance $i$ in $G$.  Note that $\sum_{i=1}^d m_i = {n \choose 2}$ and $\sum_{i=1}^d im_i = W(G)$, where $W(G)$ is the sum of all distances in $G$ (also known as the Weiner index of $G$).  Then 
+	\begin{align*}
+		\langle m(P), m(G) \rangle &= \sum_{i=1}^d(d+1-i)\cdot m_i	\\
+		&= (d+1)\sum_{i=1}^d m_i - \sum_{i=1}^d im_i	\\
+		&= (d+1){n \choose 2} - W(G).
+	\end{align*}
+	
+	By the definition of the inner product in $\R^d$,
+	
+	$$ \langle m(P), m(G) \rangle = \norm{m(P)} \norm{m(G)} \cos(\theta),$$
+	
+	where $\theta$ is the angle between $m(P)$ and $m(G)$ in $\R^d$.  Note that 
+	$$\norm{m(P)} = \sqrt{\sum_{i=1}^d (d+1-i)^2} = \sqrt{\sum_{i=1}^d i^2} = \sqrt{\frac{d(d+1)(2d+1)}{6}}.$$
+	
+	So altogether we have
+	
+	$$(d+1){n \choose 2} - W(G) = \sqrt{\frac{d(d+1)(2d+1)}{6}} \cdot \norm{m(G)} \cdot \cos(\theta).$$
+	
+	Why is this interesting?  Note $n$, $W(G)$, and $\norm{m(G)}$ are parameters that depend only on $G$, so they determine the angle $\theta$, which can be seen as a measure of how similar $G$ and $P$ are.  For example, let $G = K_{1,n-1}$; since $G$ has diameter $2$, we assume $d=2$.  Then it is straightforward to see that $\norm{m(K_{1,n-1})} = \sqrt{{n-1 \choose 2}^2 + (n-1)^2}$ and $W(K_{1,n-1}) = 2{n-1 \choose 2} + (n-1)$.  Thus we have
+	
+	\begin{align*}
+		3{n \choose 2} - \biggr(2{n-1 \choose 2} + (n-1)\biggr) &= \sqrt{5} \cdot \sqrt{{n-1 \choose 2}^2 + (n-1)^2} \cdot \cos(\theta)	\\
+		\Leftrightarrow 2 {n \choose 2} - {n-1 \choose 2} &= \sqrt{5 \biggr({n-1 \choose 2}^2 + (n-1)^2\biggr)} \cdot \cos(\theta)	\\
+		\Leftrightarrow \cos(\theta) &= \frac{{n+1 \choose 2}}{\sqrt{5({n-1 \choose 2}^2 + (n-1)^2)}}
+	\end{align*}
+	
+	Note that as $n \rightarrow \infty$, $\cos(\theta)$ tends to $\tfrac{1}{\sqrt{5}}$.  This means that $\lim_{n \rightarrow \infty} \theta(n) \sim 1.1071$, which is about $63.43$ degrees.  While we might expect the angle to be closer to $\tfrac{\pi}{2}$ (since paths and stars have very different, almost oppositional, multiplicity structure in trees), it is still the case that $m(P)$ and $m(K_{1,n-1})$ are very dissimilar in both angle and (especially) norm.
+	
+	Note that while all trees with diameter $2$ are stars, there are many diameter two graphs containing cycles that do not have a spanning tree with the same distance multiset.  \textbf{A follow-up question from this example:} does there exist a graph $G$ with a cycle whose multiplicity vector has larger angle from $P$ than $K_{1,n-1}$ and from $K_{1,n-1}$ than $P$?  If not, then perhaps $m(K_{1,2})$ and $m(K_{1,n-1})$ form boundaries for multiplicity vectors of graphs with diameter $2$.
+	
+	\paragraph{On the Weiner Index and Arithmetic Progressions}
+	
+	Recall the Weiner index is $W(G) = \sum_{i=1}^d im_i$.  So if we are comparing $G$ to some special standard graph $H$ and $W(G)$ shows up in $\langle m(G), m(H) \rangle$, then this means that at least part of $m(H)$ has a distribution that scales linearly with the distance.  That is if $m(H) = (\ell_1, \ell_2, \ldots, \ell_d)$, where $\ell_i$ is the multiplicity of distance $i$ in $H$, then for $W(G)$ to show up in $\langle m(G), m(H) \rangle$, it must hold that $\ell_i = f(\ell_i) + i g + a$ for some $g,a \in \Z$ and some function $f:\Z \mapsto \Z$.  This is because if $W(G)$ shows up in this way, we have
+	
+	\begin{align*}
+		\langle m(G), m(H) \rangle &= \sum_{i=1}^d m_i \cdot \ell_i	\\
+		&= 	\sum_{i=1}^d m_i \cdot f(\ell_i) + gW(G) + a\sum_{i=1}^d m_i\\
+		&=  \sum_{i=1}^d m_i \cdot f(\ell_i) + g\sum_{i=1}^d im_i + a \sum_{i=1}^d m_i	\\
+		&= 	\sum_{i=1}^d m_i(f(\ell_i) + gi + a).
+	\end{align*}
+
+	Note that if $f$ vanishes and $g \neq 0$, then $m(H)$ is an arithmetic progression.  Also if $a \neq 0$, then $\sum_{i=1}^d m_i = {n(G) \choose 2}$ shows up in the inner product, which is also convenient.
+	
+	\textbf{Question:} are all graphs with arithmetic progression multiplicities are similar to one another?  That is, $\theta$ in their inner products are similar. Let's explore this...
+	
+	Let $m(G) = (15,11,7,3)$, so $n = 9$.  Set aside the fact that no graph exists with these multiplicities, since we may generalize this approach to study distance multiplicities for any class of metrical objects.  Let's compare $m(G)$ to $m(P) = (4,3,2,1)$, the multiplicities of a path with diameter $4$.  Then $\langle m(P), m(G) \rangle = \sum_{i=1}^4 (5-i)m_i = 60 + 33 + 14 + 3$, but note that $m_i = 4(d-i)+3 = 17-4i$.  So....
+	
 	
 	\newpage
 	\begin{thebibliography}{100}

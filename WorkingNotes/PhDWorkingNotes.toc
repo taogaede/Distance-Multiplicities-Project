@@ -6,3 +6,5 @@
 \contentsline {section}{\numberline {4}Construction with Large Gap Between Max Multiplicity and $\mathbf {\mult (2)}$}{7}{section.4}%
 \contentsline {paragraph}{Construction.}{8}{section*.5}%
 \contentsline {section}{\numberline {5}Distance Multisets of Specific Graphs}{10}{section.5}%
+\contentsline {section}{\numberline {6}Graph Distance Multiplicity Vector Space}{14}{section.6}%
+\contentsline {paragraph}{On the Weiner Index and Arithmetic Progressions}{16}{section*.7}%

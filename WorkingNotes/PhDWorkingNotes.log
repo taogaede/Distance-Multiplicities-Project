@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.26)  14 FEB 2023 18:02
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.26)  24 FEB 2023 19:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -890,7 +890,7 @@ Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                 on input line 213.
 
 [4]
-<ExtremalTreeExample3(min).png, id=90, 280.4076pt x 162.6075pt>
+<ExtremalTreeExample3(min).png, id=95, 280.4076pt x 162.6075pt>
 File: ExtremalTreeExample3(min).png Graphic file (type png)
 <use ExtremalTreeExample3(min).png>
 Package pdftex.def Info: ExtremalTreeExample3(min).png  used on input line 257.
@@ -901,12 +901,12 @@ Package pdftex.def Info: ExtremalTreeExample3(min).png  used on input line 257.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [5] [6 <./ExtremalTreeExample3(min).png>]
-<ExtremalTreeExample2.png, id=125, 252.945pt x 279.6849pt>
+<ExtremalTreeExample2.png, id=130, 252.945pt x 279.6849pt>
 File: ExtremalTreeExample2.png Graphic file (type png)
 <use ExtremalTreeExample2.png>
 Package pdftex.def Info: ExtremalTreeExample2.png  used on input line 327.
 (pdftex.def)             Requested size: 164.4123pt x 181.79303pt.
-<ExtremalTreeExample1.png, id=126, 279.6849pt x 252.945pt>
+<ExtremalTreeExample1.png, id=131, 279.6849pt x 252.945pt>
 File: ExtremalTreeExample1.png Graphic file (type png)
 <use ExtremalTreeExample1.png>
 Package pdftex.def Info: ExtremalTreeExample1.png  used on input line 331.
@@ -982,23 +982,33 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 449.
 
 [7 <./ExtremalTreeExample2.png> <./ExtremalTreeExample1.png>]
-<Delta-ary-tree-example.png, id=145, 225.84375pt x 268.75406pt>
+<Delta-ary-tree-example.png, id=151, 225.84375pt x 268.75406pt>
 File: Delta-ary-tree-example.png Graphic file (type png)
 <use Delta-ary-tree-example.png>
 Package pdftex.def Info: Delta-ary-tree-example.png  used on input line 464.
 (pdftex.def)             Requested size: 112.92159pt x 134.3767pt.
- [8 <./Delta-ary-tree-example.png>] [9] [10] [11] [12] (./PhDWorkingNotes.aux)
+ [8 <./Delta-ary-tree-example.png>] [9]
+Overfull \hbox (40.26053pt too wide) detected at line 605
+[]
+ []
+
+[10]
+Overfull \hbox (41.94495pt too wide) detected at line 673
+[]
+ []
+
+[11] [12] [13] [14] [15] [16] [17] [18] (./PhDWorkingNotes.aux)
 Package rerunfilecheck Info: File `PhDWorkingNotes.out' has not changed.
-(rerunfilecheck)             Checksum: 2B916165675853C0C3B1F06406FE0EE6;1456.
+(rerunfilecheck)             Checksum: DD7A1A8F3F90A0AE7F25856F25B65F46;1711.
  ) 
 Here is how much of TeX's memory you used:
- 24817 strings out of 478037
- 460103 string characters out of 5843053
- 838164 words of memory out of 5000000
- 42751 multiletter control sequences out of 15000+600000
+ 24829 strings out of 478037
+ 460196 string characters out of 5843053
+ 837164 words of memory out of 5000000
+ 42752 multiletter control sequences out of 15000+600000
  480331 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,89p,1306b,659s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,16n,89p,1406b,659s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/tex
 live/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2022
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-di
@@ -1014,10 +1024,10 @@ exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2022
 amsfonts/cm/cmsy5.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmsy7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.p
 fb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on PhDWorkingNotes.pdf (12 pages, 297939 bytes).
+Output written on PhDWorkingNotes.pdf (18 pages, 322422 bytes).
 PDF statistics:
- 272 PDF objects out of 1000 (max. 8388607)
- 213 compressed objects within 3 object streams
- 72 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 309 PDF objects out of 1000 (max. 8388607)
+ 244 compressed objects within 3 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 89 words of extra memory for PDF output out of 10000 (max. 10000000)
 
