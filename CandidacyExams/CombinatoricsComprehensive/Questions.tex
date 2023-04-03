@@ -1,0 +1,1013 @@
+\documentclass[12]{article}
+\usepackage[shortlabels]{enumitem}
+\usepackage{geometry}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{booktabs} % See the package documentation for guidelines on formal tables: https://ctan.org/pkg/booktabs
+\usepackage{verbatim} % Used to typeset, for example, code snippets or pseudo-code for algorithms.
+\usepackage{dsfont} % Extra fontset for helpful mathematics symbols, e.g. \mathds{1}
+\usepackage{etoolbox} % Used to allow boolean variables for use in the title page
+\usepackage{import}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{bbm}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\set}[2]{\left\{#1 \ : \ #2\right\}}
+\newcommand{\conv}[1]{\underset{#1}\longrightarrow}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\Supp}[0]{\ \mathrm{Supp}\ }
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclareMathOperator{\lcm}{lcm}
+\newcommand{\Cross}{\mathbin{\tikz [x=1.4ex,y=1.4ex,line width=.2ex] \draw (0,0) -- (1,1) (0,1) -- (1,0);}}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+		\left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+		#1 % the function
+		\vphantom{\big|} % pretend it's a little taller at normal size
+		\right|_{#2} % this is the delimiter
+}}
+% Custom math operators (analogous to \lim, \sup, etc).
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\subspan}{span}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diam}{Diam}
+\DeclareMathOperator{\mult}{mult}
+
+\newcounter{identityCounter}
+\newcounter{countingFactCounter}
+\newcounter{exerciseCounter}
+\newtheorem{thm}{Theorem}[section] % Numbering is impacted by [chapter]; could do [section] or [subsection] also.
+\newtheorem{lem}{Lemma} % The [thm] argument says to number Lemma in sequence with Theorem.
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{question}{Question}
+\newtheorem{iden}[identityCounter]{Identity}
+\newtheorem{countingFact}[countingFactCounter]{Counting Fact}
+\newtheorem{ex}[exerciseCounter]{Exercise}
+% These environments are unnumbered and will not count toward the numbering.
+%\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem*{claim}{Claim}
+% These environments are definitions; they have a different style (bold label, standard font).
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % These definitions are also numbered in sequence with Theorem.
+\newtheorem{eg}{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{obs}{Observation}
+
+\title{ \vspace{-3cm} Combinatorics Comprehensive Exam Preparation }
+%\author{Tao Gaede}
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\section{Topic Notes}
+	
+	\subsection{Important Proofs}
+	
+	\subsubsection{Pigeonhole Principle}
+	
+	\begin{thm}
+		If $n$ objects are placed into $k$ containers, then at least one container contains at least $\ceil{n/k}$ objects and at least one container contains at most $\floor{n/k}$ objects.
+	\end{thm}
+	\begin{proof}
+		We distribute the $n$ objects uniformly in the $k$ containers.  If $k \ | \ n$, then the statement conclusion follows.  If $k  \not| \ n$, then there is a container with more than $n/k$ objects and at least one container with fewer than $n/k$ objects.
+	\end{proof}
+	
+	\begin{thm}
+		If $k^2+1$ points are placed in an equilateral triangle with side lengths $k$, then there are at least two points at distance less than $1$.
+	\end{thm}
+
+	\begin{thm}
+		If $k^d + 1$ points are placed in a $d$-dimensional hypercube with side lengths $k$, then there are at least two points at distance less than $\sqrt{d}$.
+	\end{thm}
+	
+	\begin{thm}[Erd\H{o}s-Szekeres]
+		Let $v, m, n$ be positive integers such that $v > mn$.  Let $a_1, a_2, \ldots, a_v$ be a sequence of distinct real numbers such that the number of terms of every decreasing subsequence is at most $m$.  Then there exists an increasing subsequence of more than $n$ terms.
+	\end{thm}
+
+	\begin{proof}[Proof (A. Seidenberg 1959)]
+		To each $a_i$ assign a pair $(m_i,n_i)$, where $m_i$ is the largest length of a decreasing subsequence beginning at $a_i$ and $n_i$ the same but for increasing subsequences. For each $i < j$, $(m_i,n_i)$ and $(m_j,n_j)$ are distinct.  For otherwise if $a_i < a_j$ then $n_i > n_j$, and if $a_j > a_i$ then $m_i > m_j$.  Thus there are $v > mn$ such distinct pairs.  But by pigeonhole principle, if each $n_i \leq n$, then since each $m_i \leq m$, there would be at most $mn$ distinct pairs, a contradiction.
+	\end{proof}
+	
+	\subsubsection{Principle of Inclusion and Exclusion}
+	
+	\begin{thm}
+		Let $A_1, A_2, \ldots, A_n$ be finite sets.  Then
+		$$\biggr|\bigcup_{i = 1}^n A_i \biggr| = \sum_{k=1}^n (-1)^{k+1} \sum_{I \in {[n] \choose k}} \biggr|\bigcap_{i \in I}A_i \biggr|.$$
+	\end{thm}
+	\begin{proof}
+		Since every element in $\bigcup_{i = 1}^n A_i$ is counted at least once in the RHS, we show that in fact each element is counted at most once.  Suppose $x \in \bigcup_{i = 1}^n A_i$ belongs to $t$ of the sets $A_1, A_2, \ldots, A_n$ where $1 \leq t \leq n$.  Then on the RHS, $x$ is counted $t$ times when $k = 1$, ${t \choose 2}$ times when $k=2$, and in general ${t \choose k}$ times for all $1 \leq k \leq t$.  By the binomial theorem, 
+		$$-\sum_{k = 1}^t (-1)^k {t \choose k} = -\biggr[(1 + (-1))^t - {t \choose 0}(-1)^0 \biggr] = 1.$$
+		So the RHS also counts $x$ exactly once.
+	\end{proof}
+
+	\begin{thm}
+		The number of onto functions from $[n]$ to $[m]$ is
+		$$\sum_{k=0}^m (-1)^k {m \choose k}(m-k)^n.$$
+	\end{thm}
+	\begin{proof}
+		The term in the sum at $k=0$ is $m^n$, which is the number of all functions from $[n]$ to $[m]$, so the remaining terms count the number of non-onto functions.  A non-onto function is one that doesn't map to an element in the codomain $[m]$, so ${m \choose k}$ counts the number of $k$-subsets of elements in the codomain for $(m-k)^n$ functions to ignore.  So for each $1 \leq i \leq m$, the set $A_i$ is the number of functions that ignore element $i \in [m]$, and their union is the number of non-onto functions. By PIE, 
+		$$\biggr| \bigcup_{i=1}^m A_i| = -\sum_{k=1}^m (-1)^k {m \choose k}(m-k)^n.$$
+		So the number of onto functions is $m^n$ less this quantity.
+	\end{proof}
+
+	\begin{thm}
+		The number of derangements in $\mathcal{S}_n$ is
+		$$\sum_{k=0}^n (-1)^k {n \choose k}(n-k)!.$$
+	\end{thm}
+
+	\begin{proof}[Proof (See proof about onto functions)]
+		The proof is the same as the onto function proof above.  When $k=0$ we count the total number of objects with and without the property of interest.  Then for $k \geq 1$, we only count the objects without the POI, apply PIE and subtract this from the total.  At $k=0$ we have all $n!$ permutations, then for each of the ${n \choose k}$ ways to fix $k$ points, there are $(n-k)!$ permutations with these fixed points.  These $(n-k)!$ permutations include permutations with more than $k$ fixed points, which is why we are using PIE.
+	\end{proof}
+	
+	\subsubsection{M\"obius Inversion}
+	
+	\subsubsection{Mirsky's Theorem}
+	
+	\subsubsection{Dilworth's Theorem}
+	
+	\subsubsection{Hall's Theorem}
+	
+	\begin{thm}
+		Let $\mathcal{F} = \{A_1, A_2, \ldots, A_m\}$ be subsets of $[n]$.  Then $\mathcal{F}$ has an SDR if and only iffor every $I \in {[m] \choose k}$, $|\bigcup_{i \in I}A_i| \geq k$.
+	\end{thm}
+	
+	\subsubsection{K\"onig's Theorem}
+	
+	\subsubsection{Orbit-Stabilizer Theorem}
+	
+	\subsubsection{Burnside's Theorem}
+	
+	\subsubsection{Ramsey Theorems}
+	
+	\begin{thm}[General Ramsey Theorem]
+		For $r, k \in \Z^+$, $a_1, a_2, \ldots, a_r \geq k$, $r \geq 2$, there is a least integer $R := R_k(a_1, a_2, \ldots, a_r)$ such that for each $n \geq R$, if the ${n \choose k}$ $k$-subsets of an $n$-set are partitioned (coloured) into $r$ classes $C_1, C_2, \ldots, C_r$, then some $a_i$-set has all of its $k$-subsets in class $C_i$ for some $i$.
+	\end{thm}
+	
+	\begin{thm}[Upper Bound 1]
+		$$R(a,b) \leq R(a-1,b) + R(a,b-1)$$
+		with strict inequality when both terms on the RHS are even.
+	\end{thm}
+
+	\begin{thm}[Upper Bound 2]
+		$$R(a,b) \leq {a + b - 2 \choose a-1}.$$
+	\end{thm}
+
+	\begin{thm}[Symmetric Ramsey Lower Bound]
+		Let $k \geq 2$.  Then
+		$$R(k,k) \geq 2^{k/2}$$
+	\end{thm}
+
+	\begin{thm}
+		For every $k,a,b \geq 1$,
+		$$R_k(a,b) \leq R_{k-1}(R_k(a-1,b), R_k(a,b-1))+1.$$
+	\end{thm}
+
+	\subsubsection{Designs}
+	
+	\begin{thm}[Symmetric Designs]
+		Let $A$ be the incidence matrix for a symmetric $(v,k,\lambda)$ design.  Then
+		$$A^TA = AA^T = (k-\lambda)I + \lambda J.$$
+	\end{thm}
+
+	\begin{thm}[Bruck-Ryser-Chowla Theorem (Even Case)]
+		If there exists a symmetric $(v,k,\lambda)$ design and $v$ is even, then $k-\lambda$ is a square.
+	\end{thm}
+
+	\begin{thm}[Bruck-Ryser-Chowla Theorem (Odd Case)]
+		If there is a symmetric $(v,k,\lambda)$ design and $v$ is odd, then
+		$$z^2 = (k-\lambda)x^2 + (-1)^{\tfrac{v-1}{2}}\lambda y^2$$
+		has a non-trivial solution.
+	\end{thm}
+	
+	\begin{thm}
+		If $v > k$ and $(V, \mathcal{B})$ is a resolvable $(v, k, \lambda)$ design, then $b \geq v + r-1$.
+	\end{thm}
+	
+	\subsection{Enumeration}
+	
+	\subsubsection{Basics}
+	
+	\begin{countingFact}[Number of $k$-subsets]
+		The number of $k$-subsets of a ground set with $n$ elements is ${n \choose k}$
+	\end{countingFact}
+	\begin{proof}
+	
+	\end{proof}
+
+	\begin{defn}
+		The rising factorial function is defined by $[x]^0 = 1$ and $[x]^n = \prod_{i=0}^{n-1} (x+i)$
+	\end{defn}
+
+	\begin{defn}
+		The Stirling numbers of the first kind, denoted ${n \brack k}$ can be defined as the coefficient of $x^k$ in $[x]^n$.
+	\end{defn}
+	
+	\begin{countingFact}[Stirling Numbers of the First Kind]
+		The number of permutations in $\mathcal{S}_n$ with $k$ cycles is ${n \brack k}$.
+	\end{countingFact}
+
+	\begin{countingFact}[Stirling Numbers of the Second Kind]
+		The number of partitions of an $n$-set into exactly $r$ nonempty sets is ${n \brace k}$.
+	\end{countingFact}
+
+	\begin{countingFact}
+		The number of onto functions from an $n$-set to an $k$-set is 
+		$$k!{n \brace k}.$$
+	\end{countingFact}
+	\begin{proof}
+		
+	\end{proof}
+
+	\begin{countingFact}
+		The number of functions from an $n$-set to a $k$-set is given by
+		$$k^n = \sum_{i=1}^k {n \brace i}{k \choose i}i!$$
+	\end{countingFact}
+	\begin{proof}
+		
+	\end{proof}
+
+	\begin{defn}[Bell Number]
+		The $n$-th Bell number, denoted $B_n$ is the number of unordered partitions of an $n$-set.
+	\end{defn}
+
+	\begin{countingFact}
+		$$B_n = \sum_{k=0}^n {n \brace k}.$$
+	\end{countingFact}
+
+	\begin{defn}
+		The Catalan numbers, denoted by $c_n$, is given by $c_n = \frac{1}{n+1}{2n \choose n}$.
+	\end{defn}
+
+	\begin{countingFact}[Catalan Numbers]
+		\
+		\begin{enumerate}[a)]
+			\item The number of rooted and ordered binary trees on $n$ vertices is $c_n$.
+			\item The number of distinct triangulations of an $n$-gon is $c_{n+2}$.
+			\item The number of lattice paths from $(1,0)$ to $(n+1,n)$ that lie below the line $y = x$ is $c_n$
+		\end{enumerate}
+	\end{countingFact}
+	\begin{proof}
+		
+	\end{proof}
+
+	\begin{countingFact}
+		The number of ways that $m$ distinct numbers from the set $\{1, 2, \ldots, n\}$ can be arranged in a circle is
+		$$\frac{n!}{m(n-m)!}$$
+		where arrangements which differ only by rotation are considered the same.
+	\end{countingFact}
+	\begin{proof}
+		
+	\end{proof}
+
+	\begin{countingFact}
+		Stirling's approximation is as follows
+		$$n! \approx \sqrt{2\pi n}\biggr( \frac{n}{e} \biggr)^n.$$
+	\end{countingFact}
+	
+	\subsubsection{List of Combinatorial Identities}
+	In this section, I organize a bunch identities that I've come across in upper-level undergraduate enumeration courses and texts.  I mainly include combinatorial proofs of each; and if I am aware of others, I include those as well.
+	
+	\begin{iden}[Binomial Theorem]
+		$$(x+y)^n = \sum_{k=0}^n {n \choose k} x^k y^{n-k}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		We prove a weaker version in which we assume $x$ and $y$ are nonnegative integers.  For the RHS, we split a domain into two sets -- one of size $k$ and the other of size $n-k$, and then map these domains to ranges $X$ and $Y$ of sizes $x$ and $y$, respectively.  We show that ordered pairs of these functions correspond to functions with domain of size $n$ and range of size $x+y$.  For each $k$-subset $A$, we pair each function $f$ with $A$ as domain and a range $X$ with each function $g$ having $[n] \setminus A$ as domain and range $Y$.  For each pair $(f,g)$, define the function $h$ with domain $\mathcal{D}(f) \cup \mathcal{D}(g) = [n]$ and range $X \cup Y$.  There are $(x+y)^n$ such functions of the form of $h$.
+	\end{proof}
+
+	\begin{iden}[Multinomial Theorem]
+		$$(x_1 + x_2 + \cdots + x_r)^n = \sum_{n_1 + n_2 + \cdots + n_r = n} {n \choose n_1, n_2, \ldots, n_r}x_1^{n_1}x_2^{n_2}\cdots x_r^{n_r}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+
+	\begin{iden}[Multinomial Triangle Identity]
+		$${n \choose n_1, n_2, \ldots, n_r} = \sum_{i=1}^r {n-1 \choose n_1, \ldots, n_{i-1}, n_i-1, n_{i+1}, \ldots, n_r}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+
+	\begin{iden}
+		The n
+	\end{iden}
+	
+	\begin{iden}[Pascal]
+		$${n \choose k} = {n-1 \choose k-1} + {n-1 \choose k}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		${n-1 \choose k-1}$ counts the number of $k$-subsets of $[n]$ containing $n$, and ${n-1 \choose k}$ counts the number of $k$-subsets of $[n]$ not containing $n$.
+	\end{proof}
+	
+	\begin{iden}
+		$${n \choose r} {n-r \choose k} = {n \choose k} {n-k \choose r} = {n \choose r+k} {r+k \choose r}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		Count ordered triples of subsets of $[n]$ that partition $[n]$.  Note ${n \choose r+k} = {n \choose n-r-k}$, so if $A, B$, and $C$ are subsets of $[n]$ with $r$, $k$, and $n-r-k$ elements, respectively.  Then the first expression counts triples of the form $(A,B,C)$ and the latter two expression count triples of the forms $(B,A,C)$ and $(C,A,B)$.  We could be annoying here and include the three other equivalent expressions, but nope :).
+	\end{proof}
+
+	\begin{iden}
+		$${n-1 \choose m-1} = \sum_{i=0}^{n-m} (-1)^i {n \choose m+i}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+
+	
+	\begin{iden}[Pascal Triangle Shallow Diagonals Identity]
+		Let $f_n$ be the $n$-th Fibonacci number where $f_0 = 0$ and $f_1 = 1$.  Then
+		$$f_n = \sum_{k = 0}^{ \big\lfloor\tfrac{n-1}{2} \big\rfloor } { n- k - 1 \choose k}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+	
+	\begin{iden}
+		$$\sum_{k=1}^n k{n \choose k} = n2^{n-1}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		$k{n \choose k}$ counts the number of strings of length $n$ over alphabet $\{0, 1, \ldots, n-1\}$ with $n-k$ $0$s, first non-zero entry in $[k]$, and the rest of the $k-1$ entries with value $1$.  Summing over all $1 \leq k \leq n$ counts all strings of length $n$ whose first non-zero entry has a value in $[n]$ and the rest of the $n-1$ entries have value either $0$ or $1$.
+	\end{proof}
+	
+	\begin{iden}
+		$$\sum_{k=1}^n k^2{n \choose k} = n2^{n-1} + n(n-1)2^{n-2}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		$k^2 { n \choose k}$ counts the number of length $n$ strings over alphabet $\{0, 1, \ldots, n-1\}$ such that there are $n-k$ $0$s, the first two elements are in $[k]$ and the rest have value $1$.  The number $n2^{n-1}$ counts all strings of length $n$ over $\{0, 1, \ldots, n-1\}$ such that the first non-zero entry has value in $[n-1]$, the second non-zero entry has value $1$, and the rest of the $n-2$ entries have value in $\{0,1\}$.  The number $n(n-1)2^{n-2}$, counts the case when the second non-zero entry has value in $[k] \setminus \{1\}$.
+	\end{proof}
+
+	\begin{iden}
+		
+		$$\sum_{k = 1}^n k^r {n \choose k} = \sum_{s = 1}^r \frac{n!}{(n-s)!}2^{n-s}.$$
+	\end{iden}
+	\begin{proof}[Combinatorial Proof]
+		$k^r {n \choose k}$ counts the number of strings of length $n$ over alphabet $\{0, 1, \ldots, n-1\}$ such that the first $r$ non-zero entries are in $[k]$, there are $n-k$ entries with value $0$, and the rest of the $n-k-r$ entries have value $1$.  The number $\frac{n!}{(n-s)!}2^{n-s}$ counts the number of length $n$ strings over $\{0, 1, \ldots, n-1\}$ such that for each $1 \leq j \leq s$, the $j$-th non-zero entry has value in $[n-1] \setminus [j-1]$, and the rest have value in $\{0,1\}$.  Summing over $1 \leq s \leq r$ counts all strings of length $n$ over $\{0, 1, \ldots, n-1\}$ such that the first $r$ non-zero entries are in $[n-1]$ and the rest are in $\{0,1\}$.
+	\end{proof}
+	
+	\begin{iden}
+		$${n \choose k+1} = \frac{n-k}{k+1}{n \choose k}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+	
+	\begin{iden}[Vandermonde's Convolution]
+		$${n+m \choose k} = \sum_{i=0}^k {n \choose i}{m \choose k-i}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		${n \choose i}{m \choose k-i}$ counts the number of ways of choosing $i$ elements from set $N$ and $k-i$ elements from set $M$.  But summing over all $0 \leq i \leq k$ means we count all combinations of size $k$ from $N \cup M$.  Note that when $i = 0$, we get all $k$-subsets from $M$ (similarly for $N$ when $i = k$), and otherwise we count all $k$-set combinations between the sets.  The distinction we have made between sets $N$ and $M$ has no effect on counting combinations of elements from the two sets.
+	\end{proof}
+	
+	\begin{iden}[Lattice Path Identity]
+		$${n+1 \choose r+1} = \sum_{i = 0}^{n-r} {r+i \choose r}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+	
+	\begin{iden}
+		$$\sum_{i=0}^{n} \frac{1}{i+1} {n \choose i} = \frac{2^{n+1}-1}{n+1}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		Count binary strings of length $n+1$, excluding the all $0$s string, with rotational equivalence.
+	\end{proof}
+
+	\begin{iden}[Shows up in a Proof of Cayley's Tree Theorem (see proofs from the book)]
+		$$n^{n-k} = \sum_{i=0}^{n-k}{n-k \choose i}(n-1)^i.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		${n-k \choose i}(n-1)^i$ counts the number of ways of choosing $i$ of the $n-k$ objects to place into $n-1$ bins, with the remaining $n-k-i$ objects going into another bin.  Summing $0 \leq i \leq n-k$ counts the number of ways of placing $n-k$ objects into $n$ bins.
+	\end{proof}
+
+	\begin{iden}
+		$$\sum_{i=0}^{n-1} 2^i = 2^n-1.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		$2^{n-1}$ is the number of subsets of $[n]$ not containing $n$, $2^{n-2}$ is the number of subsets containing $n$ but not $n-1$, $2^{n-3}$ is the number of subsets of $[n]$ containing $n$ but not $n-1$ nor $n-2$. Thus $\sum_{i = 0}^n 2^i$ is the number of subsets of $[n]$ containing $n$, except for the set $[n]$.  Note the empty set is counted by $2^{n-1}$.  Thus all subsets of $[n]$, except $[n]$ itself, are accounted for by the LHS, so the result follows.
+	\end{proof}
+
+	\begin{iden}[Stirling Number of the First Kind Triangle Identity]
+		$${n \brack r} = (n-1){n-1 \brack r} + {n-1 \brack r-1}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		Recall that ${n \brack r}$ is the number of permutations in $\mathcal{S}_n$ with exactly $r$ cycles, so $(n-1){n-1 \brack r}$ is the number of permutations of $\mathcal{S}_{n-1}$ with exactly $r$ cycles
+	\end{proof}
+
+	\begin{iden}
+		$${n \choose k} k! = \frac{n!}{(n-k)!}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		The LHS counts all permutations of each $k$-subset of elements in $[n]$.  The RHS counts all permutations of $\mathcal{S}_n$ such that $n-k$ of the elements are treated as fixed points, which are the permutations of all $k$-subsets of $[n]$.  
+		
+		The two expressions also both count the number of injective functions with domain of size $k$ and range of size $n$.  For the LHS, choose a $k$-subset of the range to map the domain to, then take all permutations to get all functions to that particular $k$-subset.  For the RHS, we count the number of injections by mapping one element in the domain at a time; there are $n$ values for the first element, $n-1$ for the second, and so on, and $n-(k-1)$ values for the $k$-th element.  Thus there are $n(n-1)\cdots (n-(k-1))$ ways of mapping the elements in the domain to distinct elements in the range. 
+	\end{proof}
+
+	\begin{iden}[First Stirlings Sum]
+		$$\sum_{r=0} {n \brack r} = n!$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		Every permutation in $\mathcal{S}_n$ has some number of cycles between $1$ and $n$, and ${n \brack 0} = 0$ for all $n \geq 1$.  So when $n \geq 1$, $\sum_{r=0} {n \brack r} = n!$.  When $n=0$, then the equality still holds because ${0 \brack 0} = 0! = 1$ by definition.
+	\end{proof}
+	
+	\begin{iden}[Rising Factorial Binomial Theorem]
+		$$[x+y]^n = \sum_{k=0}^n {n \choose k}[x]^k [y]^{n-k}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+	
+	\begin{iden}[Stirling Numbers of the Second Kind Triangle Identity]
+		$${n \brace r} = r{n-1 \brace r} + {n-1 \brace r-1}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		Stirling numbers of the second kind, denoted ${n \brace r}$, count the number of unordered partitions of an $n$-set involving $r$ classes.  As an aside, note that multinomial coefficients are similar except that they impose an order on the classes in the partition.  So, $r{n-1 \brace r}$ counts the number of ways of partitioning $[n]$ into $r$ classes where $n$ is placed in one of these classes (a class of size larger than $1$), and ${n-1 \brace r-1}$ counts the number of partitions of $[n]$ where $n$ is a singleton.  These are the only two cases for partitions of $[n]$ into $r$ classes, so the result follows by the addition principle (if the set of objects being counted is the union of subsets of objects, which are non-intersecting, then the size of the superset is the sum of sizes of the non-intersecting subsets).
+	\end{proof}
+
+	\begin{iden}
+		$${n+1 \brace r} = \sum_{i=0}^n {n \choose i} {i \brace r-1}.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+	
+	\begin{iden}[Stirling Numbers Matrix Identity]
+		Let $A$ and $B$ be $n \times n$ matrices with entries $a_{i,j} = {i \brace j}$ and $b_{i,j} = (-1)^{i-j}{i \brack j}$, respectively.  Then
+		$$AB = I_n.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+
+	\begin{iden}[Bell Numbers Triangle Identity]
+		$$B_n = \sum_{k=0}^{n-1} {n-1 \choose k}B_k.$$
+	\end{iden}
+	\begin{proof}[Proof (Combinatorial)]
+		
+	\end{proof}
+	
+	\begin{iden}[Catalan Recursion Identity 1 (Triangulations)]
+		$$c_{n+3} = \sum_{i=1}^{n-1}c_{i+3}c_{n-i+3}.$$
+	\end{iden}
+	\begin{proof}
+		
+	\end{proof}
+	\begin{iden}[Catalan Recursion Identity 2 (Triangulations)]
+		$$(n-3)c_{n+2} = \frac{n}{2}\sum_{i=3}^{n-1}c_{i+2}c_{n+4-i}.$$
+	\end{iden}
+	\begin{proof}
+		
+	\end{proof}
+	
+	\begin{iden}
+		$$\sum_{i=0}^n (-1)^i{n \choose i} = 0.$$
+	\end{iden}
+	\begin{proof}[Combinatorial]
+	
+	\end{proof}
+	
+	\begin{iden}
+		$$\sum_{k=1}^n \frac{(-1)^{k-1}}{k} {n \choose k} = \sum_{k=1}^n \frac{1}{k}.$$
+	\end{iden}
+	\begin{proof}[Combinatorial Proof]
+		
+	\end{proof}
+
+	
+
+	\begin{iden}
+		Find the closed form expression for
+		$$\sum_{k=0}^n \biggr(\frac{1}{k+1} \biggr)^2 { n \choose k} .$$
+	\end{iden}
+	\begin{proof}[Combinatorial Proof]
+		
+	\end{proof}
+
+	\begin{iden}
+		$$\sum_{k=1}^n k{n \choose k}^2 = n{2n - 1 \choose n-1}.$$
+	\end{iden}
+	\begin{proof}[Combinatorial Proof]
+		
+	\end{proof}
+
+	\begin{iden}
+		$$\sum_{k=1}^n k{n \choose k}^2 = n{2n - 1 \choose n-1}.$$
+	\end{iden}
+	\begin{proof}[Combinatorial Proof]
+		
+	\end{proof}	
+	
+	\begin{iden}
+		$$\sum_{k=0}^{\floor{n/3}} {n - 2k \choose k} < \biggr( \frac{3}{2} \biggr)^n.$$
+	\end{iden}
+	\begin{proof}[Combinatorial Proof]
+		
+	\end{proof}
+
+	\begin{iden}
+		$$(r+1)^n = \sum_{k=0}^n {n \choose k}r^k.$$
+	\end{iden}
+	
+	\subsubsection{Miscellaneous Interesting Counting Arguments}
+	
+	\begin{thm}
+		The number of different trees with vertex set $\{1, 2, \ldots, n\}$ and degree sequence $d_1, d_2, \ldots, d_n$ is the multinomial coefficient
+		$${n-2 \choose d_1-1, d_2-1, \ldots, d_n-1}.$$
+	\end{thm}
+	\begin{proof}
+		
+	\end{proof}
+	\begin{thm}
+		The number of odd terms in the sequence ${n \choose 0}, {n \choose 1}, \ldots, {n \choose n}$ is a power of two.
+	\end{thm}
+	\begin{proof}
+		
+	\end{proof}
+
+	\begin{thm}
+		Every element in the sequence ${n \choose 0}, {n \choose 1}, \ldots, {n \choose n}$ is odd if and only if $n = 2^t - 1$ for some integer $t \geq 0$.
+	\end{thm}
+	\begin{proof}
+		
+	\end{proof}
+
+	\subsection{Generating Functions}
+	
+	\begin{ex}
+		Prove that the generating function of the sequence $0, 1, 4, 9, 16, \ldots$ is $\frac{x(x+1)}{(1-x)^3}.$
+	\end{ex}
+	\begin{proof}
+		The generating function for $0, 1, 2, \ldots$ is $\frac{x}{(1-x)^2}$ since 
+		\begin{align*}
+			\frac{d}{dx}\big(\frac{1}{1-x} \big) &= \frac{d}{dx}(1 + x + x^2 + \cdots)	\\
+			...
+		\end{align*}
+	\end{proof}
+	
+	\section{Questions}
+	
+	\begin{question}
+		In this question there are $b$ balls and $c$ containers.  Determine the number of distributions of the balls among the containers in each off the scenarios given.  The order in which the balls are placed into the containers is unimportant, except in the last part of the question.  Your answers may be given in terms of other quantities like binomial coefficients or Stirling numbers of the second kind, etc.  A brief explanation of your reasoning is required when indicated, as well as the definition of any symbol or quantity other than ${n \choose k}$.
+		\begin{enumerate}
+			\item The balls are indistinguishable and the containers are indistinguishable.  Explain your reasoning.
+			\item The balls are indistinguishable and the containers are labelled $1, 2, \ldots, c$.
+			\item The balls are indistinguishable, the containers are labelled $1, 2, \ldots, c$, and each container holds at most one ball.
+			\item The balls are labelled $1, 2, \ldots, b$ and the containers are indistinguishable. Explain your reasoning.
+			\item The balls are labelled $1, 2, \ldots, b$ and the containers are labelled $1, 2, \ldots, c$.
+			\item The balls are labelled $1, 2, \ldots, b$ the containers are labelled $1, 2, \ldots, c$, and no container is empty.
+			\item The balls are labelled $1, 2, \ldots, b$, the containers are labelled $1, 2, \ldots, c$, and the order in which the balls are placed into the containers matters (\textit{i.e.}, the balls are ordered within each container).  Explain your reasoning.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Use any method to evaluate
+		$$ \sum_{k=0}^n k^2 {n \choose k}.$$
+		Then, give a proof of the resulting identity using a combinatorial argument.  (It is possible to do both parts simultaneously.)
+	\end{question}
+
+	\begin{question}
+		State both the Pigeonhole Principle and Ramsey's Theorem (finite version, in full generality), and show how Ramsey's Theorem is a generalization of the Pigeonhole Principle.  Define all terms necessary to make your statements meaningful.
+	\end{question}
+
+	\begin{question}
+		A pair of two distinct dice is rolled six times.  Suppose none of the ordered pairs of values $(1,5), (2,6), (3,4), (5,5), (5,3), (6,1)$ occur.  What is the probability that all six values on the first die and all six values on the second die occur once in the six rolls of the two dice.
+	\end{question}
+
+	\begin{question}
+		Let $a(n,k)$ be the number of $k$-permutations of $n$ distinct objects (that is, the number of linear arrangements of $k$ of the $n$ objects), and define $a(n,k)$ to be zero if $k > n$.
+		\begin{enumerate}[a)]
+			\item Find a recurrence relation and initial conditions for $a(n,k)$.
+			\item Let 
+			$$G_n(x) = \sum_{k=0}^\infty a(n,k)\frac{x^k}{k!}.$$
+			Find a closed form for $G_n(x)$ and use it to determine $a(n,k)$.
+		\end{enumerate}
+	\end{question}
+	\begin{question}
+		Let $A$ be a $(0,1)$-matrix.  Prove that the minimum number of lines containing all $1$s of $A$ equals the maximum number of $1$s, no two on a line.  State any theorems used.
+	\end{question}
+
+	\begin{question}
+		A scientist is studying the effect of soil, temperature, and fertilizer on development of five different varieties of strawberries.  She wants to compare the effects of five types of soil, five types of fertilizer, and five different temperatures on the growth of the strawberries.  A comprehensive study would test each possible combination of variety, soil, temperature, and fertilizer, and would require $5^4 = 625$ different plots.  Due to budget and space constraints she has only five small greenhouse units, each with five boxes in which plants can be grown, available for her study.  Each greenhouse has its own heat control and can be kept at a different temperature.  She decides that it is most important that each pairing of strawberry variety and fertilizer is tested (at some temperature) and, further, each type of soil is tested at least once at each temperature.  Show how Latin squares can be used to obtain the desired experimental design.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item State necessary and sufficient conditions for the existence of a Steiner Triple System.  Prove that the conditions you state are necessary.
+			\item Show how to use a Steiner Triple System on $v$ points to construct a Steiner Triple System on $3v$ points.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item State the Hamming bound on the number of words in a code with length $n$ and minimum distance $2d+1$ or $2d+2$.
+			\item Show that, for $r \geq 3$, the Hamming code of length $2^r-1$ is a perfect single error correcting code.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item State Polya's Enumeration Theorem and define any terms necessary to make your statement meaningful.
+			\item You are given a large supply of beads of $5$ different colours.  How many difference necklaces of $9$ beads can be made?  Two necklaces are the same if one can be rotated and/or flipped to obtain the other.
+			\item How many necklaces in $(b)$ use $4$ red beads, $3$ white beads, and $2$ black beads?
+		\end{enumerate}
+	\end{question}
+
+	\newpage
+	
+	\begin{question}
+		Define the Ramsey number $N(q_1, q_2, \ldots, q_t;r)$ and prove that $N(4,3;2) \leq 9$.
+	\end{question}
+	\begin{question}
+		Prove that for all nonnegative integers $m, n$,
+		\begin{enumerate}[a)]
+			\item $\sum_{k=0}^n  {m \choose k}{m-k \choose n-k} = 2^n{m \choose n}$.
+			
+			\item $\sum_{k=0}^n (-1)^k {n \choose k} {m-k \choose n-k} = {m - n \choose n}$.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item What is the generating function for $p(n)$, the number of integer partitions of $n$? (Your answer should not involve $p(n)$)
+			\item Prove that the number of partitions of $n$ into even summands is equal to the number of partitions of $n$ with each summand appearing an even number of times.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		A Hadamard matrix is an $n \times n$ matrix $H$ such that every entry is $\pm 1$ and $HH^T = nI$.  That is, the dot product of distinct rows are zero.  Suppose there is an $n \times n$ Hadamard matrix.  Prove that if $n \geq 4$, then $n \equiv 0 \Mod{4}$.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Give the definition of a $2-(v,k,\lambda)$ block design.
+			\item How many blocks are in such a design?
+			\item Give a construction for a $2-(7,4,2)$ design.
+			\item State Fisher's inequality.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Let $I(n,k)$ be the number of permutations of $1, 2, \ldots, n$ with exactly $k$ inverses (an inverse of a permutation $\pi$ is an ordered pair $(i,j)$ such that $i < j$ and $\pi(i) > \pi(j)$).  For fixed $n$, find a generating function for $I(n,k)$ and from this deduce a recurrence for these numbers.
+	\end{question}
+
+	\begin{question}
+		Show that an automorphism of a projective plane that fixes all points on some line must fix each line through some point.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item State a theorem that characterizes distributive lattices.
+			\item State a theorem that characterizes modular lattices.
+			\item Prove either of the theorems of $(a)$ and $(b)$.
+		\end{enumerate}
+	\end{question}
+	
+	\begin{question}
+		State and prove Dilworth's theorem.
+	\end{question}
+
+	\begin{question}
+		State Hall's theorem and show that it follows from Dilworth's theorem.
+	\end{question}
+
+	\newpage
+	
+	\begin{question}
+		Let $\{F_k\}$ be the Fibonacci sequence, with $F_0 = 0$, and let $n$ be a positive integer.
+		\begin{enumerate}[a)]
+			\item Show that $F_{n-1}$ counts the number of tilings of a $1 \times n$ grid with $1 \times 1$ and $1 \times 2$ tiles.
+			\item Use $(a)$ to show that
+			$${n \choose 0} + {n-1 \choose 1} + {n-2 \choose 2} + \cdots = F_{n-1}.$$
+			\item Prove that
+			$${n \choose 0} + {n-2 \choose 1} + {n - 4 \choose 2} + \cdots < \biggr(\frac{3}{2}\biggr)^n.$$
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}[Multiplicity: 2]
+		\
+		\begin{enumerate}
+			\item State and prove Burnside's Lemma regarding the number of distinct orbits associated with a group of permutations.  Define all terms necessary to make the statement meaningful.
+			\item In how many ways may the vertices of a regular pentagon be coloured with red and blue, if colourings that differ by rotation and/or reflection are considered the same.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Define the conjugate of an integer partition.
+			\item Show that the number of self-conjugate integer partitions of $n$ is equal to the number of partitions of $n$ into distinct odd parts.
+			\item Give a closed-form generating function for $p(n)$, the number of integer partitions of $n$.  (Of course, do not use $p(n)$ itself in the answer.)
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Use generating functions to solve the following:
+		\begin{enumerate}[a)]
+			\item How many lines of length $n$ containing Englishmen, Irishmen, Scotsmen, and Welshmen contain an even number of Englishmen and an odd number of Welshmen?
+			\item How many $5$-subsets of $\{1, 2, \ldots, 12\}$ contain no three consecutive integers?
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Let $A$ be an $n \times n$ $(0,1)$-matrix.  Prove that $A$ has a collection of ones in distinct rows and columns if and only if $A$ has no $r \times s$ all-zero submatrix for $r+s > n$.  State any major theorems used in your proof.
+	\end{question}
+
+	\begin{question}
+		Use a `rank argument' to prove that if a $(v, b, r, k, \lambda)$-design with $v > k$ is resolvable, then $b \geq v+r-1$.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}
+			\item State the definition of a $t-(v,k,\lambda)$ design, and write the number of blocks, $b$, and replication number, $r$, in terms of the other parameters.
+			\item Let $\mathcal{D}$ be a $t-(v,k,\lambda)$ design and $0 \leq s \leq t$.  Show that there exists $\lambda_s$ such that $\mathcal{D}$ is also an $s-(v,k,\lambda_s)$ design.
+			\item A Steiner quadruple system $SQS(n)$ is a $3-(n,4,1)$ design.  Prove that if an $SQS(n)$ exists, then so does an $SQS(2n)$.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Let $n$ be a positive integer.  Consider the poset $P$ of all positive integer divisors of $3 \cdot 2^{n-1}$, equipped with the partial order of divisibility, namely $|\subseteq P \times P$ defined by $x \ | \ y$ if and only if $y = xt$ for some integer $t$.  Prove that the number of total orders containing $|$ is equal to the $n$th Catalan number.
+	\end{question}
+
+	\begin{question}
+		Define a function $\lambda(n)$ on the positive integers by $\sum_{d|n} \lambda(d) = \log(n)$.  Show that if $n = p^k$ is a prime power ($p$ is prime), then $\lambda(n) = \log(p)$, and $\lambda(n) = 0$ otherwise.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Define the graph Ramsey number $R(G_1, G_2, \ldots, G_k)$.
+			\item Prove that, for any tree $T_n$ on $n$ vertices and star $K_{1,n}$,
+			$$R(T_n,K_{1,n}) = 2n-1.$$
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item State the enumeration theorem of inclusion and exclusion.  Define all terms necessary to make your statement meaningful.
+			\item Give a formula for the number of functions from an $n$-set onto an $m$-set.
+			\item Express the count in $(b)$ using the Stirling numbers of the second kind.
+		\end{enumerate}
+	
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}
+			\item State the Vandermonde identity of binomial coefficients.
+			\item Give a combinatorial proof of it.
+			\item Use it to deduce a closed form for
+			$$\sum_{k=0}^n {n \choose k}^2.$$
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Let $r$ be an arbitrary positive integer.  Use the Pigeonhole principle to assert the existence of an integer $n$ such that both:
+		\begin{itemize}
+			\item $r$ divides $n$ and
+			\item the only (base ten) digits in $n$ are $0$ and $1$.
+		\end{itemize}
+	\end{question}
+
+	\begin{question}
+		Let $n$ be a fixed positive integer.  The rank of a permutation $\pi = p_1p_2\ldots p_n$ is the position in which $\pi$ appears in the dictionary order, starting from $0$.  For instance, if $n=6$, the rank of $123456$ is $0$ and the rank of $654321$ is $6!-1 = 719$.
+		\begin{enumerate}[a)]
+			\item Outline a recursive algorithm that computes the rank of permutation.
+			\item For general $n$, describe the permutation whose rank is $n!/2$.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		A one-factorization of order $2n$ is a partition of the ${2n \choose n}$ unordered pairs of a $(2n)$-set into partitions of the set.  In other words, it is a resolvable $(2n,2,1)$ design.
+		\begin{enumerate}
+			\item Prove that a one-factorization of order $2n$ exists for all positive integers $n$.
+			\item A one-factorization is perfect if the union of any two parallel classes, regarded as a set of edges, induces a (Hamiltonian) $2n$-cycle.  Prove that a perfect one-factorization of order $p+1$ exists for all primes $p > 2$.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Consider $(v=6,k=3,\lambda=2)$ block designs.
+		\begin{enumerate}
+			\item How many blocks are in such a design?
+			\item Prove that such a design cannot have two disjoint blocks.
+			\item Construct such a design.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}
+			\item State Hall's theorem.
+			\item State Dilworth's theorem.
+			\item Show how Hall's theorem follows from Dilworth's theorem.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Determine a closed form for the number of ways in which a $2 \times n$ chessboard can be tiled using a supply of $1 \times 1$, $2 \times 1$, or $1 \times 2$ tiles.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}
+			\item State precisely what is meant by the Ramsey number $N(3,4,5;3)$.
+			\item Prove that $N(p,q;2) \leq {p + q - 2 \choose p-1}$.
+			\item Find an upper bound on $N(4,4,;3)$.
+			\item Prove that $N(4,5;3) \leq N(5,19;2)+1$.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}[Multiplicity: 2]
+		\
+		\begin{enumerate}[a)]
+			\item State and prove Burnside's Lemma regarding te number of distinct orbits associated with a group of permutations.  Define all terms necessary to make the statement meaningful.
+			\item In how many ways can the vertices of a regular pentagon be coloured with Red and Blue, if colourings that differ by rotation and/or reflection are considered the same?
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Solve the difference equation $u_{n+3} = 3u_{n+2}-4u_n$, ($n \geq 0$), given that $u_0 = 1$, $u_1 = 1$, and $u_2 = 3$.
+			\item Derive a recurrence relation and initial conditions for $t_n$, the number of ways to triangulate the interior of a convex $n$-gon.  Given a non-recursive formula for $t_n$ (you need not prove it).  State any results used.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Define $S(n,m)$, the Stirling number of the second kind, and prove a relationship between $S(n,m)$ and the number of functions from an $n$-set onto an $m$-set.
+			\item Using $(a)$ or otherwise prove
+			$$S(n,m) = \frac{1}{m!} \sum_{r=0}^{m-1}(-1)^r {m \choose r}(m-r)^n.$$
+		\end{enumerate}
+	\end{question}
+	
+	\begin{question}
+		\
+		\begin{enumerate}
+			\item State the enumeration theorem of inclusion and exclusion.  Define any terms necessary to make our statement meaningful.
+			\item A man has six friends.  He has met each of them at dinner $12$ times, every two of them six times, every three of them four times, every four of them three times, every five twice, and all six only once.  He has dined out eight times without meeting any of them.  How many times has he dined out altogether?
+			\item $5n$ men, standing in a line, are from $n$ countries (five men from each country).  Find the number of ways in which the line can be formed so that every man is standing next to a compatriot.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Find a generating function for the number $a_n$ of sequences of length $n$ from the set $\{\alpha, \beta, \gamma, \delta, \epsilon\}$ in which the letter $\alpha$ occurs an even number of times an the letter $\beta$ occurs an odd number of times.  Hence, find $a_n$.
+			\item Find the number of $7$-subsets of $\{1, 2, \ldots, n\}$ which contain no three consecutive integers.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}
+			\item State precisely what is meant by the Ramsey number $N(3,4,5;3)$.
+			\item Prove that $N(k,k;2) \geq 2^{k/2}$.
+		\end{enumerate}
+	\end{question}
+	
+	\begin{question}[Multiplicity = 2]
+		A Steiner quadruple system, $SQS(n)$, is a $3-(n,4,1)$ design.  Prove that if an $SQS(n)$ exists, then so does an $SQS(2n)$.
+	\end{question}
+
+	\begin{question}[Multiplicity = 3]
+		Define a function $\lambda(n)$ o the positive integers by $\sum_{d|n} \lambda(d) = \log(n)$.  Show that if $n =  p^k$ is a prime power ($p$ is prime), then $\lambda(n) = \log(p)$, and $\lambda(n) = 0$ otherwise.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Prove that
+			$$ {2n \choose n} + 2{2n-1 \choose n} + 2^2{2n - 2 \choose n} + \cdots + 2^n{n \choose n} = 2^{2n}.$$
+			\item Prove that
+			$$ \sum_{k=0}^m (-1)^k{n \choose k} {n-k \choose m-k} = 0.$$
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}[Multiplicity = 2]
+		\
+		\begin{enumerate}
+			\item State Polya's Enumeration Theorem and define any terms necessary to make your statement meaningful.
+			\item A circle is divided into eight identical sectors.  In how many ways can these be painted with three colours?
+			\item How many of these paintings have one white sector, three blue sectors, and four red sectors?
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		State and prove Dilworth's theorem for finite posets.  Define any terms necessary in the statement and proof.
+	\end{question}
+
+	\newpage
+	
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Determine the number of arrangements of $a_1, a_1, a_2, a_2, \ldots, a_n, a_n$ where no two equal letters are adjacent.
+			\item State and prove the enumeration theorem known as the Principle of Inclusion and Exclusion.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}[Multiplicity = 2]
+		\
+		\begin{enumerate}[a)]
+			\item State and prove Burnside's lemma regarding the number of distinct orbits associated with a group of permutations.  Define all terms necessary to make the statement meaningful.
+			\item In how many ways may the vertices of a regular pentagon be coloured with red and blue, if colourings that differ by rotation and/or reflection are considered the same?
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item State Ramsey's theorem (the finite version, in its full generality).  Define all terms necessary to make the statement meaningful.
+			\item Prove that $N(a,b;2) \leq N(a,b-1;2) + N(a-1,b;2)$.
+			\item Prove the following statement concerning Ramsey numbers: If both $N(a,b-1;2)$ and $N(a-1,b;2)$ are even, then $N(a,b;2) < N(a,b-1;2) + N(a-1,b;2)$.
+			\item Show that $N(3,5;2) \leq 14$.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Use generating functions to solve:
+		\begin{enumerate}[a)]
+			\item How many lines of length $n$ containing Englishmen, Irishmen, Scotsmen, and Welshmen contain an even number of Englishmen and an odd number of Welshmen?
+			\item How many $5$-subsets of $\{1, 2, \ldots, 12\}$ contain no three consecutive integers?
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		Prove that there exists a projective plane of order $n$ if and only if there exists a collection of $n-1$ pairwise orthogonal latin squares of order $n$.
+	\end{question}
+
+	\begin{question}
+		Show that if every chain and every antichain of a poset $P$ is finite, then $P$ is finite.
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item State the definition of a $t-(v,b,r,k,\lambda)$ design (usually called a $t-(v,k,\lambda)$ design), and show that the number of blocks, $b$, and replication number, $r$, can be determined from the other parameters.
+			\item Let $\mathcal{D}$ be a $t-(v,k,\lambda)$ design and $s \leq t$.  Show that there exists $\lambda_s$ such that $\mathcal{D}$ is also an $s-(v,k,\lambda_s)$ design.
+			\item Prove that necessary conditions for the existence of a $2-(v,k,\lambda)$ design are:
+			$$(v-1)\lambda \equiv 0 \Mod{k-1} \text{ and } v(v-1)\lambda \equiv 0 \Mod{k(k-1)}.$$
+			\item State Wilson's theorem regarding designs.
+		\end{enumerate}
+	\end{question}
+
+	\begin{question}
+		\
+		\begin{enumerate}[a)]
+			\item Prove that
+			$$ {2n \choose n} + 2{2n-1 \choose n} + 2^2{2n - 2 \choose n} + \cdots + 2^n{n \choose n} = 2^{2n}.$$
+			\item Prove that
+			$$ \sum_{k=0}^m {m \choose k} {n \choose r+k} = {m + n \choose m+r}.$$
+		\end{enumerate}
+	\end{question}
+	
+	\begin{question}[Multiplicity = 3]
+		Define a function $\lambda(n)$ o the positive integers by $\sum_{d|n} \lambda(d) = \log(n)$.  Show that if $n =  p^k$ is a prime power ($p$ is prime), then $\lambda(n) = \log(p)$, and $\lambda(n) = 0$ otherwise.
+	\end{question}
+	
+	\begin{question}
+		\
+		\begin{enumerate}
+			\item Derive a recurrence for $d_n$, the number of derangements of $n$ distinct objects.
+			\item Derive a recurrence for the number of ways of parenthasizing the product $x_1x_2\cdots x_n$.
+			\item Solve the recurrence $a_0 = 30$ and $a_1 = 33$, and for $n \geq 2$, $a_n = 4a_{n-1} - 3a_{n-2}-200$.
+		\end{enumerate}
+	\end{question}
+	
+	\end{document}

@@ -1,10 +1,39 @@
 \contentsline {section}{\numberline {1}Crescent Labelled Trees}{1}{section.1}%
 \contentsline {section}{\numberline {2}Polynomial Method}{3}{section.2}%
-\contentsline {section}{\numberline {3}Distance Multiplicities in Unweighted Graphs}{4}{section.3}%
+\contentsline {section}{\numberline {3}Distance Multiplicities in Unweighted Graphs}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Conjectures}{5}{subsection.3.1}%
 \contentsline {paragraph}{Construction 2:}{7}{section*.3}%
-\contentsline {section}{\numberline {4}Construction with Large Gap Between Max Multiplicity and $\mathbf {\mult (2)}$}{7}{section.4}%
+\contentsline {section}{\numberline {4}Construction with Large Gap Between Max Multiplicity and $\mathbf {\mult (2)}$}{8}{section.4}%
 \contentsline {paragraph}{Construction.}{8}{section*.5}%
 \contentsline {section}{\numberline {5}Distance Multisets of Specific Graphs}{10}{section.5}%
-\contentsline {section}{\numberline {6}Graph Distance Multiplicity Vector Space}{14}{section.6}%
-\contentsline {paragraph}{On the Weiner Index and Arithmetic Progressions}{16}{section*.7}%
+\contentsline {subsection}{\numberline {5.1}Paths, Cycles, and Grid Graphs}{10}{subsection.5.1}%
+\contentsline {paragraph}{Case 1:}{10}{section*.7}%
+\contentsline {paragraph}{Case 2:}{10}{section*.8}%
+\contentsline {paragraph}{Case 3:}{11}{section*.9}%
+\contentsline {paragraph}{OKAY.}{17}{section*.10}%
+\contentsline {subsection}{\numberline {5.2}Only $K_2$ and $K_{1,3}$ have Uniform Distance Multiplicities}{18}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Finding Distance Multisets of Small Diameter Trees}{19}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Discussion on Larger Diameter Trees}{20}{subsubsection.5.3.1}%
+\contentsline {paragraph}{Brief Thoughts on Efficiency of Calculating Distances:}{20}{section*.11}%
+\contentsline {paragraph}{A More General Question:}{20}{section*.12}%
+\contentsline {section}{\numberline {6}Finding Graph Distances From Vertex Distances (Global from Local)}{21}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Eccentricity and Distance Multisets of Connected Graphs}{21}{subsection.6.1}%
+\contentsline {section}{\numberline {7}Graph Distance Multiplicity Vector Space}{22}{section.7}%
+\contentsline {paragraph}{A concern/drawback regarding many graphs realizing the same multiplicity vector: }{22}{section*.13}%
+\contentsline {paragraph}{Back to the geometric model for multiplicity vectors:}{22}{section*.14}%
+\contentsline {paragraph}{Square Grid and Path Example:}{23}{section*.15}%
+\contentsline {paragraph}{Remark About Cycles:}{23}{section*.16}%
+\contentsline {paragraph}{Finding Graph Structure Similarity Given Small Theta:}{23}{section*.17}%
+\contentsline {paragraph}{Embracing the Fact That Many Graphs Have Identical Multiplicity Vectors:}{23}{section*.18}%
+\contentsline {paragraph}{Calculating the Angle When $G$ is a Path:}{23}{section*.19}%
+\contentsline {section}{\numberline {8}Key Paper Ideas}{25}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Determine Distance Multisets of Particular Graph Classes}{25}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Grids, Tori, and Their Products}{25}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Trees}{25}{subsubsection.8.1.2}%
+\contentsline {subsubsection}{\numberline {8.1.3}Other Graph Classes?}{25}{subsubsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.2}Express Graph Distance Multiplicities in Terms of Degree Sequence and Minimal Substructure}{25}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Generalized Handshaking and Symmetry}{25}{subsubsection.8.2.1}%
+\contentsline {subsubsection}{\numberline {8.2.2}Small Diameter Trees}{25}{subsubsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.3}Uniform Multiplicity Graph Classification}{25}{subsection.8.3}%
+\contentsline {subsubsection}{\numberline {8.3.1}Extend Result on Trees}{25}{subsubsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.4}Probing Various Graph Distance Multiplicity Parameters: Max Multiplicity, Number of Distinct Multiplicities, and Number of Graphs Realizing a Distance Multiset}{25}{subsection.8.4}%
