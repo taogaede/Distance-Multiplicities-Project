@@ -1,0 +1,81 @@
+\contentsline {section}{\numberline {1}Monday:}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Morning}{2}{subsection.1.1}%
+\contentsline {paragraph}{8:30 IS (MET):}{2}{section*.2}%
+\contentsline {paragraph}{10:00 CM24 (1L04):}{2}{section*.3}%
+\contentsline {paragraph}{10:30 IM2:}{2}{section*.4}%
+\contentsline {paragraph}{*11:00 CM24:}{2}{section*.5}%
+\contentsline {paragraph}{*11:00 CT:}{2}{section*.6}%
+\contentsline {paragraph}{11:30 IM2:}{2}{section*.7}%
+\contentsline {paragraph}{\underline {Things to look into}}{2}{section*.8}%
+\contentsline {subsection}{\numberline {1.2}Afternoon}{4}{subsection.1.2}%
+\contentsline {paragraph}{2:00 IS (MET):}{4}{section*.9}%
+\contentsline {paragraph}{3:30 CM13 (1L11):}{4}{section*.10}%
+\contentsline {paragraph}{4:00 CM21 (1L08):}{4}{section*.11}%
+\contentsline {paragraph}{4:30 CM20 (1L07):}{4}{section*.12}%
+\contentsline {paragraph}{5:00 CT (1L06):}{4}{section*.13}%
+\contentsline {paragraph}{5:30 CM13 (1L11):}{4}{section*.14}%
+\contentsline {paragraph}{\underline {Things to look into}}{4}{section*.15}%
+\contentsline {section}{\numberline {2}Tuesday:}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Morning}{6}{subsection.2.1}%
+\contentsline {paragraph}{8:30 IS (MET):}{6}{section*.16}%
+\contentsline {paragraph}{*10:00 CT (1L06):}{6}{section*.17}%
+\contentsline {paragraph}{*10:00 CM22 (1L04):}{6}{section*.18}%
+\contentsline {paragraph}{*10:30 CM22 (1L04):}{6}{section*.19}%
+\contentsline {paragraph}{*10:30 IM9 (1L12):}{6}{section*.20}%
+\contentsline {paragraph}{*10:30 CT (1L06):}{6}{section*.21}%
+\contentsline {paragraph}{11:00 CT (1L06):}{6}{section*.22}%
+\contentsline {paragraph}{11:30 CT (1L06):}{6}{section*.23}%
+\contentsline {paragraph}{12:00 (1L06):}{6}{section*.24}%
+\contentsline {paragraph}{\underline {Things to look into}}{6}{section*.25}%
+\contentsline {subsection}{\numberline {2.2}Afternoon}{8}{subsection.2.2}%
+\contentsline {paragraph}{2:00 IS (MET):}{8}{section*.26}%
+\contentsline {paragraph}{*3:30 IM10 (1L12):}{8}{section*.27}%
+\contentsline {paragraph}{*3:30 CM21 (1L08):}{8}{section*.28}%
+\contentsline {paragraph}{*4:00 (1L06):}{8}{section*.29}%
+\contentsline {paragraph}{*4:00 CM21 (1L08):}{8}{section*.30}%
+\contentsline {paragraph}{4:30 CM21 (1L08):}{8}{section*.31}%
+\contentsline {paragraph}{5:00 CM21 (1L08):}{8}{section*.32}%
+\contentsline {paragraph}{5:30 CM21 (1L08):}{8}{section*.33}%
+\contentsline {paragraph}{\underline {Things to look into}}{8}{section*.34}%
+\contentsline {section}{\numberline {3}Wednesday:}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Morning}{10}{subsection.3.1}%
+\contentsline {paragraph}{8:30 IS (MET):}{10}{section*.35}%
+\contentsline {paragraph}{10:00 CM16 (1L11):}{10}{section*.36}%
+\contentsline {paragraph}{10:30 CM16 (1L11):}{10}{section*.37}%
+\contentsline {paragraph}{11:00 IM9 (1L12):}{10}{section*.38}%
+\contentsline {paragraph}{*11:30 IM6 (1L08):}{10}{section*.39}%
+\contentsline {paragraph}{*11:30 CM16 (1L11):}{10}{section*.40}%
+\contentsline {paragraph}{12:00 CT (1L06):}{10}{section*.41}%
+\contentsline {paragraph}{\underline {Things to look into}}{10}{section*.42}%
+\contentsline {subsection}{\numberline {3.2}Afternoon}{12}{subsection.3.2}%
+\contentsline {paragraph}{2:00 IS (MET):}{12}{section*.43}%
+\contentsline {paragraph}{*3:30 IM3 (1L07):}{12}{section*.44}%
+\contentsline {paragraph}{*3:30 IM8 (1L08):}{12}{section*.45}%
+\contentsline {paragraph}{*3:30 CT (1L06):}{12}{section*.46}%
+\contentsline {paragraph}{4:00 CT (1L06):}{12}{section*.47}%
+\contentsline {paragraph}{4:30 CT (1L06):}{12}{section*.48}%
+\contentsline {paragraph}{5:00 IM3 (1L07):}{12}{section*.49}%
+\contentsline {paragraph}{5:30 IM8 (1L08):}{12}{section*.50}%
+\contentsline {paragraph}{\underline {Things to look into}}{12}{section*.51}%
+\contentsline {section}{\numberline {4}Thursday}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Morning}{14}{subsection.4.1}%
+\contentsline {paragraph}{8:30 IS (MET):}{14}{section*.52}%
+\contentsline {paragraph}{10:00: CM19 (1L12):}{14}{section*.53}%
+\contentsline {paragraph}{*10:30 CM14 (1L08):}{14}{section*.54}%
+\contentsline {paragraph}{*10:30 CM19 (1L12):}{14}{section*.55}%
+\contentsline {paragraph}{11:00 CM19 (1L12):}{14}{section*.56}%
+\contentsline {paragraph}{11:30 CM19 (1L08):}{14}{section*.57}%
+\contentsline {paragraph}{*12:00 CM16 (1L11):}{14}{section*.58}%
+\contentsline {paragraph}{*12:00 CM14 (1L08):}{14}{section*.59}%
+\contentsline {paragraph}{\underline {Things to look into}}{14}{section*.60}%
+\contentsline {subsection}{\numberline {4.2}Afternoon}{16}{subsection.4.2}%
+\contentsline {paragraph}{2:00 IS (MET):}{16}{section*.61}%
+\contentsline {paragraph}{3:30 IM3 (1L07):}{16}{section*.62}%
+\contentsline {paragraph}{4:00 IM3 (1L07):}{16}{section*.63}%
+\contentsline {paragraph}{*4:30 IM3 (1L07):}{16}{section*.64}%
+\contentsline {paragraph}{*4:30 CM23 (1L13):}{16}{section*.65}%
+\contentsline {paragraph}{*5:00 IM3 (1L07):}{16}{section*.66}%
+\contentsline {paragraph}{*5:00 IM8 (1L08):}{16}{section*.67}%
+\contentsline {paragraph}{*5:30 IM3 (1L07):}{16}{section*.68}%
+\contentsline {paragraph}{*5:30 CM23 (1L13):}{16}{section*.69}%
+\contentsline {paragraph}{\underline {Things to look into}}{16}{section*.70}%

@@ -1221,11 +1221,343 @@ If $x = 2d-1$, then $\mult_{ext,d}(x) = r \mult_{ext,d-1}(x-1)$ (no counting lea
 	
 	\newpage
 	
+	\section{Extremal Numbers for Distance Multiplicities in Trees}
+	
+	Define $L(k,d)$ to be the smallest order of a tree with diameter $d$ whose distance multiset contains every distance multiset of the trees of order $k$.  Similarly define $S(k,d)$ to be largest order of a tree with diameter $d$ whose distance multiset is contained in every distance multiset of the trees of order $k$.  Note that $S(k,d) \leq k \leq L(k,d)$ and equality holds when $d = 2$ with extremal example $K_{1,k-1}$.  Also, $S(k,k-2) = k-1$ with extremal example $P_{k-1}$.
+	
+	The main motivation for these extremal numbers is the following: tight example trees probably have similar structure, so if we can classify tight examples, then upper/lower bounding the multiplicity distributions of trees of order $k$ amounts to calculating the distance multisets of tight examples for these extremal numbers.  These bounds are likely not to be best possible, because the distance multiset with smallest/largest multiplicities that contains/(is contained by) all distance multisets of all trees of order $k$ probably isn't realizable as the distances in a tree.  However, this problem seems easier to approach if we assume a smallest/largest all-containing/contained distance multiset is realized by a graph (tree).  By ``easier" I mean that we can search for bounds on $L(k,d)$ and $S(k,d)$ by looking for constructions of particular graphs, and then get multiplicity distribution bounds by calculating distance multisets of these constructed graphs.  
+	
+	Below we show by construction that $L(k,d) \leq 2k$.  This bound is certainly not tight, but it's a start showing that $L(k,d) \leq O(k)$ and also just introducing the method.  The main idea is very simple, since $\mult(1) = k-1$, it is sufficient to construct a tree that has $\mult(x) \geq {k-1 \choose 2}$ for each $x \in [2,d]$.  The construction is a particular type of caterpillar that biases higher degree vertices towards the periphery.
+	
+	\begin{prop}
+		The distance multiset of every tree of order $k$ is contained within the distance multiset of a tree of order $L(k,d) \leq O(k\sqrt{d})$.
+	\end{prop}
+
+	\begin{proof}
+		We construct a caterpillar graph $T$ that satisfies the property that each distance $2, 3, \ldots, d$ has multiplicity at least ${k-1 \choose 2}$, which is the largest multiplicity that any distance in a tree of order $k$ can have.  We begin with a diametrical path $P = (v_{-1}, v_0, \ldots, v_{d-1})$, and then we will place leaves on the vertices of $P$ to ensure the desired multiplicities.  For each $i \in [0, d-2]$, define $\ceil{a_i}$ to be the number of leaves to append to vertex $v_i$; and set $a_{-1} = a_{d-1} = 0$.  We will assume that $a_i = a_{d-2-i}$ (perhaps a better bound is achievable without this assumption, but it makes things nice below).  Observe that for $\mult(d) = {k-1 \choose 2}$, $a_0 = a_{d-2} = \sqrt{{k-1 \choose 2}}$, because all paths of length $d$ are between leaves of $v_0$ and those of $v_{d-2}$ and there are at least $a_1^2$ of each as well as the $(v_{-1},v_{d-1})$-path.  The paths of length $d-1$ can only occur between neighbours of $v_1$ and $v_{d-2}$, as well as those of $v_0$ and $v_{d-3}$; there are $a_0a_{d-3} + a_1a_{d-2} = a_0a_1 + a_1a_0$ such paths involving leaves as well as $2$ within $P$.  In general, for each $r \in [0,d-3]$ there are $\sum_{j=0}^{r}a_ja_{r-j}$ paths of length $d-r$ involving leaves as end vertices, plus $r+1$ such paths whose endpoints are in $P$.  Note that when $r = d-1$, we are counting paths of length $1$, which is at least $k-1$ in $T$ because $|V(T)| \geq k$.  When $r = d-2$, we are counting the number of paths of length $2$, which is $\sum_{v \in V(T)} {\deg(v) \choose 2}$, and we will show later that this quantity is much larger than ${k-1 \choose 2}$.  So, our goal is to find (possibly real) values $a_0, a_1, \ldots, a_{d-1}$ such that for each $r \in [0,d-3]$, $$\sum_{j=0}^{r}a_ja_{r-j} = {k-1 \choose 2}.$$
+		
+		\begin{claim}
+			It holds that $a_r = \frac{{2r \choose r}}{4^r} {k-1 \choose 2}^{1/2}$.
+		\end{claim}
+	
+		Given the claim we have that $\ceil{a_r} \leq \frac{{2r \choose r}}{4^r} \frac{k}{\sqrt{2}} + 1$, and so the number of vertices in the caterpillar is at least 
+			$$|P| + \sum_{i = 0}^{d-2}\ceil{a_i} \leq d+1 + \sum_{i=0}^{d-2} \biggr(\frac{{2i \choose i}}{4^i} \frac{k}{\sqrt{2}} + 1 \biggr) = 2d + \frac{k}{\sqrt{2}}\sum_{i=0}^{d-2} \frac{{2i \choose i}}{4^i}.$$
+		
+		\begin{claim}[Claim 2]
+			It holds that 
+			$$\sum_{i=0}^{d-2} \frac{{2i \choose i}}{4^i} \leq \frac{2}{\pi}\sqrt{d}(1+O(\tfrac{1}{d})).$$
+		\end{claim}
+		
+		
+		
+		
+		So, there exists a caterpillar of order $2d + \sqrt{\frac{2}{\pi}}k\sqrt{d}  (1+O(\tfrac{1}{q}))$ such that every distance in $\{3, 4, \ldots, d\}$ occurs at least ${k-1 \choose 2}$ times.  Note that
+		$\sum_{j=0}^{r}a_ja_{r-j} = {k-1 \choose 2}$
+		
+		
+		
+		Note that 
+		\begin{align*}
+			\mult(2) &= \sum_{v \in P\setminus \{v_{-1},v_d\}} {\deg(v) \choose 2}	\\
+			&= \sum_{i=0}^{d-2}{a_i+2 \choose 2} 	\\
+			&\geq \frac{1}{2}\sum_{i=0}^{d-2}a_ia_i	\\
+			&\geq \frac{a_{\floor{(d-2)/2}}^2}{2} + \frac{1}{2}\biggr(\sum_{i=0}^{\floor{(d-2)/2}-1}a_ia_{i+1} + \sum_{i=\floor{(d-2)/2}+1}^{d-2}a_{i}a_{i-1} \biggr)	\\
+			&> \frac{1}{2}\biggr(\sum_{i=0}^{\floor{(d-2)/2}-1}a_ia_{i+1} + \sum_{i=\floor{(d-2)/2}}^{d-2}a_{i+1}a_{i} \biggr)	\\
+			&= \frac{1}{2}\biggr(\sum_{i=0}^{\floor{(d-2)/2}-1}a_ia_{d-3-i} + \sum_{i=\floor{(d-2)/2}}^{d-2}a_{d-3-i}a_{i} \biggr)	\\
+			&= \frac{1}{2}\sum_{i=0}^{d-3}a_ia_{d-3-i}	\\
+			&= \frac{1}{2}\mult(3)
+			%&\geq \frac{1}{2}\sum_{i=0}^{d-2} (a_i -1)^2	\\
+			%&\geq \frac{\ceil{a_{d-2}}(\ceil{a_{d-2}}-1)}{2} + \frac{1}{2}\sum_{i=0}^{d-3} \ceil{a_i}(\ceil{a_{i+1}}-1)	\\
+			%&\geq \frac{a_{d-2}(a_{d-2}-1)}{2}\frac{1}{2}\sum_{i=\floor{(d-2)/2}}^{d-3}2(a_i)(a_{i+1}
+		\end{align*}
+		
+		
+		[and the rest of the distances $2, 3, \ldots, \floor{d/2}$ also occur this many times].  Thus $L(k,d) \leq O(k\sqrt{d})$.
+		
+		\begin{proof}[Proof of Claim 1]
+			
+			The unique sequence of real numbers $x_0, x_1, \ldots, x_n$ that satisfies the property $\sum_{j=0}^r x_jx_{r-j} = 1$ is $x_r = {2r \choose r}4^{-r}$ (see Richard Stanley's Enumerative Combinatorics Volume 1 (2nd Ed.) Page 11).  Since our sequence $a_0, a_1, \ldots, a_{d-1}$ satisfies the property
+			$$\sum_{j=0}^{r}a_j a_{r-j} = {k-1 \choose 2} \Leftrightarrow
+			\sum_{j=0}^{r}\biggr( a_j {k-1 \choose 2}^{-1/2} \biggr) \biggr( a_{i-j}{k-1 \choose 2}^{-1/2} \biggr) = 1,$$
+			
+			it follows that $a_r {k-1 \choose 2}^{-1/2} = \frac{{2r \choose r}}{4^r} \Leftrightarrow a_r = \frac{{2r \choose r}}{4^r} {k-1 \choose 2}^{1/2}$, as desired.
+		\end{proof}
+		
+		\begin{proof}[Proof of Claim 2]
+			First we show that $\sum_{i=0}^{d-2} \frac{{2i \choose i}}{4^i} = {d-3/2 \choose d-2}$.  Then we bound this quantity.  Induction.  Prove and apply the identity ${n + 1/2 \choose n} = {2n \choose n}\frac{2n+1}{4^n}$.
+			
+			Set $q := d-2$.  Given Claim 2, we can use a property of the Gamma function and Stirling's approximation to do the following:
+			\begin{align*}
+				{q + 1/2 \choose q} &= \frac{2\Gamma(q+3/2)}{\sqrt{\pi}\Gamma(q+1)}	\\
+				&\approx \frac{2}{\sqrt{\pi}} \biggr( \frac{\sqrt{\tfrac{2\pi}{q+3/2}} ( \tfrac{q+3/2}{e} )^{q+3/2}}{\sqrt{\tfrac{2\pi}{q+1}} ( \tfrac{q+1}{e})^{q+1}} \biggr)	\\
+				&= \frac{2}{\sqrt{\pi e}} \biggr( \frac{q+3/2}{q+1} \biggr)^{q+1/2} \sqrt{q+3/2}.
+			\end{align*}
+			Since $\lim_{q \rightarrow \infty} (\frac{q+3/2}{q+1})^{q+1/2} = \sqrt{e}$, it follows that ${q + 1/2 \choose q} \leq \frac{2\sqrt{q+3/2}}{\sqrt{\pi}}  (1+O(\tfrac{1}{q}))$, which means that ${q + 1/2 \choose q} \leq O(\sqrt{q})$.
+		\end{proof}
+		
+		
+		
+	\end{proof}
+
+	
+	%\begin{proof}
+	%	When $k(2-\sqrt{2}) \geq d+1 \Leftrightarrow 2 \leq d \leq k(2-\sqrt{2}) - 1$, we construct a tree in the following way:
+	%	\begin{enumerate}
+	%		\item Begin with a diametrical path involving $d+1$ vertices $(v_1,v_2,\ldots,v_{d+1})$.
+	%		\item To ensure $\mult(d) \geq {k-1 \choose 2}$, append $\tfrac{k}{\sqrt{2}}$ vertices to each $v_1$ and $v_{d+1}$.  There are $2k - (d+1) - \sqrt{2}k$ vertices left to append on the diametrical path.
+			
+	%		\item Note that $\mult(d-1) \geq \sqrt{2}k$.  We want $\mult(d-1) = \tfrac{k^2}{2}$, so append to $v_2$ and $v_{d}$ $a$ vertices each such that $2 (\tfrac{k}{\sqrt{2}} \cdot a) = \tfrac{k^2}{2}$.  Here, we are considering the paths between vertices adjacent to $v_1$ and $v_d$ as well as $v_2$ and $v_{d+1}$.  Solving for $a$ gives $a = \tfrac{k}{2\sqrt{2}}$.
+	%		\item Note $\mult(d-2) \geq \sqrt{2}k + (\tfrac{k}{2\sqrt{2}})^2 = \tfrac{k^2}{8} + \sqrt{2}k$.  We want $\mult(d-2) = \tfrac{k^2}{2}$, so append to $v_3$ and $v_{d-1}$ $b$ vertices each such that $2(\tfrac{k}{\sqrt{2}} \cdot b) + \tfrac{k^2}{8} = \tfrac{k^2}{2}$.  Here there are $\tfrac{k}{\sqrt{2}} \cdot b$ paths between $v_1$ and $v_{d-1}$ as well as $v_3$ and $v_{d+1}$, and then there are still $\tfrac{k^2}{8}$ paths between $v_2$ and $v_d$.  Solving for $b$ gives $b = \tfrac{1}{\sqrt{2}k}(\tfrac{3k^2}{8}) = \tfrac{3k}{8\sqrt{2}}$.
+	%		\item Note that $\mult(d-3) \geq \sqrt{2}k + 2\tfrac{k}{2\sqrt{2}} + 2\tfrac{3k}{8\sqrt{2}} + (\tfrac{3k}{8\sqrt{2}})^2 = \sqrt{2}k(1 + \tfrac{1}{2} + \tfrac{3}{8}) + \tfrac{9k^2}{128}$
+	%	\end{enumerate}
+	%\end{proof}
+
+	We need not restrict our constructions to trees, but it is often easier to calculate the distance multiset of trees since each distance result from a unique path.  Also, there might turn out to be something interesting to say about a chain of tight example trees of orders $L(k,d), L(k+1,d), \ldots, L(k+b,d)$; that is, it seems kind of ``natural" to restrict constructions to the same class defined by the extremal number.
+	
 	%\section{ Graphs}
 	
 	%We introduce the idea of a graph that has distance multiplicity list that is close to an interval.  Recall that the only graph with an interval multiplicity list is a path.  Let $M = (m_1, m_2, \ldots, m_d)$ be a non-decreasing sequence of integers (multiplicities).  Then the discrepancy of $M$ is:
 	
 	%$$D = \max_{1 \leq a \leq b \leq \diam} \biggr| \frac{|\{m_1, m_2, \ldots\}}{den}
+	
+	\subsection{More General Approach}
+	
+	Let $b= (b_2, b_3, \ldots, b_{d})$ be a sequence of real numbers greater than or equal to $1$ and $d$ a positive integer.   Define $D$ to be the multiset $D = \{2^{b_2}, 3^{b_3}, \ldots, d^{b_d}\}$ (Note we allow partial inclusion of the integers $2, 3, \dots, d$ here).  Then there exists a tree with diameter $d$ whose distance multiset contains $D$ and has smallest order $L(d, b) \leq O(b_{ave}\sqrt{d})$.
+	
+	\begin{proof}
+		We construct a caterpillar graph $T$ that satisfies the property that each distance $2, 3, \ldots, d$ has multiplicity at least $b$.  We begin with a diametrical path $P = (v_{-1}, v_0, \ldots, v_{d-1})$, and then we will place leaves on the vertices of $P$ to ensure the desired multiplicities.  For each $i \in [0, d-2]$, define $\ceil{a_i}$ to be the number of leaves to append to vertex $v_i$; and set $a_{-1} = a_{d-1} = 0$.  We will assume that $a_i = a_{d-2-i}$ (perhaps a better bound is achievable without this assumption, but it makes things nice below).  Observe that for $\mult(d) = b$ to hold, it is sufficient for $a_0 = a_{d-2} = \sqrt{b}$, because all paths of length $d$ are between leaves of $v_0$ and those of $v_{d-2}$ and there are at least $a_1^2$ of each as well as the $(v_{-1},v_{d-1})$-path.  The paths of length $d-1$ can only occur between neighbours of $v_1$ and neighbours of $v_{d-2}$, as well as those of $v_0$ and $v_{d-3}$; there are $a_0a_{d-3} + a_1a_{d-2} = a_0a_1 + a_1a_0$ such paths involving leaves as well as $2$ within $P$.  In general, for each $r \in [0,d-3]$ there are $\sum_{j=0}^{d-r}a_ja_{d-r-j}$ paths of length $d-r$ involving leaves as end vertices, plus $r+1$ such paths whose endpoints are in $P$.  Note that when $r = d-1$, we are counting paths of length $1$, which is $|V(T)|-1$.  When $r = d-2$, we are counting the number of paths of length $2$,  which is
+		\begin{align*}
+			\mult(2) &= \sum_{v \in V(T)} {\deg(v) \choose 2}	\\
+			&=\sum_{v \in P\setminus \{v_{-1}, v_{d-1}\}} {\deg(v) \choose 2}	\\
+			&= \frac{1}{2}\sum_{i=0}^{d-2} (a_i+2)(a_i+1)	\\
+			&\geq \frac{1}{2}\sum_{i = 0}^{d-2} a_ia_{d-2-i}	\\
+			&= \frac{b}{2}
+		\end{align*}
+	
+		So this means that 
+		\begin{align*}
+			\sum_{d-2 \geq 0}2\mult(2)x^{d-2} &\geq \sum_{d-2 \geq 0}\biggr(\sum_{i = 0}^{d-2} a_ia_{d-2-i} \biggr)x^{d-2}
+		\end{align*}
+		
+		
+		  So, our goal is to find (possibly real) values $a_0, a_1, \ldots, a_{d-1}$ such that for each $r \in [0,d-3]$, $$\sum_{j=0}^{r}a_ja_{r-j} = {k-1 \choose 2}.$$
+	\end{proof}
+	
+	\subsection{Restarting the Proof}
+	
+	\begin{proof}
+		First, we show that $\sum_{i = 0}^{d-r} a_ia_{d-r-i} \leq \sum_{i=0}^{d-(r-1)}a_ia_{d-(r-1)-i}$ for each $r \in [3,d]$, which implies that $\mult(r) \leq \mult(r-1)$.  Then we show that $a_r = {2(d-r) \choose d-r}4^{-(d-r)}\sqrt{b}$.  Then $\mult(2) \geq \mult(d) = b$.  Altogether, it follows that $T$ is a tree satisfying $\mult(r) \geq b$ for each $r \in [2,d]$.  Finally, we estimate $|V(T)|$ and calculate the number of extraneous distances in $D(T)$ to achieve this $b$-uniform multiplicity property.
+		
+		Remark:  This convolution sum comes from the caterpillar structure.  Ideally, we could specify that $\mult(r)$ be around $b_r$ rather than the constant $b$.  There are probably other distributions $b_2, b_3, \ldots, b_d$ that are relatively easy to work with as well -- for example, what if $b_r = (d-r+1)g$ for some $g \in \Z^+$?.
+		
+		The broad question here is: given a multiset $M$ with positive integer support $\{1, 2, \ldots, d\}$, find a graph $G$ (tree in this case) with small (ideally smallest) order such that $M \subseteq D(G)$.
+		
+		The above result has a neat corollary:  Setting $b := {k-1 \choose 2}$, it holds that $T$ contains the distance multiset of every tree of order $k$ and diameter $d$, and $|V(T)| \leq O(k\sqrt{d})$.
+	\end{proof}
+	\subsection{Technique for Constructing Caterpillar with Half its Multiplicities Specified by the Square of a Known Generating Function}
+		In this section, we show a technique that allows one to specify a sequence of multiplicities and construct a graph such that the larger half of its distances attain (approximately) the specified multiplicities.  The problem amounts to whether or not the sequence associated with the square root of the generating function for the specified sequence is known.
+		
+		Let $P = (v_0, \ldots, v_{d-2})$ be a path such that for each $i \in [0,d-2]$, $v_i$ has $a_i$ leaves joined to it.  Let $b = (b_0, b_1, \ldots, b_{\floor{\tfrac{d-2}{2}}})$ be a sequence of reals greater than or equal to $1$.  Define $D$ to be an integer multiset where for each $r \in [d-\floor{\tfrac{d-2}{2}}, d]$, $\mult_D(r) = b_{r-(d-\floor{\tfrac{d-2}{2}})}$.  Then we show below that there exists a caterpillar graph $T$ whose distance multiset $D(T)$ satisfies the property that for each $r \in [d-\floor{\tfrac{d-2}{2}}, d]$, $\mult_{D(T)}(r) \approx \mult_D(r)$.  Note the same cannot be said for the multiplicities of the smaller half of distances.
+		
+		The idea is to first assume that $a_i = a_{d-2-i}$, which ensures that $\mult(r) \approx \sum_{i=0}^{d-r} a_ia_{d-r-i}$ (this will be explained shortly) and also that there are $\floor{\tfrac{d-2}{2}}+1$ unknowns 
+		$$a_0=a_{d-2}, a_1 =a_{d-3}, \ldots, a_{\floor{\tfrac{d-2}{2}}} = a_{d-2-\floor{\tfrac{d-2}{2}}}.$$    Then we solve for these unknowns using the following system of $\floor{\tfrac{d-2}{2}}+1$ equations: for each $r \in [d-\floor{\tfrac{d-2}{2}}, d]$, we have
+		\begin{align}\label{Equations}
+			\sum_{i=0}^{d-r} a_ia_{d-r-i} = b_{r-(d-\floor{\tfrac{d-2}{2}})}.
+		\end{align}
+		Note that $\mult(r)$ also includes distances between leaves and vertices in $P$, and there are $\sum_{i=0}^{d-1-r}2a_i$ of such  distances for each $r \in [d-\floor{\tfrac{d-2}{2}}, d-1]$, but these terms are all linear in $a_i$, and so contribute much less than the quadratic terms in the convolution sum above; so for this reason and simplicity, we do not emphasize these distances going forward.  Also observe that there are $d-1-r$ occurrences of distance $r \in [3, d-2]$ within $P$.  So in general,
+		$$\mult(r) = \sum_{i=0}^{d-r} a_ia_{d-r-i} + \sum_{i=0}^{d-1-r}2a_i + \sum_{i=0}^{d-1-r}1.$$
+		
+		Now back to developing the technique for working with the quadratic terms in the convolution.  Since 
+		$$F(x)^2 := \biggr(\sum_{d-r \geq 0} a_{d-r}x^{d-r} \biggr)^2 = \sum_{d-r \geq 0} \biggr(\sum_{i=0}^{d-r} a_ia_{d-r-i}\biggr)x^{d-r},$$ 
+		if $b$ is given by a generating function $G(x)$, then $F(x) = \sqrt{G(x)}$. Thus if $\sqrt{G(x)}$ is known, then we know $F(x)$ and can construct a caterpillar whose larger half of distances closely attain the multiplicities specified by $b$.  For example, if for some constant $C$, $b = (C, C, \ldots, C)$, then 
+		\begin{align*}
+			\sum_{d-r \geq 0} \biggr(\sum_{i=0}^{d-r} a_ia_{d-r-i}\biggr)x^{d-r} &= \sum_{d-r \geq 0} Cx^{d-r}	\\
+			\Leftrightarrow \sum_{d-r \geq 0} \biggr(\sum_{i=0}^{d-r} \big(\frac{a_i}{\sqrt{C}}\big)\big(\frac{a_{d-r-i}}{\sqrt{C}}\big)\biggr)x^{d-r} &= \sum_{d-r \geq 0} x^{d-r}	\\
+			\Leftrightarrow \sum_{i=0}^{d-r} \big(\frac{a_i}{\sqrt{C}}\big)\big(\frac{a_{d-r-i}}{\sqrt{C}}\big) &= 1,	\\
+		\end{align*}
+		which implies that $\frac{a_{d-r}}{\sqrt{C}} = {2(d-r) \choose d-r} 4^{-(d-r)} $, since this is the unique sequence of reals (with $a_0/\sqrt{C} = 1$) that has convolutions always equalling $1$.  Thus setting $a_{d-r}$ and $a_{r-2}$ to $\ceil{{2(d-r) \choose d-r} 4^{-(d-r)}\sqrt{C}}$ for each $r \in [d-\floor{\tfrac{d-2}{2}}, d]$ ensures that $\mult_T(r) \approx \mult_D(r) = b_{r-(d-\floor{\tfrac{d-2}{2}})} = C$.  In fact, if we allow for real number multiplicities, where the distances from one of the appended leaves at each internal path vertex are possibly included only partially, then we can remove the ceiling function and get that $\mult_T(r) = \mult_D(r) + \sum_{i=0}^{d-1-r}2a_i + \sum_{i=0}^{d-1-r}1$.
+		
+		Here is an example of such a caterpillar:
+		
+		\begin{eg}
+			Let $d = 9$ and $C = 78 = {13 \choose 2}$.  Then 
+			$$(a_0, a_1, \ldots, a_{7}) \approx (8.832, 4.416, 3.312, 2.760, 2.760, 3.312, 4.416, 8.832),$$
+			and if we denote the quadratic terms in $\mult(r)$ as $\mult_{Q}(r)$, then we have 
+			\begin{align*}
+				\mult_{Q}(6) = \mult_{Q}(7) = \mult_{Q}(8) = \mult_{Q}(9) &= 78.004224	\\
+				\mult_{Q}(5) &= 84.098304	\\
+				\mult_{Q}(4) &= 101.161728	\\
+				\mult_{Q}(3) &= 133.155648	\\
+				\mult(2) &= 96.772224	\\
+				\mult(1) &= 46.64.
+			\end{align*}
+		
+		\begin{rem}
+			When pursuing this caterpillar idea, I was originally motivated by the following problem: Find a smallest order tree with diameter $d$ whose distance multiset contains \textbf{*all*} distance multisets of trees of order $k$ and diameter $d$ (There's an analogous problem for finding a largest order tree whose distance multiset \emph{is contained by} all trees of order $k$ and diameter $d$).  Looking at the previous example, since no tree of order $14$ can have distance multiplicities larger than ${13 \choose 2}$ (extremal example is $K_{1,13}$ for $\mult(2)$), this caterpillar is actually a (definitely not smallest order) solution to the extremal problem.  By the way, when $b$ is a constant sequence, it is relatively easy to show that $\mult_Q(r) \leq \mult_Q(r-1)$ for all $r \in [4, d]$, so it isn't a fluke that the smaller distance multiplicities in the example are also large.
+		\end{rem}
+		
+		We can represent the fractional multiplicities in a graph using the following terminology.  A vertex $v$ labelled with a number $x$ indicates that the distances involving the vertex $v$ should be considered with partial multiplicity; we call $x$ the \emph{multiplicity scalar} of $v$.  If $x$ and $y$ are multiplicity scalars of $v$ and $u$, then $d(v,u)$ is counted with multiplicity $xy$.  If a multiplicity scalar is unspecified, then assume it is $1$.
+		\begin{figure}[ht]
+			\begin{center}
+				\includegraphics[scale = 0.5]{CaterpillarExample1(ConstantMults).png}
+			\end{center}
+		\caption{Caterpillar with larger multiplicities close to $78$, where ``close" means the quadratic terms sum to $\approx 78$.  }
+		\end{figure}
+		
+		
+		
+		\end{eg}
+		
+		This technique can be applied so long as the choice of $b$ enables the system of equations in (\ref{Equations}) to be solved.  That is, we need to be able to find a non-negative sequence of reals $a_0, a_1, \ldots, a_n$ such that 
+		$$\sum_{n \geq 0}a_nx^n = \sqrt{\sum_{n \geq 0}b_nx^n}.$$
+		The trade off here is that the order of $T$ could be very large, and it is not necessarily the case that it is minimal with respect to the property of its large half of distances having the specified multiplicities.  Put another way, $T$ could have a lot of extraneous small distances.
+		
+		For another example, geometric progressions are also suitable choices for $b$. If $b_i = \alpha^{i}$, then a simple calculation shows that we should set $a_{d-r} = {2(d-r) \choose d-r} 4^{-(d-r)} \alpha^{d-r}$.  Here's the calculation:
+		\begin{align*}
+			\sum_{d-r \geq 0} \biggr(\sum_{i=0}^{d-r} a_ia_{d-r-i}\biggr)x^{d-r} &= \sum_{d-r \geq 0} \alpha^{d-r}x^{d-r}	\\
+			\biggr(\sum_{d-r \geq 0} a_{d-r}x^{d-r} \biggr)^2 &= \frac{1}{1-\alpha x}	\\
+			\sum_{d-r \geq 0} a_{d-r}x^{d-r} &= (1-\alpha x)^{-1/2}	\\
+			&= \sum_{d-r \geq 0} {-1/2 \choose d-r}(-1)^{d-r} \alpha^{d-r}x^{d-r}	\\
+			&= \sum_{d-r \geq 0}  {2(d-r) \choose d-r} 4^{-(d-r)} \alpha^{d-r}x^{d-r}.
+		\end{align*}
+	
+	I'm hoping this is an early version of a class of techniques that allows us to construct graphs such that \textbf{*all*} (or nearly all) of its distance multiplicities closely resemble those specified.  The two main drawbacks to the above approach are (1) only half the multiplicities can be specified and (2) this can cause the order of the constructed graph to be quite large (though this varies depending on the choice of $b$), which means it might not be a minimal order construction (which would probably be a more cool thing to find).  
+	
+	What makes this technique work is that convolutions relate to squares of generating functions, and convolutions account for the majority of multiplicities in caterpillars with number of leaves symmetric about the center of the graph.   However, many, if not most, of the distances are not accounted for by this caterpillar construction (though it's neat that nearly half of the distance multiplicities essentially are!).  Ideally, there would be a way to get a system of maybe just less than $d$ equations so that the same number of unknowns $a_0, a_1, a_2, \ldots, a_{d-2}$ (describing number of leaves (or some other ``gadgets") to be appended to specified vertices) could be solved for, given a list of $\sim d$ specified multiplicities.  
+	
+	I tried playing with cycles for a bit to see if convolutions could be applied there to count multiplicities, but had no luck.  I think the convolution = square observation can only be leveraged in cases where only half the distance multiplicities are specified.  However, it might be possible to find a way to get a system of $\sim d$ equations using a caterpillar (\textit{i.e.} where we don't assume $a_i = a_{d-2-i}$).  In this case, what we would need to do is figure out how to solve the following: for each $r \in [3,d]$, we have the following system of equations:
+	\begin{align}
+		\mult_Q(r) = \sum_{i=0}^{d-r}a_ia_{i+r-2} = b_{r-3},
+	\end{align}
+	but I don't currently have any good ideas about how to work with this sum to find $a_0, a_1, \ldots, a_{d-2}$ (also, it looks like there's an extra unknown here).  Anyway, I think this section has sufficiently established that it is worth looking into this type of problem!
+
+	\subsection{Constructing Trees That Maximize Multiplicity for a Given Distance}
+	
+	%Let $\mathcal{T}(k,d)$ denote the set of all trees of order $k$ and diameter $d$.  We wish to find a tree $G := G(k,d,i)$ of order $k$ and diameter $d$ that satisfies for a given distance $i \in [2,d]$ the property that $\mult_G(i) = \max_{T \in \mathcal{T}(k,d)}(\mult_T(i))$.  That is, we want $\mult_G(i)$ to be the largest possible multiplicity for distance $i$ in any tree of order $k$.
+	
+	%I believe that a candidate for $G$ can be a triple broom when $d \leq k/3$ and $d$ is even.  Below is a construction of $G(k,d,d)$.
+	
+	%Begin with an isolated vertex and append three paths of length $d/2-1$ to it. Let $v_1, v_2, v_3$ be the leaves of this tree.  Then append the remaining $k-3(d/2-1)-1$ vertices to $v_1$, $v_2$, and $v_3$ such that each has a balanced number of leaves; \textit{i.e.} $|v_i - v_j| \leq 1$ for each $i \neq j \in \{1,2,3\}$.  A computer search shows that this tree $G$ satisfies $\mult_G(d) = \max_{T \in \mathcal{T}(k,d)}(\mult_T(d))$ for all $k \leq 25$ and $d \leq \ceil{k/3}+2$.
+	
+	%Going forward, we will assume that $G(k,d,d)$ is the above triple broom tree.
+	
+	%I believe when $i$ is even, $G(k,d,i)$ can be constructed from $G(k-(d-i),d,d)$.  Construct $G(k,d,i)$ as follows: Begin with the triple broom graph $G(k-(d-i),i,i)$.  Let $v$ be a leaf, and append a path of length $d-i$ to $v$.  The resulting graph has diameter $d$, order $k$, and $\mult(i) = \mult_{G(k-(d-i),i,i)}(i) + 2(d-i)$
+	
+	Our goal here is to set up and state Conjecture \ref{Conjecture-TightBoundsOnEvenDistanceMultiplicities} (which I think is mostly proven below) on a tight upper bound for the multiplicities of even distances in trees of order $k$ and diameter $d$.  That is, let $\mathcal{T}(k,d)$ denote the set of all trees of order $k$ and diameter $d$, then we want to find $\max_{T \in \mathcal{T}(k,d)}(\mult_T(i))$, where $\mult_T(i)$ is the multiplicity of distance $i$ in the tree $T$.  We begin by finding the tight example for distance $d$ (when $d$ is even), and then we argue that this example can be slightly altered to maximize the multiplicity of any even distance.  What follows is a technical lemma that is necessary to prove the optimality of the construction in the diameter multiplicity case.
+	
+	\begin{lem}\label{Lemma-MaximizingMultiplicityInTreeTechnicalLemma}
+		Let $\{a_1, a_2, \ldots, a_n\}$ be a set of positive reals such that $\sum_{i = 1}^n a_i = k - rn \geq n$, where $k, r \in \Z^+$ and $k \geq r/2$.  Then the sum $\sum_{i<j\leq n}a_ia_j$ is maximized at $f(n,k,r) = {n \choose 2}\frac{(k-rn)^2}{n^2}$
+		%\frac{(n-1)(k-rn)^2}{2n}$,
+		(with $a_i = \frac{k-rn}{n}$), when $n=\ceil{n_0(k,r)}$, where $n_0$ is the solution to the following cubic such that $n_0 \in [n_{\max}-1, n_{\max}]$, where $\frac{\partial}{\partial n}f(n_{\max},k,r) = 0$ and $2 \leq n_{\max} < k-rn$:
+		$$n^3(2r^2) + n^2(2r^2-2kr) + n(-2kr) + k^2 = 0.$$
+		%$$2(n+1)(n-1)(k-rn)^2 = 2n^2(k-r(n+1))^2.$$
+	\end{lem}
+
+	\begin{proof}[Proof Sketch]
+		Observe that $\sum_{1=i<j \leq n}a_ia_j$ is maximized when $a_1 = a_2 = \cdots = a_n = \frac{k-rn}{n}$.  Thus 
+		$$\sum_{i<j \leq n} a_ia_j \leq {n \choose 2}\frac{(k-rn)^2}{n^2} = \frac{(n-1)(k-rn)^2}{2n},$$
+		which is the function $f(n,k,r)$ in the lemma statement.  Now we find integers $n$ that maximize $f(n,k,r)$.  Note that $f(n,k,r)$ is maximized at $n = \frac{1}{4}\big( \sqrt{\frac{8k}{r} + 1} + 1 \big) = n_{\max}$ when $k-rn \geq n$.  To find nearest integer values that maximize $f(n,k,r)$, we need to consider $f(n,k,r)$ within the interval $I$ within which $f$ is concave and $n_{\max} \in I$.   This interval $I$ is $[1,b]$ where $b$ is the unique real number satisfying $\frac{\partial^2}{\partial n^2}f(b,k,r) = 0$, whereby the concavity of $f$ fails when $n > b$.  Since $\frac{\partial^2}{\partial n^2}f(n,k,r) = r^2 - \frac{k^2}{n^3}$, $b = \frac{k^{2/3}}{r^{2/3}}$ and so $I = [1,(\tfrac{k}{r})^{2/3}]$.  Thus within this interval $I$, $f(n,k,r)$ is concave.  To find the integer(s) that maximize $f(n,k,r)$, we find $n_0$ for which $f(n_0,k,r) = f(n_0+1,k,r)$ (such an $n_0$ exists and is unique by continuity and concavity of $f$ within $I$, respectively), and then the maximal integer solution(s) will be $\{\ceil{n_0}, \floor{n_0+1}\}$.  Note that $f(n,k,r)$ has only two local extrema in $\R^+$, one local maximum at $f(n_{\max},k,r)$ in $I$ and one local minimum at $f(k/r)$ in $\R \setminus I$, so we solve the following equation for $n$ and choose the root within $I$:
+		\begin{align*}
+			& \frac{(n-1)(k-rn)^2}{2n} = \frac{(n)(k-r(n+1))^2}{2(n+1)}	\\
+			%\Leftrightarrow &2(n+1)(n-1)(k-rn)^2 = 2n(n)(k-r(n+1))^2	\\
+			\Leftrightarrow& 2(n+1)(n-1)(k-rn)^2 = 2n^2(k-r(n+1))^2	\\
+			\Leftrightarrow& n^3(2r^2) + n^2(2r^2-2kr) + n(-2kr) + k^2 = 0.
+		\end{align*}
+	We want the solution within the interval $[x_{\max}-1,x_{\max}]$; denote this number by $n_0(k,r)$.  This $n_0(k,r)$ can be easily found for a given $k$ and $r$ using a computer solver like Sage.  Thus $f(\ceil{n_0(k,r)}, k, r)$ is the maximum of $f(n,k,r)$ over $I$ restricted to the integers. 
+	
+	In particular, we have the following expression for $n_0(k,r)$ [wow, simplification needed!  The root is real, so it should be possible to simplify out the $\sqrt{-1}$s somehow]:
+	\begin{align*}
+		n_0(k,r) = \newcommand{\Bold}[1]{\mathbf{#1}}&-\frac{1}{24} \cdot 4^{\frac{2}{3}} {\left(i \, \sqrt{3} + 1\right)} {\left(\frac{4 \, {\left(k - r\right)}^{3}}{r^{3}} + \frac{18 \, {\left(k - r\right)} k}{r^{2}} - \frac{27 \, k^{2}}{r^{2}} + \frac{3 \, \sqrt{3} k \sqrt{-\frac{8 \, k^{3} - 11 \, k^{2} r - 4 \, k r^{2} - 4 \, r^{3}}{r}}}{r^{2}}\right)}^{\frac{1}{3}} \\
+		&+ \frac{4^{\frac{1}{3}} {\left(i \, \sqrt{3} - 1\right)} {\left(\frac{{\left(k - r\right)}^{2}}{r^{2}} + \frac{3 \, k}{r}\right)}}{6 \, {\left(\frac{4 \, {\left(k - r\right)}^{3}}{r^{3}} + \frac{18 \, {\left(k - r\right)} k}{r^{2}} - \frac{27 \, k^{2}}{r^{2}} + \frac{3 \, \sqrt{3} k \sqrt{-\frac{8 \, k^{3} - 11 \, k^{2} r - 4 \, k r^{2} - 4 \, r^{3}}{r}}}{r^{2}}\right)}^{\frac{1}{3}}} \\
+		&+ \frac{k - r}{3 \, r}.
+	\end{align*}
+	This is the end of the proof.  [But like clearly I need to stare at the Sage output for $n_0(k,r)$ above for a while to figure out how to simplify it...] \qedhere
+	\end{proof}
+
+
+	Now back to the graph problem.  We want to find a tree of order $k$ and diameter $d$ that maximizes the multiplicity of $d$ across all such trees.  We will use Lemma \ref{Lemma-MaximizingMultiplicityInTreeTechnicalLemma} with $r = d/2-1$ and $n_0(k-1,d/2-1)$.  Since a distance $d$ is counted as a sum of products of the form $(\deg(v_i)-1)(\deg(v_j)-1)$ where $\{v_i,v_j\} \in {V(T) \choose 2}$ such that $d(v_i,v_j) = d-2$, we have for some $S \subseteq {V(T) \choose 2}$ that $\mult(d) \leq \sum_{\{v_i,v_j\} \in S}(\deg(v_i)-1)(\deg(v_j)-1)$.  By Lemma \ref{Lemma-MaximizingMultiplicityInTreeTechnicalLemma}, the largest this sum can be is when there are vertices $v_1, v_2, \ldots, v_{\ceil{n_0(k-1,d/2-1)}}$ with balanced degree and degree sum $k-1 - (d/2-1)\ceil{n_0(k-1,d/2-1)}$ each at distance $d-2$ from one another.  We construct a graph with such structure presently, denote it using $G(k,d)$, and call it a \emph{balanced-broom tree} of order $k$ and even diameter $d$.
+	
+	Here is the construction for a balanced-broom tree $G(k,d)$ with order $k$ and even diameter $d$.  Begin with a centre vertex $v$.  Then append $\ceil{n_0(k-1,d/2-1)}$ length $d/2-1$ paths to $v$ by identifying an end vertex of each path to $v$.  Now for the other end vertices (equivalently, the leaves of the tree built so far), call them $v_1, v_2, \ldots, v_{\ceil{n_0(k-1,d/2-1)}}$, we append $k-1-(d/2-1)\ceil{n_0(k-1,d/2-1)}$ leaves to these end vertices in a balanced way so that their degrees differ by at most one.  Let $S = \{\{v_i, v_j\}: 1 \leq i<j \leq \ceil{n_0(k-1,d/2-1)} \}$, and notice that each pair $\{v_i,v_j\} \in S$ satisfies $d(v_i,v_j) = d-2$.  Then by Lemma \ref{Lemma-MaximizingMultiplicityInTreeTechnicalLemma}, we have
+	$$\sum_{\{v_i,v_j\} \in S}(\deg(v_i)-1)(\deg(v_j)-1) = \max_{\substack{T \in \mathcal{T}(k,d) \\ S' \subseteq {V(T) \choose 2} \\ \{v_i,v_j\} \in S' \\ d(v_i,v_j) = d-2}} (\deg(v_i)-1)(\deg(v_j)-1) = \max_{T \in \mathcal{T}(k,d)}(\mult_T(d)).$$
+	
+	That is, any tree that maximizes the multiplicity of distance $d$ must, by Lemma \ref{Lemma-MaximizingMultiplicityInTreeTechnicalLemma}, maximize the sum on the LHS; $G(k,d)$ does this, therefore $G(k,d)$ maximizes the multiplicity of $d$ across \textbf{*all*} trees of order $k$ and diameter $d$.
+	
+	It is straightforward to count $\mult_{G(k,d)}(d)$, so we have the following proposition.
+	\begin{prop}\label{Proposition-TightDiameterCounting}
+		Let $T$ be a tree of order $k$ and diameter $d$ such that $d$ is even.  Set $n_0 := n_0(k-1,d/2-1)$ as defined above and set $\ell := k-1-(d/2-1)\ceil{n_0}$.  Let $\ell = q\ceil{n_0} + s$, where $0 \leq s <\ceil{n_0}$.    Then the following bound holds with tight example $G(k,d)$:
+			$$\mult_T(d) \leq {s \choose 2}\biggr\lceil{\frac{\ell}{\ceil{n_0}}}\biggr\rceil^2 + {\ceil{n_0}-s \choose 2}\biggr\lfloor{\frac{\ell}{\ceil{n_0}}}\biggr\rfloor^2 + s(\ceil{n_0}-s)\biggr\lceil{\frac{\ell}{\ceil{n_0}}}\biggr\rceil \biggr\lfloor{\frac{\ell}{\ceil{n_0}}}\biggr\rfloor.$$
+		
+		%$${\ceil{n_0} \choose 2}\frac{(k-1-(d/2-1)\ceil{n_0})^2}{\ceil{n_0}^2}.$$
+	\end{prop}
+	
+	I am quite sure that a similar graph to $G(k,d)$ maximizes the multiplicity for all even distances $2 \leq i \leq d$.  The construction is simply to create a $G(k-(d-i),i)$ and then identify an end-vertex of a path of length $d-i$ to any leaf of $G(k,i)$.  This results in a graph with order $k$ and diameter $d$, which we denote by $G(k,d,i)$.  It is straightforward to see that $\mult_{G(k,d,i)}(i) = \mult_{G(k-(d-i),i)}(i) + d-i$.  I think a proof that $\mult_{G(k,d,i)}(i) = \max_{T \in \mathcal{T}(k,d)}(\mult_T(i))$ should follow from the truth of $\mult_{G(k-(d-i),i)}(i) = \max_{T \in \mathcal{T}(k-(d-i),i)}\mult_T(i)$ and showing (probably by appealing to Lemma \ref{Lemma-MaximizingMultiplicityInTreeTechnicalLemma}) that $G(k,d,i)$ is an optimal way to maximize the number of vertex pairs $\{v_i,v_j\}$ satisfying $d(v_i,v_j) = i-2$ while also having order $d$.  We just need to show that appending the path of length $d-i$ doesn't undermine optimality of $G(k,d,i)$.  I'm pretty sure that this should be easy.  Anyway, so I think the following generalization of Proposition \ref{Proposition-TightDiameterCounting} is true and our discussion thus far is at least a mostly complete proof sketch.
+	
+	\begin{conj}\label{Conjecture-TightBoundsOnEvenDistanceMultiplicities}
+		Let $T$ be a tree of order $k$ and diameter $d$ ($d$ not necessarily even).  Let $2 \leq i \leq d$ be an even integer.  Set $n_0^{(i)} := n_0(k-(d-i)-1,i/2-1)$ and set $\ell^{(i)} := k-(d-i)-1-(i/2-1)\ceil{n_0^{(i)}}$.  Let $\ell^{(i)} = q\ceil{n_0^{(i)}} + s^{(i)}$, where $0 \leq s^{(i)} <\ceil{n_0^{(i)}}$.    Then the following bound holds with tight example $G(k,d,i)$:
+		$$\mult_T(i) \leq {s^{(i)} \choose 2}\biggr\lceil{\frac{\ell^{(i)}}{\ceil{n_0^{(i)}}}}\biggr\rceil^2 + {\ceil{n_0^{(i)}}-s^{(i)} \choose 2}\biggr\lfloor{\frac{\ell^{(i)}}{\ceil{n_0^{(i)}}}}\biggr\rfloor^2 + s^{(i)}(\ceil{n_0^{(i)}}-s^{(i)})\biggr\lceil{\frac{\ell^{(i)}}{\ceil{n_0^{(i)}}}}\biggr\rceil \biggr\lfloor{\frac{\ell^{(i)}}{\ceil{n_0^{(i)}}}}\biggr\rfloor.$$
+	\end{conj}
+	
+	If we can prove this last optimality step (showing there is no $T \in \mathcal{T}(k,d)$ such that $\mult_T(i) > \mult_{G(k,d,i)}(i)$), then we have a tight upper bound on the multiplicities of even distances in trees, which would be pretty cool!  I haven't thought much about odd distances yet -- this case seems less nice because of the lack of symmetry in the branches; but perhaps it's not too bad given the even case.  
+	
+	Also, I believe the \textbf{*lower bound*} problem is approachable as well, and contrary to the upper bound tight examples, which are very starry, tight examples for the lower bound should be very pathy like in long legged spiders.  Note that the lower bound tight example isn't trivially a path of length $k-1$, because $k$ can be arbitrarily larger than $d$.  So, the construction needs to have branching; but where must this branching occur, and how many branches are there?
+	
+	\newpage
+	
+	\section{Diameter Distance Removal Algorithm}
+	
+	\begin{prop}
+		Let $T$ be a tree with distance multiset $\{1^{m_1}, 2^{m_2}, \ldots, d^{m_d}\}$.  Then there exists a sequence of graphs 
+		$$T = G_d \subset G_{d-1} \subset \cdots \subset G_{2},$$
+		such that for every $i \in [2,d]$, $G_i$ has distance multiset  $\{1^{m_1 + \sum_{k=i+1}^{d} m_{k}}, 2^{m_2}, 3^{m_3}, \ldots, i^{m_i}\}$.% and $j \in [2,i]$, $\mult_{G_{i}}(j) = m_j$ and $\mult_{G_{i}}(1) = m_1 + \sum_{k=0}^{i-1} m_{d-k}$.
+	\end{prop}
+	
+	\begin{proof}
+		Let $T = G_d$ be a tree with diameter $d$ and distance multiset $\{1^{m_1}, 2^{m_2}, \ldots, d^{m_d}\}$.  Let $P(T)$ be the periphery of $T$ and let $v \in P(T)$.  Observe that for every pair $\{x, y\} \subseteq P(T)$ it holds that if $d(x,y) = d$ then either $d(v,x) = d$ or $d(v,y) = d$.  This means that every diametrical path has an end vertex at distance $d$ from $v$.  Thus if $D_v = \{u \in V(T): d(v,u) = d\}$, then the graph $G_{d-1}$ produced by joining each $u \in D_v$ with the unique vertex $u'$ such that $d(v,u') = d-2$ and $d(u,u') = 2$ has diameter $d-1$.  Note we do not include multiple edges here, the edge $uu'$ can only occur once.  Since $|D_v| = m_d$, exactly $m_d$ edges are added to produce $G_{d-1}$.
+		
+		A very nice fact about $G_{d-1}$ is that it has distance multiset $\{1^{m_1 + m_d}, 2^{m_2}, 3^{m_3}, \ldots, (d-1)^{m_{d-1}}\}$.  This fact is explained presently: Let $T_{d-1}$ be the graph induced by all vertices with distance at most $d-2$ from $v$.  Observe that $T_{d-1}$ is a tree such that $T_{d-1} \subset T$, so the distances between vertices in $T_{d-1}$ are unchanged from those in $T$.  The distances that are changed (by adding the $m_d$ edges above) are 
+		\begin{enumerate}
+			\item Class 1: Those between vertices at distance exactly $d$ from $v$ and those with distance at most $d-2$ from $v$;
+			\item Class 2: Let $x,y$ be at distance exactly $d$ from $v$ such that $2 \leq d(x,y) < d$ and let $P(x,y) = (x,x',\ldots, y',y)$ be the unique $(x,y)$-path in $G_d$, then the only distances that are changed when producing $G_{d-1}$ are $d(x,y) \rightarrow d(x,y) -2$, and $d(x',y) = d(x,y') = d(x,y) - 1 \rightarrow d(x,y) - 2$.
+		\end{enumerate}
+		  For Class 2 distances: Note that if there is a pair of vertices $x,y$ at distance $d$ from $v$ such that $2 \leq d(x,y) = t < d$ in $G_d$, then....  If $T$ is a caterpillar, then $t \leq 2$, and so $x$ and $y$ are still at distance $2$ in $G_{d-1}$ because they are not joined together in $G_{d-1}$, and $x' = y'$ where $d(x,y') = d(x',y) = 1$ is also unchanged.  
+		  
+		  For Class 1 distances: Each added edge $uu'$ is at the end of one of the $m_d$ diametrical paths with $v$ as end-vertex, call them $P_{u'}$.  So for each of these $m_d$ diametrical paths from $v$, for each pair of vertices $a,b \in P_{u'}$, $d(a,b)$ decreases by exactly $1$; thus if $\{1^{d}, 2^{d-1}, \ldots, d^{1}\}$ was the distance multiset of $P_{u'}$ before adding $uu'$, the distance multiset after adding $uu'$ is $\{1^{d+1}, 2^{d-1}, 3^{d-2}, \ldots, (d-1)^{2}\}$.  Of course, several of these paths must intersect, but each of them reduces the multiplicity of $d$ by $1$ and increases the multiplicity of $1$ by $1$, and all other multiplicities are left unchanged.  Since there are no other distances, we have finished proving the case for caterpillars.
+		  
+		  For general trees, Class 2 distances are more complicated because $t$ can be larger than $2$.  However, we can account for the Class 2 distances.  For each $t \in [3,d-1]$, define 
+		  $$S_t := \{\{x,y\}\in {P(G_d) \choose 2}: d(x,v) = d(y,v) = d, d(x,y) = t\}.$$
+		  Observe that $S_t$ is empty when $t$ is odd because any $(x,y)$-path intersects the $(v,x)$-path and $(v,y)$-path at exactly one point and this means that for $d(v,x) = d(v,y) = d$, $t$ must be even.  Then the multiset of Class 2 distances is 
+		  $$\mathcal{C}_2 = \bigcup_{\substack{t = 4 \\ t \equiv 0 \Mod{2}}}^{d-1} \{(t-2)^{3|S_t|}, (t-1)^{-2|S_t|}, t^{-|S_t|}\}.$$
+		
+		Altogether, the distance multiset of $G_{d-1}$ is
+		$$\{1^{m_1 + m_d}, 2^{m_2}, 3^{m_3}, \ldots, (d-1)^{m_{d-1}}\} \cup \mathcal{C}_2.$$
+		
+		Since $t \leq d-1$ and even, and $|S_t| \leq |P(T)|$, with each pair in $S_t$ altering $6$ distances, it follows that $\mathcal{C}_2$ alters at most $\frac{6d|P(T)|}{2} = 3d|P(T)|$ distances, which means that if the $\mathcal{C}_2$ distances were ignored, we can assume the distance multisets of $G_2$ and $G_d$ are equal up to an error of $3d|P(t)|$ distances.
+		
+		Another nice fact is that the set of vertices at distance at most $d-2$ from $v$ in $G_{d-1}$ induces a tree, which allows us to recursively add new edges to obtain the sequence of graphs $(G_d, G_{d-1}, \ldots, G_{2})$ satisfying the following two properties:
+		\begin{enumerate}
+			\item For each $i \in [3,d]$ and $j \in [2,i-1]$, it holds that $\mult_{G_i}(j) = \mult_{G_{i-1}}(j)$ and $\mult_{G_i}(1) = m_1 + \sum_{k=0}^{i} m_{d-k}$;
+			\item For each $i \in [3,d]$, $G_{i} \subset G_{i-1}$.
+		\end{enumerate}
+		To produce $G_{i}$ from $G_{i+1}$, we join the following vertices:  for every vertex $u \in V(T)$ at distance $i+1$ from $v$, join $u$ with the unique vertex $u'$ such that $d(v,u') = i-1$ and $d(u,u') = 2$; there is such a unique vertex because the graph induced by all vertices at distance at most $i$ from $v$ in $G_{i+1}$ is a tree.  Let $T_{i+1}$ be this tree.  Note that every distance in $T_{i+1}$ is unchanged after adding the edges to form $G_i$.  The only altered distances are those involving vertices distance at most $i-1$ from $v$ and those at distance $i+1$ from $v$; for each added edge, each of these distances were reduced by $1$; these distances occur along a $(u,v)$-path such that each added edge $uu'$ causes all distances $2, 3, \ldots, i+1$ to decrease in multiplicity by exactly $1$.  Since there are $m_{i+1}$ such edges, there are $m_{i+1}$ such $(u,v)$-paths, which means that while distances do change in this process, the multiplicities $m_2, m_3, \ldots, m_i$ are unchanged with $\mult_{G_{i}}(1) = \mult_{G_{i+1}}(1) + m_{i+1}$. \qedhere
+	\end{proof}
+	\newpage
+	
+	\begin{prop}
+		Let $T$ be a caterpillar with diameter $d$ and distance multiset $\{1^{m_1}, 2^{m_2}, \ldots, d^{m_d}\}$.  Let $P = (v=v_0, v_1, \ldots, v_{d})$ be a diametrical path of $T$ with end vertex $v$.  For each $j \in [1,d-1]$, let $a_i= \deg(v_i)-1$.  Then there exists a sequence of graphs
+		$$T = G_d \subset G_{d-1} \subset \cdots \subset G_2,$$
+		such that for each ...
+		$G_{d-1}$ has distance multiset
+		\begin{align*}
+			&\{1^{m_1}, 2^{m_2}, \ldots, d^{m_{d}}\}	\\
+			\cup &\{1^{a_{d-1}}, 2^{a_{d-1}a_{d-2}}, 3^{a_{d-1}a_{d-3}}, \ldots, (d-1)^{a_{d-1}a_1}\}	\\
+			\cup &\{2^{-a_{d-1}}, 3^{-a_{d-1}a_{d-2}}, 4^{-a_{d-1}a_{d-3}}, \ldots, d^{-a_{d-1}a_1}\}	\\
+			= &\{1^{m_1 + a_{d-1}}, 2^{m_2 + a_{d-1}(a_{d-2}-a_{d-1})}, 3^{m_3 + a_{d-1}(a_{d-3}-a_{d-2})}, \ldots, (d-1)^{m_{d-1} + a_{d-1}(a_1 - a_2)}\}.
+		\end{align*}
+		Then $G_{d-2}$ has distance multiset:
+		\begin{align*}
+			\{1^{m_1 + a_{d-1}+ a_{d-2}}, 2^{m_2 + a_{d-1}(a_{d-2}-a_{d-1}) + a_{d-2}(a_{d-3} - a_{d-2})}, 3^{m_3 + a_{d-1}(a_{d-3}-a_{d-2}) + a_{d-2}(a_{d-4} - a_{d-3})}, \ldots, (d-2)^{m_{d-2} + a_{d-2}(a_1 - a_2)}\}.
+		\end{align*}
+	\end{prop}
 	
 	\newpage
 	\begin{thebibliography}{100}

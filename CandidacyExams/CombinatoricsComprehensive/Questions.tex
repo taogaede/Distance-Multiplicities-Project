@@ -291,7 +291,7 @@
 		Stirling's approximation is as follows
 		$$n! \approx \sqrt{2\pi n}\biggr( \frac{n}{e} \biggr)^n.$$
 	\end{countingFact}
-	
+
 	\subsubsection{List of Combinatorial Identities}
 	In this section, I organize a bunch identities that I've come across in upper-level undergraduate enumeration courses and texts.  I mainly include combinatorial proofs of each; and if I am aware of others, I include those as well.
 	
@@ -317,8 +317,20 @@
 	\end{proof}
 
 	\begin{iden}
-		The n
+		$${2n \choose n} = (-1)^n 4^n {-1/2 \choose n}.$$
 	\end{iden}
+	\begin{proof}
+		\begin{align*}
+			(-1)^n {-1/2 \choose n} &= (-1)^n \frac{(-1/2)(-1/2-1)(-1/2-2)\cdots (-1/2-(n-1))}{n!}	\\
+			&= \frac{(1/2)(1/2+1)(1/2+2)\cdots(1/2+n-1)}{n!}	\\
+			&= \frac{(\tfrac{1}{2})(\tfrac{3}{2})(\tfrac{5}{2})\cdots (\tfrac{2n-1}{2})}{n!}	\\
+			&= \frac{1\cdot 3 \cdot 5 \cdots (2n-1)}{2^n n!}	\\
+			&= \frac{2\cdot 4 \cdot 6 \cdots 2n}{2\cdot 4 \cdot 6 \cdots 2n} \cdot \frac{1\cdot 3 \cdot 5 \cdots (2n-1)}{2^n n!}	\\
+			&= \biggr( \frac{2\cdot 4 \cdot 6 \cdots 2n}{2^n n!} \biggr)  \biggr( \frac{1\cdot 3 \cdot 5 \cdots (2n-1)}{2^n n!} \biggr)	\\
+			&= \biggr( \frac{1}{4^n} \biggr) \biggr(\frac{(2n)!}{n! n!}\biggr)	\\
+			&= \frac{{2n \choose n}}{4^n}.
+		\end{align*}
+	\end{proof}
 	
 	\begin{iden}[Pascal]
 		$${n \choose k} = {n-1 \choose k-1} + {n-1 \choose k}.$$
@@ -647,6 +659,25 @@
 	\begin{question}
 		Define the Ramsey number $N(q_1, q_2, \ldots, q_t;r)$ and prove that $N(4,3;2) \leq 9$.
 	\end{question}
+
+	\begin{proof}
+		\textbf{Definition:} $N(q_1, q_2, \ldots, q_t;r)$ is the smallest number of vertices required in a hypergraph such that any $t$-colouring of the hyper-edges of size $r$ produces a monochromatic $r$-hyper clique of size $q_i$ for some $i \in [1,t]$.
+		
+		To prove $N(4,3;2) \leq 9$, we will use the fact that $N(a,b) \leq N(a,b-1) + N(a-1,b)$ with strict inequality when the RHS terms are both even.  Then since $N(3,3) = 6$ and $N(n,2) = n$, we will be done.
+		
+		\begin{lem}
+			$N(a,b) \leq N(a,b-1) + N(a-1,b)$, where strict inequality holds when the RHS terms are both even.
+		\end{lem}
+		\begin{proof}
+			Let $n = N(a,b)$, $n_1 = N(a,b-1)$, $n_2 = N(a-1,b)$, and consider a graph $G$ of order $n$.  Then $n = n_1 + n_2$.  Let $v \in V(G)$ and define $S = G \setminus [N(v)]$.  If $\deg(v) \geq n_1$, then $[N(v)]$ contains a monochromatic $K_{a}$ or $K_{b-1}^C$.  If $\deg(v) < n_1$, then $|S| \geq n_2$ and so $S$ contains a monochromatic $K_{a-1}$ or $K_{b}^C$.  Since we only want an upper bound, we may assume these cases occur independently (where $[N(v)]$ and $S$ are treated as disjoint, say) to get that $N(a,b) \leq N(a,b-1) + N(a-1,b)$.
+			
+			For the strict inequality: assume $n_1$ and $n_2$ are both even, then $n := n_1 + n_2 -1$ is odd.  By handshaking $G$ cannot have an odd number of odd vertices, so there exists an even vertex $v \in V(G)$.  If $\deg(v) \geq n_1$, then same as above case.  If $\deg(v) < n_1$, then indeed $\deg(v) \leq n_1 -2$, which means that $|S| \geq n_1 + n_2 -1 - (n_1-2) = n_2 + 1$, thus $N(a,b) \leq n_1 + n_2 - 1$.
+		\end{proof}
+		$N(3,3) \leq 6$ because pick a vertex, PHP gives it a monochromatic neighbourhood of size $3$, try not to make a monochromatic triangle, must fail.  Lower bound: $C_5$.  Obviously, $N(n,2) = n$.
+		
+		Thus $N(4,3;2) < N(3,3;2) + N(4,2;2) = 6 + 4$, as desired.
+	\end{proof}
+
 	\begin{question}
 		Prove that for all nonnegative integers $m, n$,
 		\begin{enumerate}[a)]
@@ -654,7 +685,16 @@
 			
 			\item $\sum_{k=0}^n (-1)^k {n \choose k} {m-k \choose n-k} = {m - n \choose n}$.
 		\end{enumerate}
+
 	\end{question}
+
+		\begin{proof}[Proof of Part a)]
+			This is just a calculation.  Can tinker with factors on the LHS to get ${m \choose n}\sum_{k=0}^n {n \choose k} = {m \choose n}2^{n}$.
+		\end{proof}
+		
+		\begin{proof}[Proof of Part b)]
+			Let $M$ be an $m$-set and $N \in {M \choose n}$.  Then RHS counts the number of $n$-subsets of $M\setminus N$.  Use PIE to show the same for the LHS; given a fixed $k$-subset $K$ of $N$, ${m - k \choose n-k}$ counts the number of $n$-subsets of $M$ that ignore $K$...
+		\end{proof}
 
 	\begin{question}
 		\
@@ -663,11 +703,30 @@
 			\item Prove that the number of partitions of $n$ into even summands is equal to the number of partitions of $n$ with each summand appearing an even number of times.
 		\end{enumerate}
 	\end{question}
+	\begin{proof}[Proof of Part a]
+		\begin{align*}
+			\sum_{n \geq 0}p(n)x^n &= \sum_{n \geq 0} \sum_{\substack{m_1 + m_2 + \cdots = n \\ m_i \geq 0}} x^{m_1 + m_2 + \cdots}	\\
+			&= \prod_{i \geq 1} \biggr(\sum_{m_i \geq 0} x^{m_i}\biggr)	\\
+			&= \prod_{i \geq 1} \frac{1}{1-x^{i}}
+		\end{align*}
+	\end{proof}
 
+	\begin{proof}[Proof of Part b]
+		Let $P$ be a partition of $n$ with only even parts.  The Ferrer diagram of $P$ is essentially a $0-1$ matrix with rows corresponding to part sizes in weakly decreasing order from top to bottom.  If $P$ has $k$ parts, then each row has even number of consecutive $1$s.  A conjugate partition is characterized by the transpose of a Ferrer diagram.  The conjugate partition of $P$ has an even number of rows in its Ferrer diagram, and so it has an even number of parts.  Each part size occurs an even number of times, because the $i$-th and $(i-1)$-th rows have the same number of $1$s for all even $i$.   Transpose of Ferrer diagrams is invertible.
+	\end{proof}
 	\begin{question}
 		A Hadamard matrix is an $n \times n$ matrix $H$ such that every entry is $\pm 1$ and $HH^T = nI$.  That is, the dot product of distinct rows are zero.  Suppose there is an $n \times n$ Hadamard matrix.  Prove that if $n \geq 4$, then $n \equiv 0 \Mod{4}$.
 	\end{question}
-
+	
+	\begin{proof}
+		Look at any $3$ rows and take their inner products.  Let $H = (a_{i,j})$, then $\sum_{j = 1}^n a_{1,j}a_{2,j} = 0$ iff half the terms are $(1)(-1)$ products and the other half are $(1)(1)$ or $(-1)(-1)$ products $\Rightarrow n \equiv 0 \Mod{2}$.  Since $\sum_{j = 1}^n a_{1,j}a_{3,j} = 0$ it follows that
+		\begin{align*}
+			\sum_{j = 1}^n a_{1,j}a_{2,j} &= \sum_{j = 1}^n a_{1,j}a_{3,j}	\\
+			\Rightarrow \sum_{j=1}^n a_{1,j}(a_{2,j} - a_{3,j}) &= 0,
+		\end{align*}
+		which means that there are $n/2$ terms where $a_{2,j} - a_{3,j} = 0$ and $n/4$ where $a_{2,j} - a_{3,j} = -2a_{1,j}$, and $n/4$ where $a_{2,j} - a_{3,j} = 2a_{1,j}$.  There are $n/4$ differences of the form $(-1)-(-1) = 0$, $n/4$ of the form $(1)-(1) = 0$, $n/4$ of the form $(1)-(-1) = 2$ and similarly for $(-1)-(1) = -2$.  Thus $n \equiv 0 \Mod{4}$.
+	\end{proof}
+	
 	\begin{question}
 		\
 		\begin{enumerate}[a)]
@@ -677,14 +736,37 @@
 			\item State Fisher's inequality.
 		\end{enumerate}
 	\end{question}
-
+	
+	\begin{proof}
+		\textbf{Definition:} Let $X$ be a $v$-set.  A $2-(v,k,\lambda)$ block design is a pair $(X, \mathcal{B})$, where $\mathcal{B}$ is a collection of $k$-subsets of $X$, called blocks, such that each pair $p \in {X \choose 2}$ occurs in exactly $\lambda$ blocks.
+		
+		Let $b$ be the number of blocks in a $(v,k,\lambda)$-design.  To find the number of block in a design, just count pairs in two ways: there are ${v \choose 2}\lambda$ pairs in the design (Top-down perspective), and now look at the blocks in $\mathcal{B}$ (Bottom-up perspective): there are $b$ blocks and ${k \choose 2}$ pairs in each block.  Thus we have ${v \choose 2}\lambda = b{k \choose 2} \Leftrightarrow b = \tfrac{v(v-1)\lambda}{k(k-1)}$.
+		
+		To construct a $2-(7,4,2)$-design, just take the complement of the finite projective plane of order $2$.
+		
+		Fisher's inequality is $b \geq v$.  It can be proven using a rank argument on the incidence matrix, I think.  Note that this inequality is not at all obvious because suppose $v= Cb$ and , then
+		$$b \sim \tfrac{v^2}{k^2}\lambda \sim \tfrac{C^2b^2}{k^2}\lambda \Leftrightarrow b \sim \tfrac{k^2}{C^2\lambda}.$$
+		I think it's not so hard to imagine this working for $C$ equal to something like $1.5$.
+		
+		%Also, if equality holds, then the design is symmetric (the incidence matrix might not be symmetric!)
+	\end{proof}
+	
 	\begin{question}
 		Let $I(n,k)$ be the number of permutations of $1, 2, \ldots, n$ with exactly $k$ inverses (an inverse of a permutation $\pi$ is an ordered pair $(i,j)$ such that $i < j$ and $\pi(i) > \pi(j)$).  For fixed $n$, find a generating function for $I(n,k)$ and from this deduce a recurrence for these numbers.
 	\end{question}
 
+	\begin{proof}
+		$q$-analogues!  We count according to the possible gap sizes between $i$ and $\pi(i)$.  Note that there $\pi(i) - i$ inverses in a permutation $\pi$ contributed to by the inverse $(i,\pi(i))$.
+		
+		The generating function is $\sum_{k \geq 0} I_{n,k}x^k = (n!)_q = \prod_{j = 1}^{n-1} \frac{1-q^j}{1-q}$...
+	\end{proof}
+
 	\begin{question}
 		Show that an automorphism of a projective plane that fixes all points on some line must fix each line through some point.
 	\end{question}
+	\begin{proof}
+		Let $L$ be a line whose points are fixed under some automorphism $Q$.  Then since we're in a projective plane, not all points are in $L$ and there are other lines $L_1, L_2, \ldots, L_{n^2 + n}$.  Each pair of lines intersects at exactly one point and every pair of points are on a unique line.  Thus for each $L_i$ there is a point $x_i \in L \cap L_i$ (not all distinct of course since $|L| = n+1$), such that $x_i$ is fixed in $L_i$.  Thus there is at least one point on each line that is fixed under $Q$.
+	\end{proof}
 
 	\begin{question}
 		\
@@ -698,10 +780,39 @@
 	\begin{question}
 		State and prove Dilworth's theorem.
 	\end{question}
-
+	
+	\begin{proof}
+		\textbf{Statement:} In any poset $P$, a largest antichain in $P$ has the same size as a minimum sized chain decomposition of $P$.
+		
+		Let $P$ be a poset and $C$ a longest chain of $P$.  Let $M_P$ be the size of a largest antichain in $P$ and $m_P$ the size of a smallest chain decomposition in $P$.
+		
+		Note that $M_P \leq m_P$ because otherwise there would be two elements in an antichain contained in a chain of a minimum sized chain decomposition, a contradiction.
+		
+		We proceed by induction on the order of $P$.  The theorem holds for the order $1$ poset.  Suppose for all posets of order less than that of $P$ that the theorem holds.
+		
+		Consider the poset $P-C$.  Note that $M_{P} -1 \leq M_{P-C} \leq M_{P}$ since a maximum antichain in $P$ can only have at most one element in $C$; so LH inequality follows in the case where the $P$ max antichain intersects $C$ while the RH inequality is the case when the $P$ max antichain doesn't intersect $C$.
+		
+		Suppose $M_{P}-1 = M_{P-C}$.  By the inductive hypothesis, $M_P = m_{P-C}+1$, which can only hold if a largest antichain in $P$ intersects $C$; this is because exactly one element in the antichain must be in each chain in a minimum size chain decomposition of $P-C$.  But in this case, $m_{P-C}+ 1 = m_{P}$.
+		
+		Suppose $M_{P-C} = M_P$.  Let $Y = \{y_1, y_2, \ldots, y_{M_{P-C}}\}$ be a largest antichain in $P-C$.  Note that $Y$ is a largest antichain in $P$ as well.  Let $A$ and $B$ be the upset and downset of $Y$:
+		\begin{align*}
+			A &:= \{x \in P: x \geq y, y \in Y\}	\\
+			B &:= \{x \in P: x \leq y, y \in Y\}
+		\end{align*}
+		Note that $Y = A \cap B$.  Indeed $P = A \cup B$ because otherwise if $z \in P \setminus (A \cup B)$, then $Y \cup \{z\}$ is a larger antichain than $Y$, a contradiction.  Recall that $Y \cap C = \emptyset$.  Now let $g = \max(C)$ and $\ell = \min(C)$; since $C$ is a longest chain in $P$, $g \notin B$ and $\ell \notin A$.  Since $A, B \subset P$, by the inductive hypothesis, $A$ and $B$ both have a minimum sized chain decomposition of size $M_{P-C} = M_{P}$ whose chains are in bijection with $Y$, and since $A \cup B = P$, it follows that $P$ has a minimum sized chain decomposition of size $M_P$, as desired. \qedhere
+	\end{proof}
+	
 	\begin{question}
 		State Hall's theorem and show that it follows from Dilworth's theorem.
 	\end{question}
+	\begin{proof}
+		\textbf{Statement:} Let $m \geq n$.  The sets $A_1, A_2, \ldots, A_n \subseteq [m]$ have an SDR iff for every $I \in 2^{[n]}$, $|\bigcup_{i \in I}A_i| \geq |I|$.
+		
+		\textbf{Forward:} Suppose the family has an SDR $\{s_1, s_2, \ldots, s_n\}$, where $s_i$ represents $A_i$.  Then 
+		$$\Big|\bigcup_{i \in I}A_i\Big| \geq \Big|\bigcup_{i \in I}\{s_i\}\Big| \geq |I|.$$
+		
+		\textbf{Backward:}   Suppose Hall's condition holds.  Let $\bigcup_{i \in I}A_i = \{x_1, x_2, \ldots, x_m\}$.  Then define a poset $P = \{A_1, A_2, \ldots, A_n\} \cup \{\{x_1\}, \{x_2\}, \ldots, \{x_m\}\}$, where for all $U, V \in P$, $U \leq V$ iff $U \subseteq V$.  Note that $\{x_1, x_2, \ldots, x_m\}$ is an antichain.  Suppose for some $\mathcal{X} \subseteq \{\{x_1\}, \{x_2\}, \ldots, \{x_m\}\}$ and $\mathcal{A} \subseteq \{A_1, A_2, \ldots, A_n\}$, $\mathcal{X} \cup \mathcal{A}$ is a largest antichain, then for all $X \in \mathcal{X}$, $X \cap \bigcup_{A \in \mathcal{A}}A = \emptyset$, but Hall's condition implies that $|\bigcup_{A \in \mathcal{A}}A| \geq |\mathcal{A}|$.  Thus $|\mathcal{X}| \leq m - |\mathcal{A}| \Leftrightarrow |\mathcal{X}| + |\mathcal{A}| \leq m$, which means that $\{x_1, x_2, \ldots, x_m\}$ is a largest antichain in $P$.  So by Dilworth's theorem, a smallest chain decomposition has size $m$, and the only way for this to be true is if there are $m-n$ singletons and $n$ chains of size $2$, which means that the chains of size $2$ are of the form $\{A_i,x_j\}$ where $i \in [n]$ and $j \in [m]$.  An SDR is the set of minimum elements in each chain of length $2$ in a smallest chain decomposition of $P$.
+	\end{proof}
 
 	\newpage
 	

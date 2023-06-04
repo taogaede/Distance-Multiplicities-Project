@@ -1,5 +1,5 @@
-\contentsline {section}{\numberline {1}Crescent Labelled Trees}{1}{section.1}%
-\contentsline {section}{\numberline {2}Polynomial Method}{3}{section.2}%
+\contentsline {section}{\numberline {1}Crescent Labelled Trees}{2}{section.1}%
+\contentsline {section}{\numberline {2}Polynomial Method}{4}{section.2}%
 \contentsline {section}{\numberline {3}Distance Multiplicities in Unweighted Graphs}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Conjectures}{5}{subsection.3.1}%
 \contentsline {paragraph}{Construction 2:}{7}{section*.3}%
@@ -37,3 +37,9 @@
 \contentsline {subsection}{\numberline {8.3}Uniform Multiplicity Graph Classification}{25}{subsection.8.3}%
 \contentsline {subsubsection}{\numberline {8.3.1}Extend Result on Trees}{25}{subsubsection.8.3.1}%
 \contentsline {subsection}{\numberline {8.4}Probing Various Graph Distance Multiplicity Parameters: Max Multiplicity, Number of Distinct Multiplicities, and Number of Graphs Realizing a Distance Multiset}{25}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Extremal Numbers for Distance Multiplicities in Trees}{26}{section.9}%
+\contentsline {subsection}{\numberline {9.1}More General Approach}{28}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Restarting the Proof}{29}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Technique for Constructing Caterpillar with Half its Multiplicities Specified by the Square of a Known Generating Function}{30}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Constructing Trees That Maximize Multiplicity for a Given Distance}{33}{subsection.9.4}%
+\contentsline {section}{\numberline {10}Diameter Distance Removal Algorithm}{37}{section.10}%
