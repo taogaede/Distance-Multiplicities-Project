@@ -235,7 +235,7 @@
 	\end{countingFact}
 
 	\begin{countingFact}[Stirling Numbers of the Second Kind]
-		The number of partitions of an $n$-set into exactly $r$ nonempty sets is ${n \brace k}$.
+		The number of partitions of an $n$-set into exactly $k$ nonempty sets is ${n \brace k}$.
 	\end{countingFact}
 
 	\begin{countingFact}
@@ -1120,5 +1120,65 @@
 			\item Solve the recurrence $a_0 = 30$ and $a_1 = 33$, and for $n \geq 2$, $a_n = 4a_{n-1} - 3a_{n-2}-200$.
 		\end{enumerate}
 	\end{question}
+	
+	\section{Statements}
+	
+	\begin{thm}[Burnside]
+		Let $G$ be a group acting on a set $S$ and for $g \in G$, define $I(g) = \{s \in S: gs = s\}$.  Then the number of orbits of $S$ under $G$ is
+		$$\frac{1}{|G|} \sum_{g \in G} |I(g)|.$$
+	\end{thm}
+	
+	\begin{thm}[Orbit Stabilizer]
+		Let $G$ be a group acting on a set $S$ and for $s \in S$, define $St(s) = \{g \in G: gs = s\}$ and $O(s) = \{x \in S: \exists g \in G, gx = s\}$.  Then 
+		$$|G| = |O(s)| |St(s)|.$$
+	\end{thm}
+
+	Unrelated: Group orbit closer set: $G(s) = \{g \in G: \exists x \in O(s), gx = s\}$.  What is this?
+	
+	\begin{thm}[Hall]
+		Let $A_1, A_2, \ldots, A_n$ be distinct sets.  Then the collection has an SDR if and only if for every $I \subset [n]$,
+		$$\Big|\bigcup_{i \in I} A_i \Big| \geq |I|.$$
+	\end{thm}
+	
+	\begin{thm}[Dilworth]
+		Let $P = (X, \leq)$ be a poset.  Then the size of a largest antichain in $P$ is equal to the size of a smallest chain decomposition of $P$.
+	\end{thm}
+
+	\begin{thm}[Sperner]
+		Let $P = ([n], \subseteq)$ be the inclusion poset of an $n$-set.  Then the size of a largest antichain in $P$ is ${n \choose \floor{n/2}}$.
+	\end{thm}
+	
+	%\begin{thm}[Multicolour Ramsey]
+	%	Let $q_1, q_2, \ldots, q_t$ be positive integers.  Then $n := R(q_1, q_2, \ldots, q_t)$ is the smallest integer such that for some $i \in [t]$, any $t$-colouring of a complete graph of order $n$, denoted $C: E(K_n) \rightarrow [t]$, contains a $K_{q_i}$ whose edges are all coloured $i$.
+	%\end{thm}
+
+	\begin{thm}[Ramsey]
+		Let $k_1, k_2, \ldots, k_t$, and $r$ be positive integers, where $t \geq 2$.  Then there exists a smallest positive integer $R(k_1, k_2, \ldots, k_t; r)$ such that if $n \geq R(k_1, k_2, \ldots, k_t; r)$ and the edges of the complete $r$-uniform hypergraph $K_n^r$ are $t$-coloured, then there exists a monochromatic $K_{k_i}^r$ for some $i \in [t]$.
+	\end{thm}
+
+	\begin{defn}[Integer Partition]
+		An $n$-partition into $k$ parts is a multiset of integers $\lambda_1 \geq \lambda_2 \geq \cdots \lambda_k$ such that $\sum_{i = 1}^k \lambda_i = n$.
+	\end{defn}
+
+	\begin{defn}[Conjugate Integer Partition]
+		Let $P = \{\lambda_1^{m_1}, \lambda_2^{m_2}, \ldots, \lambda_s^{m_s}\}$ be an $n$-partition into $k$ parts.  For $j \in [s]$, define $\lambda'_j = \sum_{i = 1}^{s+1-j} m_i$.  Then the conjugate of $P$ is
+		$$P' = \{{\lambda'_{1}}^{a_s}, {\lambda'_{2}}^{a_s-a_{s-1}}, {\lambda'_{3}}^{a_{s-1}-a_{s-2}}, \ldots, {\lambda'_{s}}^{a_2 - a_1}\}.$$
+	\end{defn}
+	
+	\begin{thm}
+		The number of $n$-partitions into odd sized parts is equal to the number of $n$-partitions into distinct parts.
+	\end{thm}
+
+	\begin{thm}
+		The $n$-th Catalan number is $a_n = \frac{1}{n+1}{2n \choose n}$.  Then $a_n$ counts
+		\begin{enumerate}
+			\item the number of ways to parenthesize $x_1x_2\cdots x_{n+1}$ so that every pair of parentheses encloses a product of exactly two factors;
+			\item the number of different triangulations of a labelled convex $(n+2)$-gon;
+			
+			\item the number of binary trees on $n$ vertices;
+			
+			\item thee number of dyck words of length $2n$, which is a string of $n$ $X$s and $n$ $Y$s such that no initial segment has more $Y$s than $X$s.
+		\end{enumerate}
+	\end{thm}
 	
 	\end{document}

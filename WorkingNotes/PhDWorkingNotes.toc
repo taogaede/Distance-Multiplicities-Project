@@ -43,3 +43,9 @@
 \contentsline {subsection}{\numberline {9.3}Technique for Constructing Caterpillar with Half its Multiplicities Specified by the Square of a Known Generating Function}{30}{subsection.9.3}%
 \contentsline {subsection}{\numberline {9.4}Constructing Trees That Maximize Multiplicity for a Given Distance}{33}{subsection.9.4}%
 \contentsline {section}{\numberline {10}Diameter Distance Removal Algorithm}{37}{section.10}%
+\contentsline {section}{\numberline {11}Distance Multiplicities Projects (June 2023)}{41}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Crescent Sets in Graphs}{41}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Minimal Tree Distance Multiset Covering}{41}{subsection.11.2}%
+\contentsline {subsection}{\numberline {11.3}Classifying Winograd Families}{42}{subsection.11.3}%
+\contentsline {subsection}{\numberline {11.4}Classify AP Pairs based on Multiplicity Conditions}{43}{subsection.11.4}%
+\contentsline {subsection}{\numberline {11.5}Distance Max Multiplicity Games}{43}{subsection.11.5}%

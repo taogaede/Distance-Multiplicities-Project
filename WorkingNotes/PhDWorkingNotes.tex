@@ -1050,7 +1050,7 @@ If $x = 2d-1$, then $\mult_{ext,d}(x) = r \mult_{ext,d-1}(x-1)$ (no counting lea
 	
 	\section{Finding Graph Distances From Vertex Distances (Global from Local)} A related line of investigation would be to determine distance multisets for diameter $d$ graphs given the distances at each vertex.  That is, we know the \textbf{local} information of the $n-1$ distances from each vertex (but we don't know which vertex pairs produce which distance), and the goal is to find the \textbf{global} information of the ${n \choose 2}$ distances in the graph.  Good places to start here are probably \textbf{(1)} caterpillars because vertices can probably be located in the graph more easily based on their distances (I believe you had some good early thoughts on this a while back); and \textbf{(2)} vertex transitive graphs because all vertices are similar and so have the same distances.
 	
-	For \textbf{(2)}, here's a quick and silly example about a certain type of vertex transitive graph that cannot exist.  Let $G$ be a graph of order $n$.  We show that not all vertices of $G$ have distances $\{1, 2, \ldots, n-1\}$.  Suppose otherwise.  Define $K(G)$ to be the edge-weighted clique of order $n$ such that $v_iv_j \in E(K(G))$ has weight $d(v_i,v_j)$.  Note that the edge-weights correspond to a proper edge-colouring of $K(G)$, which means that $K_n$ has a proper $\Delta$-edge-colouring, which is a contradiction.  So, we know that at least one distance happens at least twice at each vertex in a vertex transitive graph.
+	For \textbf{(2)}, here's a quick and silly example about a certain type of vertex transitive graph that cannot exist.  Let $G$ be a graph of odd order $n$.  We show that not all vertices of $G$ have distances $\{1, 2, \ldots, n-1\}$.  Suppose otherwise.  Define $K(G)$ to be the edge-weighted clique of order $n$ such that $v_iv_j \in E(K(G))$ has weight $d(v_i,v_j)$.  Note that the edge-weights correspond to a proper edge-colouring of $K(G)$, which means that $K_n$ has a proper $\Delta$-edge-colouring, which is a contradiction.  So, we know that at least one distance happens at least twice at each vertex in a vertex transitive graph.
 	
 	\subsection{Eccentricity and Distance Multisets of Connected Graphs}
 	
@@ -1558,6 +1558,96 @@ If $x = 2d-1$, then $\mult_{ext,d}(x) = r \mult_{ext,d-1}(x-1)$ (no counting lea
 			\{1^{m_1 + a_{d-1}+ a_{d-2}}, 2^{m_2 + a_{d-1}(a_{d-2}-a_{d-1}) + a_{d-2}(a_{d-3} - a_{d-2})}, 3^{m_3 + a_{d-1}(a_{d-3}-a_{d-2}) + a_{d-2}(a_{d-4} - a_{d-3})}, \ldots, (d-2)^{m_{d-2} + a_{d-2}(a_1 - a_2)}\}.
 		\end{align*}
 	\end{prop}
+	
+	\newpage
+	
+	Let $T$ be a tree and $d \in [1, \diam(T)]$.  Then the distance graph of $T$ for distance $d$ is defined to be the graph with vertex set $V(T)$ and for every $u,v \in V(T)$, $uv$ is an edge iff $d(u,v) = d$.  Denote this graph $D(T,d)$.
+	
+	Define a clique graph to be a graph consisting of cliques that either share a single
+	
+	\begin{lem}
+		Let $T$ be a tree and $d \in [1, \diam(T)]$.  Then
+		\begin{enumerate}
+			\item If $d$ is even and does not contain an $S_{k,d/2}$ for some $k \geq 3$, then $D(T,d)$ is a clique graph.
+			\item If $d$ is odd, then $D(T,d)$ is a biclique graph.
+			\item If $d$ is even and contains an $S_{k,d/2}$ for some $k \geq 3$, then $D(T,d)$ is a union of clique and biclique graphs.
+		\end{enumerate}
+	\end{lem}
+	
+	
+	
+	\newpage
+	
+	\section{Distance Multiplicities Projects (June 2023)}
+	
+	\subsection{Crescent Sets in Graphs}
+	
+	A crescent set is a subset of vertices whose distances have an interval of multiplicities.  We consider graphs with order $n-1 = {k \choose 2} + (k-1)b$ where the smallest multiplicity is $b+1$ for some $k \geq 1$ and $b \geq 0$ so that the $n-1$ distances at crescent vertices can have the interval pattern.  Note the smallest multiplicity is $1$ when $b = 0$.
+	
+	\subsection{Minimal Tree Distance Multiset Covering}
+	
+	Let $\tau$ be the set of all trees of order $n$ and diameter $d$.  We wish to construct a tree $T$ with minimum order $N(n,d)$ and diameter $d$ such that the distance multiset of $T$ contains all distance multisets of trees in $\tau$.
+	
+	Approach: Prove sharp upper bound on multiplicities of even distances of trees.  Using this with the sharp upper bound on multiplicities of odd distances in trees from Dankelman, construct a smallest order tree that realizes these upper bounds.  That is, new results are: sharp bound for even distance multiplicities, and this construction.
+	
+	\begin{prop}
+		A tree with order $n$ and even diameter $d$ that maximizes $\mult(d)$ is a spider with $k := k(n,d)$ legs of length $d/2 -1$ and a balanced number of leaves at the end of each leg; that is, the floor and ceiling of $\frac{n - k(d/2-1) - 1}{k} = (n-1)/k - d/2 +1$.
+	\end{prop}
+
+	\begin{proof}
+		The proof is in 3 parts:
+		\begin{enumerate}
+			\item Show that the optimal tree contains spiders of the form $S_{k,d/2-1}$ with leaves appended to the ends of the legs.
+			\item Show that the optimal tree contains exactly one $S_{k,d/2-1}$ and that the leaves are balanced across all the legs.
+			\item Find the optimal number of legs $k(n,d)$ that maximizes $\mult(d)$.
+		\end{enumerate}
+	
+		Parts 1 and 2.  Consider the distance $d$ graph of a tree $T$, denoted $D(T,d)$.  Since $d$ is even and at least $4$, $D(T,d)$ consists of only cliques and bicliques.  A $j$-clique in $D(T)$ corresponds to a spider of the form $S_{j,d/2}$ in $T$.  Bicliques in $D(T)$ correspond to length $d-2$ paths in $T$ whose end vertices are not leaves.  It is easy to see that a clique and biclique in $D(T)$ cannot intersect at more than $2$ vertices.  To maximize $\mult(d)$, we want to ensure that the independent sets in the bicliques of $D(T)$ are both large and part of many large balanced bicliques.  Since $d$ is the diameter, a part in a biclique of $D(T)$ corresponds to a set of leaves, each with the same neighbour in $T$.  Given this, we want $D(T)$ to consist of ${k \choose 2}$ bicliques, where there are exactly $k$ biclique parts with balanced size such that each biclique part is in exactly $k-1$ bicliques.  Note that the size of each biclique part is a function of $n, d,$ and $k$, where $n$ and $d$ are fixed and $k$ is variable.  So, can find a $k$ that maximizes the number of edges in $D(T,d)$, which is equal to $\mult(d)$.  The tree $T$ with this specified distance $d$ graph is a spider with $k$ (to be determined) legs, each of length $d/2 -1$, and appended to the end of each leg are a balanced number of the remaining $n - k(d/2-1)-1$ vertices.
+		
+		Part 3.  Find an integer $k$ that maximizes ${k \choose 2} \big(\frac{n-k(d/2-1)-1}{k} \big)^2$.
+	\end{proof}
+
+	\begin{prop}
+		Let $T$ be a tree with order $n$ and odd diameter $d$.  If $T$ is a double broom, then $T$ maximizes $\mult(d)$.
+	\end{prop}
+
+	\begin{proof}
+		This follows immediately when considering the distance $d$ graph of $T$.  Since $d$ is odd, $D(T,d)$ consists of only bicliques, so to maximize the number of edges in $D(T,d)$, there must be a single biclique with balanced parts.  The tree $T$ corresponding to this distance graph is a double broom with $d-2$ internal vertices and the floor and ceiling of $\frac{n-d+1}{2}$ leaves at each end.
+	\end{proof}
+
+	\begin{prop}
+		Let $T$ be a tree with order $n$ and $d$ an odd integer less than $\diam(T)$.  If $T$ is a double broom with a path of length $\diam - d$ appended to a leaf, then $T$ maximizes $\mult(d)$.
+	\end{prop}
+	\begin{proof}
+		We show that 
+		\begin{align*}
+			\mult(d) &\leq \biggr\lfloor{\frac{n-(d-1-(\diam-d))}{2}}\biggr\rfloor \biggr\lceil{\frac{n-(d-1-(\diam-d))}{2}}\biggr\rceil 	\\
+			&= \biggr\lfloor{\frac{n-(2d-1-\diam)}{2}}\biggr\rfloor \biggr\lceil{\frac{n-(2d-1-\diam)}{2}} \biggr\rceil
+		\end{align*}
+		Consider the distance graph of $T$.  If $\diam - d \geq d$, then $D(T,d)$ it has a large biclique with $\diam -d-1$ $K_{1,1}$s and one $K_{\lceil{\frac{n-(2d-1-\diam)}{2}}\rceil, 1}$.  This means that
+		\begin{align*}
+			\mult(d) &= \lfloor{\frac{n-(2d-1-\diam)}{2}}\rfloor \lceil{\frac{n-(2d-1-\diam)}{2}} \rceil + \diam-d-1 + \lceil{\frac{n-(2d-1-\diam)}{2}}\rceil	\\
+			&= \Big\lceil{\frac{n-(2d-1-\diam)}{2}} \Big\rceil^2 + \diam-d-1
+		\end{align*}
+		
+		Alternatively, when $\diam - d < d$, there are $\diam-d$ $K_{1,1}$s and the same large biclique.  So
+		$$\mult(d) = \Big\lfloor{\frac{n-(2d-1-\diam)}{2}}\Big\rfloor \Big\lceil{\frac{n-(2d-1-\diam)}{2}} \Big \rceil + \diam-d.$$
+		
+		The idea here is that the distance $d$ graph of a tree that maximizes $\mult(d)$ should have large balanced bicliques, and the case that maximizes the size of a large biclique is the double broom with length $d$.  Given that $T$ must contain the double broom of length $d$ and must also have diameter $\diam$, we show optimality by inductively adding vertices until the tree has the desired diameter.  Suppose $T$ is the double broom of length $d$, we wish to extend the diameter, so we must add a new vertex $u$ to a leaf $v$ (on the ceiling side).  Now for the second added vertex $w$, note that joining $w$ to $v$ increases the multiplicity of $d$ less than if we just appended $w$ to the end of the broom, thus it is sub-optimal to add vertices to a biclique in $D(T,d)$ that isn't the largest one corresponding to the double broom.  But if we added $w$ to the large biclique, then the biclique would have $x(x+2)$ edges, and the tree with diameter $d+1$ with double broom having each side of size $x+1$ has distance $d$ graph with more edges.  Thus the most optimal choice for which vertex to join with $w$ is to join $w$ with $u$.  By induction, optimality holds for each added vertex, so that a path of length $\diam - d$ is made and the resulting tree has diameter $\diam$.  This proves the exact upper bound for odd distances.
+	\end{proof}
+	
+	
+	\subsection{Classifying Winograd Families}
+	
+	Proving non-existence of infinite families.  Show first that there are none for small families.  Then see if can generalize.  I think the result probably follows by focusing on why the modular Winograd families only work when $k-1 \in \{\floor{n/2}-2, \floor{n/2}-1, \floor{n/2}\}$.  Idea: there must exist a largest element in an AP that is reduced modulo $n$.
+	
+	\subsection{Classify AP Pairs based on Multiplicity Conditions}
+	
+	Classify AP pairs with distinct multiplicities.  Try to extend methods from Erd\H{o}s-deep AP pairs results from Masters.  Maybe use edge weighted cycle interpretation.
+	
+	\subsection{Distance Max Multiplicity Games}
+	
+	There are 4 types of distance games on trees.  Study
 	
 	\newpage
 	\begin{thebibliography}{100}

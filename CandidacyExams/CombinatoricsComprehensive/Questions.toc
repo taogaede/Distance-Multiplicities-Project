@@ -17,3 +17,4 @@
 \contentsline {subsubsection}{\numberline {1.2.3}Miscellaneous Interesting Counting Arguments}{11}{subsubsection.1.2.3}%
 \contentsline {subsection}{\numberline {1.3}Generating Functions}{12}{subsection.1.3}%
 \contentsline {section}{\numberline {2}Questions}{12}{section.2}%
+\contentsline {section}{\numberline {3}Statements}{25}{section.3}%
