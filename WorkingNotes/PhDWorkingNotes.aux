@@ -2,10 +2,13 @@
 \providecommand\hyper@newdestlabel[2]{}
 \providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
 \HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
 \global\let\oldnewlabel\newlabel
 \gdef\newlabel#1#2{\newlabelxx{#1}#2}
 \gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
 \AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
 \let\newlabel\oldnewlabel
 \fi}
 \fi}
@@ -24,7 +27,7 @@
 \newlabel{Prop-SubgraphNullstellensatzResult}{{2.2}{4}{Variation of Theorem 6.1 in \cite {alon}}{thm.2.2}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}Distance Multiplicities in Unweighted Graphs}{5}{section.3}\protected@file@percent }
 \newlabel{Lemma-CharacterizingMultiplicityInTermsOfDegrees}{{6}{5}{Characterizing Distance Multiplicities in Terms of Vertex Degrees}{lem.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Conjectures}{5}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Conjectures}{6}{subsection.3.1}\protected@file@percent }
 \newlabel{Proposition-Minimizing-m(d)-to(n-1)}{{3.4}{6}{}{thm.3.4}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Extremal tree example minimizing $m(d)$.\relax }}{6}{figure.caption.2}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
@@ -91,5 +94,8 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Classifying Winograd Families}{42}{subsection.11.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Classify AP Pairs based on Multiplicity Conditions}{43}{subsection.11.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Distance Max Multiplicity Games}{43}{subsection.11.5}\protected@file@percent }
+\citation{alon}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Multiplicities as Matrix Vector Product in Trees (Nov 2023)}{44}{section.12}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {13}Nullstellensatz Revisited}{44}{section.13}\protected@file@percent }
+\newlabel{Prop-SubgraphNullstellensatzResult}{{13.1}{44}{Variation of Theorem 6.1 in \cite {alon}}{thm.13.1}{}}
 \bibcite{alon}{1}
-\gdef \@abspage@last{44}

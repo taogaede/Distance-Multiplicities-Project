@@ -1650,6 +1650,48 @@ If $x = 2d-1$, then $\mult_{ext,d}(x) = r \mult_{ext,d-1}(x-1)$ (no counting lea
 	There are 4 types of distance games on trees.  Study
 	
 	\newpage
+	
+	\section{Multiplicities as Matrix Vector Product in Trees (Nov 2023)}
+	
+	\begin{obs}
+		Let $T$ be a tree with diameter $d$.  Then for each $x \in [3,d]$, the multiplicity of distance $x$ is given by:
+		\begin{align*}
+		m(x) = \sum_{\substack{\{u,v\} \in {V \choose 2} \\ d(u,v) = x-2}} (\deg(u)-1)(\deg(v)-1).
+		\end{align*}
+	\end{obs}
+
+	Let $M$ be the vector of multiplicities for distances $3, 4, \ldots, d$.  Then the above observation means that each entry in $M$ can be expressed as a sum of products of degrees of the internal vertices (non-leaves) of the tree.  Let $\mathbb{T}_{d,r}$ be the set of all trees of diameter $d$ with $r$ internal vertices.  If we order the internal vertices $v_1, v_2, \ldots, v_r$ in a standardized way for all trees in $\mathbb{T}_{d,r}$, then there exists a $(d-2) \times r$ matrix $A$ such that $M = (A - \mathbf{J})(v - \mathbf{1})$, where $v$ is the standard internal vertex degree vector $[\deg(v_1), \deg(v_2), \ldots, \deg(v_r)]^T$ and $\mathbf{1}$ is the all ones vector.  Each entry in $A$ has value either $1$ or $\deg(v_i)$ for some $i \in [1,r]$.
+	
+	I think it would be interesting to figure out, for a fixed $d$ and $r$, what variety of matrices $A$ are possible.  Since the structure of $T$ can be completely retrieved from $A$, we can ask work exclusively with the matrix $A - \mathbf{J}$.  Indeed we have the following lemma, which shows we can obtain $A - \mathbf{J}$ by specifying only its first row:
+	
+	\begin{lem}
+		Let $T \in \mathbb{T}_{d,r}$.  Then $A - \mathbf{J}$ is completely determined by the values in its first row.
+	\end{lem}
+	
+	\begin{proof}
+		
+	\end{proof}
+	
+	\section{Nullstellensatz Revisited}
+	
+	\begin{prop}[Variation of Theorem 6.1 in \cite{alon}]\label{Prop-SubgraphNullstellensatzResult}
+		Let $X$ be a set of $n$ points in a metric space, and $d$ the number of distinct distances in $\Delta(X)$.  Let $p$ be a prime number satisfying $p-1 < \tfrac{n(n-1)}{n+d}$.  Then $\mathcal{M}(X)$ contains a non-empty subgraph $U$ such that for every $u \in V(U)$, $\deg(u) \in \{kp: k \in \Z^+\}$.  %In particular, $U$ contains vertices in each part of $\mathcal{M}$, each with degree at least $p$.
+	\end{prop}
+	\begin{proof}
+		We define a polynomial $f$ with degree $|E(\mathcal{M})|$ over $\mathbb{F}_2$, and using the fact that $a^{p-1}$ $\Mod{p}$ $\equiv 1$ for all $a \not\equiv 0 \Mod{p}$, we show the existence of the desired subgraph using the nullstellensatz directly.
+		
+		Define the polynomial
+		$$f(x_e:e \in E(\mathcal{M})) = \prod_{v \in V(\mathcal{M})} \biggr[1 - \Big(\sum_{\substack{e \in E(\mathcal{M})\\ v \in e}}x_e \Big)^{p-1} \biggr] - \prod_{e \in E(\mathcal{M})}(1-x_e).$$
+		
+		The degree of $f$ is $|E(\mathcal{M})|$ because every other term has degree at most
+		$$|V(\mathcal{M})| (p-1) = (n+d)(p-1) < n(n-1) = |E(\mathcal{M})|.$$
+		
+		Note that the max degree term of $f$, $(-1)^{|E(\mathcal{M})|+1}\prod_{e \in E(\mathcal{M})} x_e$, has a non-zero coefficient. 
+		To apply the nullstellensatz, we consider solutions to $f$ of the form $(s_1,s_2,\ldots,s_{|E(\mathcal{M})|}) \in \{0,1\}^{|E(\mathcal{M})|}$ (where $t_i = 1$ for all $i \in [|E(\mathcal{M})|]$).  Thus by Lemma \ref{Lemma-CombinatorialNullstellensatz}, there exists a vector $r=(r_e:e \in E(\mathcal{M}))$ such that $f(r) \neq 0$.  By the definition of $f$, $r \neq 0$ because $f(0) = 0$, so some of its entries are $1$.  This means that the latter product in $f$ vanishes when evaluated at $r$.  The former product in $f$ can be non-zero only when $\Big(\sum_{\substack{e \in E(\mathcal{M})\\ v \in e}}r_e \Big)^{p-1} \equiv 0 \Mod{p}$.  It follows that $r$ corresponds to a subgraph $U$ of $\mathcal{M}(X)$ whose vertex degrees are congruent to $0 \Mod{p}$.  Since $r \neq 0$, there exists a vertex $u \in U$ such that $\deg(u) \in \{kp: k \in \Z^+\}$.  Note that since $U$ is a subgraph of $\mathcal{M}$, which is bipartite, the degree sums in each part need to be equal; therefore, the vertices of $U$ all have degrees being a positive multiple of $p$, and are in both parts. \qedhere
+	\end{proof}
+	
+	
+	\newpage
 	\begin{thebibliography}{100}
 		\bibitem{alon} Alon, N. (1999). Combinatorial Nullstellensatz. Combinatorics, Probability and Computing, 8(1-2), 7-29. doi:10.1017/S0963548398003411
 	\end{thebibliography}
