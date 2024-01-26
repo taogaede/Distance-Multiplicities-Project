@@ -1,0 +1,98 @@
+\documentclass[12]{article}
+
+\usepackage{geometry}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{booktabs} % See the package documentation for guidelines on formal tables: https://ctan.org/pkg/booktabs
+\usepackage{verbatim} % Used to typeset, for example, code snippets or pseudo-code for algorithms.
+\usepackage{dsfont} % Extra fontset for helpful mathematics symbols, e.g. \mathds{1}
+\usepackage{etoolbox} % Used to allow boolean variables for use in the title page
+\usepackage{import}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\set}[2]{\left\{#1 \ : \ #2\right\}}
+\newcommand{\conv}[1]{\underset{#1}\longrightarrow}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\Supp}[0]{\ \mathrm{Supp}\ }
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclareMathOperator{\lcm}{lcm}
+
+\newcommand{\Cross}{\mathbin{\tikz [x=1.4ex,y=1.4ex,line width=.2ex] \draw (0,0) -- (1,1) (0,1) -- (1,0);}}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+		\left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+		#1 % the function
+		\vphantom{\big|} % pretend it's a little taller at normal size
+		\right|_{#2} % this is the delimiter
+}}
+% Custom math operators (analogous to \lim, \sup, etc).
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\od}{od}
+\DeclareMathOperator{\subspan}{span}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\rad}{rad}
+
+\newtheorem{thm}{Theorem}[section] % Numbering is impacted by [chapter]; could do [section] or [subsection] also.
+\newtheorem{lem}{Lemma} % The [thm] argument says to number Lemma in sequence with Theorem.
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{question}{Question}
+% These environments are unnumbered and will not count toward the numbering.
+%\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem*{claim}{Claim}
+% These environments are definitions; they have a different style (bold label, standard font).
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % These definitions are also numbered in sequence with Theorem.
+\newtheorem{eg}{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{obs}{Observation}
+
+\title{ \vspace{-3cm} Note on Expressing Multiplicities as Matrix Vector Product in Subclass of Trees }
+%\author{Tao Gaede}
+
+\begin{document}
+	\maketitle
+	Let $T$ be a tree with diameter $d$ and $r$ internal vertices.  Let $m(x)$ be the multiplicity of distance $x$ in $T$.  Let $I_T$ be the tree induced by the internal vertices of $T$.  Suppose that $T$ satisfies the property that $I_T$ has max degree $3$ and at most one vertex with degree $3$, with the remaining vertices having degree at most $2$.  Note that $T$ can be any caterpillar as well as a tree constructed from three caterpillars joined at the ends of their internal trees.  Note that a tree $T$ has the corollary property that the multiplicities of distances in $I_T$ never exceed $r$.  These properties turn out to be important for representing the multiplicity vector $\mathbf{m} = [m(3), m(4), \ldots, m(d)]^T$ of $T$ as a matrix vector product.
+	
+	\paragraph{Observation}
+		  Recall for any distance $x \in [3,d]$, we have
+		$$m(x) = \sum_{\substack{\{u,v\} \in {V(T) \choose 2} \\ d(u,v) = x-2}} (\deg(u)-1) (\deg(v)-1).$$
+		
+		Note that this is just a dot product of internal vertex degree vectors.  Since the max multiplicity of distances in $I_T$ is at most $r$, there are at most $r$ terms (possibly with value $0$) in $m(x)$.
+		
+	\paragraph{Making the vector and matrix}
+	
+		Suppose we order (in some generally standardized way) the internal vertices of $T$ as $u_1, u_2, \ldots, u_r$.  Then set $a_i := \deg(u_i)-1$.  Define the vector $\mathbf{v} = [a_1, a_2, \ldots, a_r]^T$.  Then there exists a $(d-2) \times (r)$ matrix $B$ with entries coming from the set $\{0, a_1, a_2, \ldots, a_r\}$ such that $\mathbf{m} = B\mathbf{v}$.
+		
+		The $(i,j)$ entry of $B$ corresponds to paths of length $i$ in $I_T$ involving vertex $u_j$.  We have that $B_{i,j} = 0$ iff there does not exist a path of length $i$ involving $u_j$ in $I_T$.  Otherwise, if $B_{i,j} = a_k$ for some $k \in [r]$, then there exists a path of length $i$ between $u_j$ and $u_k$ in $I_T$.  The special degree property of $T$ ensures that the distance $i$ graph of $I_T$ has max degree $2$, which means it's a union of paths and triangles (i.e. there are no cliques of order greater than $3$).  This means that every path of length $i$ in $I_T$ can be accounted for as a unique non-zero entry of $B$.  So, it is always possible to place the $a_k$s in the appropriate entries of $B$ to produce the desired dot products with $\mathbf{v}$.  Thus all of the multiplicity for distance $i+2$ is accounted for in $B\mathbf{v}$.
+		
+	\paragraph{Idea}
+	Suppose we are given $\mathbf{v}$.  Then search the possible ways to assign values from $\{0, a_1, a_2, \ldots, a_r\}$ to entries of $B$ to see how $B$ transforms the degree vector $\mathbf{v}$ into a distance multiplicity vector. 
+\end{document}
