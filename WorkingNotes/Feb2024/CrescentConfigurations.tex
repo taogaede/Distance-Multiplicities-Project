@@ -1,0 +1,265 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tkz-berge}
+\usepackage{tkz-graph}
+\usepackage{booktabs} % See the package documentation for guidelines on formal tables: https://ctan.org/pkg/booktabs
+\usepackage{verbatim} % Used to typeset, for example, code snippets or pseudo-code for algorithms.
+\usepackage{dsfont} % Extra fontset for helpful mathematics symbols, e.g. \mathds{1}
+\usepackage{etoolbox} % Used to allow boolean variables for use in the title page
+\usepackage{import}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{mathbbol}
+\usepackage{caption}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\set}[2]{\left\{#1 \ : \ #2\right\}}
+\newcommand{\conv}[1]{\underset{#1}\longrightarrow}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\Supp}[0]{\ \mathrm{Supp}\ }
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclareMathOperator{\lcm}{lcm}
+
+\newcommand{\Cross}{\mathbin{\tikz [x=1.4ex,y=1.4ex,line width=.2ex] \draw (0,0) -- (1,1) (0,1) -- (1,0);}}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+		\left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+		#1 % the function
+		\vphantom{\big|} % pretend it's a little taller at normal size
+		\right|_{#2} % this is the delimiter
+}}
+% Custom math operators (analogous to \lim, \sup, etc).
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\od}{od}
+\DeclareMathOperator{\subspan}{span}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\rad}{rad}
+%\DeclareMathOperator{\span}{span}
+
+\newtheorem{thm}{Theorem}[section] % Numbering is impacted by [chapter]; could do [section] or [subsection] also.
+\newtheorem{lem}{Lemma} % The [thm] argument says to number Lemma in sequence with Theorem.
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{question}{Question}
+% These environments are unnumbered and will not count toward the numbering.
+%\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem*{claim}{Claim}
+% These environments are definitions; they have a different style (bold label, standard font).
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % These definitions are also numbered in sequence with Theorem.
+\newtheorem{eg}{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{obs}{Observation}
+
+\title{ \vspace{-3cm} Crescent Configurations}
+\author{Tao Gaede}
+
+\begin{document}
+	\maketitle
+	
+	\section{Summary}
+	
+
+	\section{Introduction and Observations}
+	Let $X$ be a set of $n$ points in $\R^2$ and define $\Delta(X)$ to be the distance multiset of $X$ with $S\Delta(X)$ its support.  We say that $X$ is a crescent configuration if and only if $|S\Delta(X)| = n-1$ and each distance occurs with distinct multiplicity.  A crescent configuration is said to be trivial if it contains three points on a line or four points on a circle.
+	
+	\begin{thm}\label{Thm-MainTheorem}
+		There is no non-trivial crescent configuration with more than $14$ points.
+	\end{thm}
+
+	For each $k \in S\Delta(X)$, we denote the multiplicity of $k$ by $m(k)$.  
+	
+	\begin{obs}
+		If $X$ is crescent, then each of the $n-1$ distinct distances has distinct multiplicities from the set $\{1, 2, \ldots, n-1\}$.
+	\end{obs}
+	
+	We use $G_k$ to denote the graph with vertex set $X$ where $u \sim v$ if and only if $d(u,v) = k$.  
+	
+	\begin{obs}\label{Obs-Circles}
+		If $X$ is a non-trivial crescent, then for each $k \in S\Delta(X)$, $\deg_{G_k}(u) \leq 3$ for all $u \in X$; since otherwise, $N_{G_k}(u)$ contains a set of four vertices all on a circle.
+	\end{obs}
+	
+	\begin{defn}
+		Let $X$ be a finite metric space involving $n$ points and $s$ distinct distances.  We define $\mathcal{D}:= \mathcal{D}(X)$ to be the $n \times s$ bipartite multigraph with the partite sets corresponding to the $n$ points and $s$ distinct distances, respectively; and we include an edge between a point $u \in X$ and distinct distance $k \in S \Delta(X)$ whenever there exists some other point $v \in X$ such that $d(u,v) = k$.
+	\end{defn}
+
+	\begin{obs}\label{Obs-BadSubgraph}
+		If $X$ is a non-trivial crescent, then $\mathcal{D}(X)$ cannot contain a subgraph in which some point vertex $u$ has more than $3$ edges with a distance vertex $k$.  By Observation \ref{Obs-Circles}, this would mean that there are at least four vertices at distance $k$ from $u$.
+	\end{obs}
+	
+	\section{Nullstellensatz}
+	
+	Proposition \ref{Prop-SubgraphNullstellensatzResult} is a variation of a result of Alon \cite{alon}, which applies the combinatorial nullstellensatz.  We use this proposition to show that for any crescent configuration $X$ with sufficiently many points, the graph $\mathcal{D}(X)$ must contain such a subgraph described in Observation \ref{Obs-BadSubgraph}, which implies that $X$ must be trivial.
+	
+	\begin{prop}[Variation of Theorem 6.1 in \cite{alon}]\label{Prop-SubgraphNullstellensatzResult}
+		Let $X$ be a set of $n$ points in a metric space, and $d$ the number of distinct distances in $\Delta(X)$.  Let $p$ be a prime number satisfying $p-1 < \tfrac{n(n-1)}{n+d}$.  Then $\mathcal{M}(X)$ contains a non-empty subgraph $U$ such that for every $u \in V(U)$, $\deg(u) \in \{kp: k \in \Z^+\}$.  %In particular, $U$ contains vertices in each part of $\mathcal{M}$, each with degree at least $p$.
+	\end{prop}
+	\begin{proof}
+		We define a polynomial $f$ with degree $|E(\mathcal{M})|$ over $\mathbb{F}_2$, and using the fact that $a^{p-1}$ $\Mod{p}$ $\equiv 1$ for all $a \not\equiv 0 \Mod{p}$, we show the existence of the desired subgraph using the nullstellensatz directly.
+		
+		Define the polynomial
+		$$f(x_e:e \in E(\mathcal{M})) := \prod_{v \in V(\mathcal{M})} \biggr[1 - \Big(\sum_{\substack{e \in E(\mathcal{M})\\ v \in e}}x_e \Big)^{p-1} \biggr] - \prod_{e \in E(\mathcal{M})}(1-x_e).$$
+		
+		The degree of $f$ is $|E(\mathcal{M})|$ because every other term has degree at most
+		$$|V(\mathcal{M})| (p-1) = (n+d)(p-1) < n(n-1) = |E(\mathcal{M})|.$$
+		
+		Note that the max degree term of $f$, $(-1)^{|E(\mathcal{M})|+1}\prod_{e \in E(\mathcal{M})} x_e$, has a non-zero coefficient. 
+		To apply the nullstellensatz, we consider solutions to $f$ of the form $(s_1,s_2,\ldots,s_{|E(\mathcal{M})|}) \in \{0,1\}^{|E(\mathcal{M})|}$ (where $t_i = 1$ for all $i \in [|E(\mathcal{M})|]$).  Thus by Lemma \ref{Lemma-CombinatorialNullstellensatz}, there exists a vector $r=(r_e:e \in E(\mathcal{M}))$ such that $f(r) \neq 0$.  By the definition of $f$, $r \neq 0$ because $f(0) = 0$, so some of its entries are $1$.  This means that the latter product in $f$ vanishes when evaluated at $r$.  The former product in $f$ can be non-zero only when $\Big(\sum_{\substack{e \in E(\mathcal{M})\\ v \in e}}r_e \Big)^{p-1} \equiv 0 \Mod{p}$.  It follows that $r$ corresponds to a subgraph $U$ of $\mathcal{M}(X)$ whose vertex degrees are congruent to $0 \Mod{p}$.  Since $r \neq 0$, there exists a vertex $u \in U$ such that $\deg(u) \in \{kp: k \in \Z^+\}$.  Note that since $U$ is a subgraph of $\mathcal{M}$, which is bipartite, the degree sums in each part need to be equal; therefore, the vertices of $U$ all have degrees being a positive multiple of $p$, and are in both parts. \qedhere
+	\end{proof}
+	
+	\section{Implications on Distance Multiplicity Problems}
+	
+	It is possible, under certain maximum multiplicity and ``distance degree" conditions, to show that the subgraph we get out of Proposition \ref{Prop-SubgraphNullstellensatzResult} is not only dense, but also has relatively large order.  The following corollary shows that if the maximum multiplicity is $n-1$, and each vertex in $G_k$ has max degree $d$ (for example, if we have $n$ points in $\R^{d-1}$ with no $d+1$ on a $(d-2)$-sphere), there must exist a large subset of at least $\tfrac{p}{d}$ points such that each point $v$ has $d$ other points at equal distance to $v$.  Here, $p$ is the prime number from Proposition \ref{Prop-SubgraphNullstellensatzResult}, which can be taken to be the nearest integer larger than $\tfrac{n-1}{2}$ for infinitely many $n$.  
+	
+	Notice that for crescent configurations in the plane, with no $4$ points on a circle, we require max multiplicity $n-1$ and $d = 3$; so, the following is a combination of max multiplicity and distance degree necessary condition on crescent configurations in $\R^{d-1}$ for all $d \geq 3$.
+	
+	\begin{thm}\label{Thm-SingleSetTheorem}
+		Let $n$, $r$, and $p$ be positive integers such that $p$ is a prime satisfying $\tfrac{n-1}{2} \leq p-1 < \tfrac{n(n-1)}{n+r}$.  Let $X$ be a finite metric space with $n$ points and distinct distances $k_1, k_2, \ldots k_r$ occurring with maximum multiplicity $M$.  Suppose for all $i \in [r]$, no point in $X$ is at distance $k_i$ from more than $d$ other points in $X$.  Then there exist sets $P \subseteq X$ and $D \subseteq [r]$ satisfying the following conditions:
+		\begin{enumerate}
+			\item It holds that $|P| \in \{|D|, 2|D|, \ldots, \floor{\tfrac{2M}{p}}|D|\}$.
+			\item For each point $u \in P$, there is a set $A \subset X$ satisfying $|A| = p$ such that for each $v \in A$, $d(u,v) \in D$.
+			\item It holds $d \geq \ceil{p/|D|}$ with equality when each point in $P$ is at some distance $k \in D$ with exactly $d$ other points in $X$.
+			%\item If $|P| = |D|$, then there are at least $|D|$ distances with multiplicity at least $\ceil{\tfrac{p}{2}}$; and if $|P| = h|D|$, then there are at least $\ceil{|D|/2}$ distances with multiplicity either at most $\ceil{\tfrac{hp}{2}}$ or 
+		\end{enumerate}
+	\end{thm}
+	
+	\begin{proof}
+		We begin by showing the second condition.  By Proposition \ref{Prop-SubgraphNullstellensatzResult} it follows that there exists a subgraph of $\mathcal{D}(X)$, call it $\mathcal{U}$, such that $\delta(\mathcal{U}) \geq p$.  Let $P$ be the set of $n$ point vertices in $\mathcal{U}$ and $D$ the set of distinct distance vertices of $\mathcal{U}$.  Since $\mathcal{D}$ is bipartite, 
+		$$\sum_{u \in P}\deg(u) = \sum_{k \in D}\deg(k).$$
+		Let $\ell := |D|$, and note that $\mathcal{U}$ is non-empty and bipartite implies $\ell \geq 1$.  Observe that the structure of $\mathcal{U}$ implies the second condition in the theorem statement.
+		\begin{claim}[\textbf{1}]
+			It holds that $|P| \in \{\ell, 2\ell, \ldots, \floor{\tfrac{2M}{p}}\ell\}$.
+		\end{claim}
+		\begin{proof}
+			Since the point vertices have degree $n-1$ in $\mathcal{D}$ and $p > (n-1)/2$, each point vertex in $P$ has degree exactly $p$.  It follows by the bipartite degree sum condition that $|P| \geq \ell$.  
+		
+			Since the max distance multiplicity is $M$, the distance vertices in $\mathcal{D}$ have max degree $2M$, which means by integer division by $p$, the degrees of distance vertices in $D$ are in the set $\{p, 2p, \ldots, \floor{\tfrac{2M}{p}}p\}$.  %Since the max degree of distance vertices is $2M$, it follows that 
+			%$$\sum_{k \in D}\deg(k) \leq \ell \floor{\tfrac{2M}{p}}p.$$
+			%By the definition of $d$, we require also that $\sum_{u \in P}\deg(u) > \ell dp$.  Thus $d < \floor{\tfrac{2M}{p}}$.
+			Let $d_{ave}(D)$ be the average degree of a distance vertex in $\mathcal{U}$.  Then we have
+			$$|P| p = \sum_{u \in P}\deg(u) = \sum_{k \in D}\deg(k) = d_{ave}(D)\ell.$$
+			Since $|P|, p$, and $\ell$ are integers, $d_{ave}(D)$ is an integer $hp$ for some $h \in \{1,$ $2,$ $\ldots,$ $\floor{\tfrac{2M}{p}}\}$.  Thus $|P| = h\ell$.
+		\end{proof}
+		Thus the first condition is proved.
+		
+		\begin{claim}[\textbf{2}]
+			It holds that $d \geq \ceil{p/\ell}$ with equality when there are $d$ edges joining each point vertex with some distance vertex in $\mathcal{U}$.
+		\end{claim}
+		\begin{proof}
+			We have that $p/\ell$ is the smallest average number of edges joining a particular point and distance vertex pair in $\mathcal{U}$ (note that not all points must have edges with all $\ell$ distances).  Since no point vertex can have more than $d$ edges with any of the $\ell$ distance vertices, $\ceil{p/\ell} \leq d$.  The equality case occurs when each point has $d$ edges with some distance vertex.
+		\end{proof}
+	
+		%[[NOT TOO INTERESTING CLAIM]]
+		\iffalse
+		\begin{claim}
+			If $|P| = \ell$, then $\mathcal{U}$ is $p$-regular.  If $|P| > \ell$, then there exists a set $A \subseteq {D \choose \ceil{\ell/2}}$ such that either $\deg_{\mathcal{U}}(k) \geq \tfrac{|P|p}{\ell}$ for all $k \in A$, or $\deg_{\mathcal{U}}(k) \leq \tfrac{|P|p}{\ell}$ for all $k \in A$.
+		\end{claim}
+		\begin{proof}
+			When $|P| = \ell$, $\mathcal{U}$ must be $p$ regular because $\delta(\mathcal{U}) = p$.  For the general case, let $a$ and $b$ be the numbers of distance vertices in $\mathcal{U}$ with degrees $\leq |P|p/\ell$ and $\geq |P|p/\ell$, respectively.  Then since $a$ and $b$ are positive integers satisfying $a + b \geq \ell$, one of the two is at least $\ceil{\ell/2}$. \qedhere
+		\end{proof}
+		\fi
+			%Of course, $|P| \leq |V(\mathcal{D})| = n$, so $h\ell \leq n$.  We show a lower bound on $|P|$ as well.  
+			%Suppose $h \geq 2$.  We show that if a distance vertex has degree larger than $p$, it must hold that since $|P| \geq 2\ell$, there is a point vertex in $\mathcal{U}$ with more than $d$ edges joining to a single distance vertex $k \in D$.
+			
+			%We have that $p/\ell$ is the fewest number of edges joining a particular point and distance vertex pair in $\mathcal{U}$.  Since no point vertex can have more than $d$ edges with any of the $\ell$ distance vertices, $p \leq d\ell$.    Thus we have 
+			%$$n \geq |P| = h\ell \frac{p}{p} \geq p\frac{h}{d} \geq (\frac{n}{2})\frac{h}{d}.$$
+			
+			%Therefore, $h \leq 2d$.  there cannot be enough edges incident to the point vertices to ensure their minimum degree of $p$.  
+			
+			%We have thus far shown that $\ell \leq |P| \leq 3\ell$.  
+			
+			%We may assume that $p > (n-1)/2$, so each point vertex in $P$ has degree $p$, and no four of these edges can be incident to a single distance vertex.  So, we have that $p/\ell \leq 3$, which means that
+			%$$(n-1)/2 < p \leq 3\ell.$$
+			%In particular, we require that $\ell > \tfrac{n-1}{6}$.  Note that $p |P|$ of the $n(n-1)$ edges are in $\mathcal{U}$, and they are joined to $\ell$ distance vertices.  Let $|P| = \ell + t$, where $t \geq 1$.  Then observe by similar reasoning to above when we showed that $|P| \geq \ell$, it must hold that the number of distance vertices that the extra $t$ point vertices are joining with is also at least $\ell$; otherwise, some point vertex has four edges with a distance vertex.  A similar argument shows that if $|P| = 2\ell + t$, for $t >0$, then $t \geq \ell$.  So, since $|P| \leq 3\ell$, we have $\ell | t$.  Therefore, $|P| \in \{\ell, 2\ell, 3\ell\}$. \qedhere
+			This proves the third condition whereby the $d$ edges joining each point vertex to some distance vertex in $\mathcal{U}$ corresponds to there being exactly $d$ points in $X$ at equal distance from each point $v \in P$. \qedhere
+	\end{proof}
+	
+	\begin{eg}
+		Let $d \geq 3$.  Let $X$ be a crescent configuration of $n$ points in $\R^{d-1}$ such that no $d+1$ points are on a sphere $S^{d-2}$.  Suppose $n$ is odd with $p = \tfrac{n+1}{2}$ prime.  Then by Theorem \ref{Thm-SingleSetTheorem}, where $r = M = n-1$, we have that there exists a subset of points $P \subset X$ and $D \subset S\Delta(X)$ such that 
+		\begin{enumerate}
+			\item $|P| \in \{|D|,2|D|,3|D|\}$,
+			\item For each $u \in P$, there is a set $A \subset X$ satisfying $|A| = \tfrac{n+1}{2}$ such that for each $v \in A$, $d(u,v) \in D$;
+			\item $d \geq \ceil{p/|D|}$ with equality when each point in $P$ is at some distance $k \in D$ with exactly $d$ other points in $X$.
+		\end{enumerate}
+		In particular, for such crescent configurations in $\R^2$, we have by Condition 3 that $3 \geq \ceil{p/|D|}$ does not attain equality when $\tfrac{p}{|D|}\leq 2 \Leftrightarrow |D| \geq \tfrac{n+1}{4}$.  Suppose $|P| = 3|D|$, then %$|P| \geq \tfrac{n+1}{2}$, and $|D| \leq |P|/3 \leq n/3$, which means that at most a third of the distance vertices have $|P|p \geq \tfrac{(n+1)^2}{4} > \tfrac{n^2}{4}$ edges.  Thus 
+		$$\deg_{ave}(D) = p|P|/|D| =3p = \frac{3(n+1)}{2};$$
+		however, recall that no distance vertex can have degree larger than $3p$, because $4p = 2(n+1) > 2M = 2(n-1)$.  Thus all distance vertices have degree $3p$.  This means that if $3 \geq \ceil{p/|D|}$ does not attain equality, we have that $|D| \geq \tfrac{n+1}{4}$ distances have multiplicity at least $\ceil{3p/2} = \ceil{\tfrac{3(n+1))}{4}}$, but this is a contradiction since only $(n-1) - \ceil{\tfrac{3(n+1))}{4}} \leq \tfrac{n-1}{4}$ distances have at least such multiplicity.  Suppose now that $|D| < \tfrac{n+1}{4}$; then as we showed above, each distance vertex in $D$ has degree exactly $3p$.  Since there are $3|D|$ point vertices, and no distance vertex can have more than $3$ edges with a point vertex, each distance vertex has at least $1$ edge with at least $(3p)/3 = p$ point vertices.  So, there...
+		
+		Note that when $n = 9$ with $p = 5$, we have $|D| \geq 2$ distances must have multiplicity at least $8 = n-1$, which is a contradiction (note that this particular contradiction only works for $n=9$!), so either $|P| = |D|$ or $|P| = 2|D|$ when $n = 9$.  Suppose $|P| = 2|D|$.  Then $\deg_{ave}(\mathcal{U}) = 2p$.  Note that there can be only one distance vertex with degree $3p = 15$ because $\ceil{\tfrac{3p}{2}} = 8$, which is the max multiplicity.  So, either all distance vertices in $D$ have degree $2p$, or all but two do with exactly one having degree $3p$ and the other with degree $p$.  If $|D| = 2$, then by PHP, each of the $4$ point vertices must have at least $2$ edges with each distance vertex, which means that neither distance vertex can have degree $p$.  
+	\end{eg}
+	
+	Note that Proposition \ref{Prop-SubgraphNullstellensatzResult} does not require a distinction be made between the point vertices and distance vertices.  The only requirement is that $|V(\mathcal{D})|(p-1) < |E(\mathcal{D})|$.  In particular, we may partition the point vertices and consider internal (or external) distances.  The following corollary shows that we can use this technique to prove necessary conditions on internal (or external) distances in families of point sets.
+	
+	\begin{cor}
+		Let $n_1, n_2, \ldots, n_s$, $t$, and $d$ be positive integers satisfying $\sum_{i \in [s]}{n_i \choose 2} = {t \choose 2}$ for some $t$. Let $n := \sum n_i$ and let $r$ and $p$ be positive integers such that $p$ is a prime satisfying $\tfrac{n-1}{2} \leq p-1 < \tfrac{t(t-1)}{n+r}$.  Let $X_1, X_2, \ldots, X_s$ be finite metric spaces satisfying $|X_i| = n_i$ with distinct distances coming from the set $\{k_1, k_2, \ldots, k_r\}$.  Suppose for all $i \in [r]$, no point is at distance $k_i$ from more than $d$ other points in $X$.  Then there exist sets $S \subseteq \bigcup_{i \in [s]}X_i$ and $R \subseteq [r]$, satisfying $|R| = |S| > \tfrac{p}{d}$ such that each point $x \in S$ is at distance $k_i$ from exactly $d$ other points for some $i \in R$.
+	\end{cor}
+	
+	\begin{cor}
+		d
+	\end{cor}
+	
+	\section{Proof of the Theorem}
+	
+	We are now ready to prove Theorem \ref{Thm-MainTheorem}.
+	
+	\begin{proof}[Proof of Theorem \ref{Thm-MainTheorem}]
+		Let $n \geq 14$.  Then by Proposition \ref{Prop-SubgraphNullstellensatzResult} for $p = 7$ and $s = n-1$, it follows that there exists a subgraph of $\mathcal{D}(X)$, call it $\mathcal{U}$, such that $\delta(\mathcal{U}) \geq 7$.  Let $P$ be the set of $n$ point vertices in $\mathcal{U}$ and $S$ the set of distinct distance vertices of $\mathcal{U}$.  Since $\mathcal{D}$ is bipartite, 
+		$$\sum_{u \in P}\deg(u) = \sum_{k \in S}\deg(k).$$
+		Let $\ell := |S|$, and recall that since $\mathcal{U}$ is non-empty and bipartite, $\ell \geq 1$.  
+		\begin{claim}
+			It holds that $|P| \in \{\ell, 2\ell, 3\ell\}$.
+		\end{claim}
+		\begin{proof}[Proof of Claim]
+			%Suppose $|P| > \ell$.  Since $\delta(\mathcal{U}) \geq 5$, and for each $u \in P$, it must hold that $\deg_{G_k}(u) \leq 3$, each point vertex in $P$ has at most $3$ edges with each distance vertex in $S$, so we have at least $5|P|$ edges joining with the $\ell$ vertices in $S$.  Since $\mathcal{U}$ has min degree $5$, $\mathcal{U}$ contains a $\delta$-regular subgraph with $\ell$ point vertices and the $\ell$ vertices in $S$.  Notice that these $\ell$ point vertices cannot have a degree that is a higher multiple of $5$ because then some $u$ will satisfy $\deg_{G_k}(u) \geq 4$.  Similarly, the $(\ell+1)$-th point vertex $v$ has degree exactly $5$.  Therefore, exactly one of the $\ell$ distance vertices $k' \in S$ has degree exactly $10$ in $\mathcal{U}$, and so there are exactly $5$ edges joining  $k'$ and $v$, which means $\deg_{G_{k'}}(v) \geq 5 \geq 4$.  Thus $|P| \leq \ell$.
+			
+			%Note that for $2p >  n-1$, it must hold that $|P| = \ell$.  In particular, we may select $p = 5$ when $n = 9$.  So, the only case we need consider is when $|P| = \ell$.  Hang on.  
+			Since the distance vertices have degrees $2, 4, \ldots, 2(n-1)$ in $\mathcal{D}$, and the point vertices have degree $n-1$ in $\mathcal{D}$, it follows by the bipartite degree sum condition that $|P| \geq \ell$.  
+			%Let $|P| = \ell + t$.  Then $pt$ edges need to be joined with the $\ell$ distance vertices in multiples of $p$.  Note that if $\ell = 2$, $|P| \leq \ell$ because there will be a $u$ such that $\deg_{G_k}(u) \geq 4$.
+			Since the max degree of distance vertices is $2(n-1)$ and $4p > 2(n-1)$, it follows that if $|P| > 3\ell$, there cannot be enough edges incident to the point vertices to ensure their minimum degree of $p$.  
+			
+			We have thus far shown that $\ell \leq |P| \leq 3\ell$.  
+			%If $\ell = 1$, then obviously $X$ is trivial.  So we may assume that $\ell \geq 2$.  
+			We may assume that $p > (n-1)/2$, so each point vertex in $P$ has degree $p$, and no four of these edges can be incident to a single distance vertex.  So, we have that $p/\ell \leq 3$, which means that
+			$$(n-1)/2 < p \leq 3\ell.$$
+			In particular, we require that $\ell > \tfrac{n-1}{6}$.  Note that $p |P|$ of the $n(n-1)$ edges are in $\mathcal{U}$, and they are joined to $\ell$ distance vertices.  Let $|P| = \ell + t$, where $t \geq 1$.  Then observe by similar reasoning to above when we showed that $|P| \geq \ell$, it must hold that the number of distance vertices that the extra $t$ point vertices are joining with is also at least $\ell$; otherwise, some point vertex has four edges with a distance vertex.  A similar argument shows that if $|P| = 2\ell + t$, for $t >0$, then $t \geq \ell$.  So, since $|P| \leq 3\ell$, we have $\ell | t$.  Therefore, $|P| \in \{\ell, 2\ell, 3\ell\}$. \qedhere
+		\end{proof}
+		 %pigeonhole principle, some point vertex $u$ satisfies $\deg_{G_k}(u) > 3$, and so $X$ is trivial by Observation \ref{Obs-BadSubgraph}.
+		 We contradict each of the three cases for $|P|$ using a geometric argument.
+		 Suppose $|P| = 3\ell$.  Then the average degree of a distance vertex is $3\ell p /\ell = 3p$.
+	\end{proof}
+	
+	\newpage
+	\begin{thebibliography}{100}
+		\bibitem{alon} Alon, N. (1999). Combinatorial Nullstellensatz. Combinatorics, Probability and Computing, 8(1-2), 7-29. doi:10.1017/S0963548398003411
+	\end{thebibliography}
+	
+\end{document}
