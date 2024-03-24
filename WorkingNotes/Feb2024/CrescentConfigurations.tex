@@ -121,19 +121,18 @@
 	Proposition \ref{Prop-SubgraphNullstellensatzResult} is a variation of a result of Alon \cite{alon}, which applies the combinatorial nullstellensatz.  We use this proposition to show that for any crescent configuration $X$ with sufficiently many points, the graph $\mathcal{D}(X)$ must contain such a subgraph described in Observation \ref{Obs-BadSubgraph}, which implies that $X$ must be trivial.
 	
 	\begin{prop}[Variation of Theorem 6.1 in \cite{alon}]\label{Prop-SubgraphNullstellensatzResult}
-		Let $X$ be a set of $n$ points in a metric space, and $d$ the number of distinct distances in $\Delta(X)$.  Let $p$ be a prime number satisfying $p-1 < \tfrac{n(n-1)}{n+d}$.  Then $\mathcal{M}(X)$ contains a non-empty subgraph $U$ such that for every $u \in V(U)$, $\deg(u) \in \{kp: k \in \Z^+\}$.  %In particular, $U$ contains vertices in each part of $\mathcal{M}$, each with degree at least $p$.
+		Let $X$ be a set of $n$ points in a metric space, and $r$ the number of distinct distances in $\Delta(X)$.  Let $p$ be a prime number satisfying $p-1 < \tfrac{n(n-1)}{n+r}$.  Then $\mathcal{M}(X)$ contains a non-empty subgraph $U$ such that for every $u \in V(U)$, $\deg(u) \in \{kp: k \in \Z^+\}$.  %In particular, $U$ contains vertices in each part of $\mathcal{M}$, each with degree at least $p$.
 	\end{prop}
 	\begin{proof}
 		We define a polynomial $f$ with degree $|E(\mathcal{M})|$ over $\mathbb{F}_2$, and using the fact that $a^{p-1}$ $\Mod{p}$ $\equiv 1$ for all $a \not\equiv 0 \Mod{p}$, we show the existence of the desired subgraph using the nullstellensatz directly.
-		
 		Define the polynomial
 		$$f(x_e:e \in E(\mathcal{M})) := \prod_{v \in V(\mathcal{M})} \biggr[1 - \Big(\sum_{\substack{e \in E(\mathcal{M})\\ v \in e}}x_e \Big)^{p-1} \biggr] - \prod_{e \in E(\mathcal{M})}(1-x_e).$$
-		
 		The degree of $f$ is $|E(\mathcal{M})|$ because every other term has degree at most
-		$$|V(\mathcal{M})| (p-1) = (n+d)(p-1) < n(n-1) = |E(\mathcal{M})|.$$
-		
+		$$|V(\mathcal{M})| (p-1) = (n+r)(p-1) < n(n-1) = |E(\mathcal{M})|.$$
 		Note that the max degree term of $f$, $(-1)^{|E(\mathcal{M})|+1}\prod_{e \in E(\mathcal{M})} x_e$, has a non-zero coefficient. 
-		To apply the nullstellensatz, we consider solutions to $f$ of the form $(s_1,s_2,\ldots,s_{|E(\mathcal{M})|}) \in \{0,1\}^{|E(\mathcal{M})|}$ (where $t_i = 1$ for all $i \in [|E(\mathcal{M})|]$).  Thus by Lemma \ref{Lemma-CombinatorialNullstellensatz}, there exists a vector $r=(r_e:e \in E(\mathcal{M}))$ such that $f(r) \neq 0$.  By the definition of $f$, $r \neq 0$ because $f(0) = 0$, so some of its entries are $1$.  This means that the latter product in $f$ vanishes when evaluated at $r$.  The former product in $f$ can be non-zero only when $\Big(\sum_{\substack{e \in E(\mathcal{M})\\ v \in e}}r_e \Big)^{p-1} \equiv 0 \Mod{p}$.  It follows that $r$ corresponds to a subgraph $U$ of $\mathcal{M}(X)$ whose vertex degrees are congruent to $0 \Mod{p}$.  Since $r \neq 0$, there exists a vertex $u \in U$ such that $\deg(u) \in \{kp: k \in \Z^+\}$.  Note that since $U$ is a subgraph of $\mathcal{M}$, which is bipartite, the degree sums in each part need to be equal; therefore, the vertices of $U$ all have degrees being a positive multiple of $p$, and are in both parts. \qedhere
+		To apply the nullstellensatz, we consider solutions to $f$ of the form $(s_1,$ $s_2,$ $\ldots,$ $s_{|E(\mathcal{M})|}) \in \{0,1\}^{|E(\mathcal{M})|}$ (where $t_i = 1$ for all $i \in [|E(\mathcal{M})|]$).  Thus by Lemma \ref{Lemma-CombinatorialNullstellensatz}, there exists a edge vector $\mathbf{u}=(u_e:e \in E(\mathcal{M}))$ such that $f(\mathbf{u}) \neq 0$.  By the definition of $f$, $\mathbf{u} \neq \mathbf{0}$ because $f(\mathbf{0}) = 0$, so some of its entries are $1$.  This means that the latter product in $f$ vanishes when evaluated at $\mathbf{u}$.  The former product in $f$ can be non-zero only when
+		$$\Big(\sum_{\substack{e \in E(\mathcal{M})\\ v \in e}}u_e \Big)^{p-1} \equiv 0 \Mod{p}.$$  
+		It follows that $\mathbf{u}$ corresponds to a subgraph $\mathcal{U}$ of $\mathcal{M}(X)$ whose vertex degrees are congruent to $0 \Mod{p}$.  Since $\mathbf{u} \neq \mathbf{0}$, there exists a vertex $v \in \mathcal{U}$ such that $\deg_{\mathcal{U}}(v) \in \{kp: k \in \Z^+\}$.  Note that since $\mathcal{U}$ is a subgraph of $\mathcal{M}$, which is bipartite, the degree sums in each part need to be equal; therefore, the vertices of $\mathcal{U}$ all have degrees being a positive multiple of $p$, and are in both parts. \qedhere
 	\end{proof}
 	
 	\section{Implications on Distance Multiplicity Problems}
@@ -223,9 +222,23 @@
 		Let $n_1, n_2, \ldots, n_s$, $t$, and $d$ be positive integers satisfying $\sum_{i \in [s]}{n_i \choose 2} = {t \choose 2}$ for some $t$. Let $n := \sum n_i$ and let $r$ and $p$ be positive integers such that $p$ is a prime satisfying $\tfrac{n-1}{2} \leq p-1 < \tfrac{t(t-1)}{n+r}$.  Let $X_1, X_2, \ldots, X_s$ be finite metric spaces satisfying $|X_i| = n_i$ with distinct distances coming from the set $\{k_1, k_2, \ldots, k_r\}$.  Suppose for all $i \in [r]$, no point is at distance $k_i$ from more than $d$ other points in $X$.  Then there exist sets $S \subseteq \bigcup_{i \in [s]}X_i$ and $R \subseteq [r]$, satisfying $|R| = |S| > \tfrac{p}{d}$ such that each point $x \in S$ is at distance $k_i$ from exactly $d$ other points for some $i \in R$.
 	\end{cor}
 	
+	\begin{defn}
+		Let $X$ be a finite metric space with distinct distances $k_1, k_2, \ldots, k_r$, and distance multiplicities in the interval $[a,b]$, where min and max multiplicities are $a$ and $b$, respectively.  We say that $\Delta(X)$ is uniformly distributed on $[a,b]$ if for each $\alpha \in [r]$, exactly $\alpha$ distances have multiplicities at least $\tfrac{b-a+1}{r}(r-\alpha) + a$.
+	\end{defn}
+
 	\begin{cor}
-		d
+		Let $X$ be a finite metric space of $n$ points such that no point is at equal distance with more than $d$ other points.  Suppose that $|P| = d|D|$ then if $|D| < \tfrac{(d+1)p}{d^2}$, then there are at least $|D|$ distances with multiplicities at least $\ceil{\tfrac{dp}{2}}$; otherwise, there are either at least $|D|/2$ distances with multiplicity at least $\ceil{dp/2}$ or at least $|D|/2$ with multiplicities at most $\ceil{dp/2}$.
+		%$$dp = \frac{b-a+1}{r}(r-|D|) + a.$$
 	\end{cor}
+	\begin{proof}
+		Recall that no distance vertex can have more than $d$ edges with a point vertex.  Since $|P| = d|D|$ and each point vertex has degree $p$, the average degree of the distance vertices is $pd$.  Since $\mathcal{U}$ is bipartite, there is a distance vertex with degree less than average degree iff there is one with larger degree.  Suppose there is a distance vertex $k$ with degree at least $p(d + 1)$.
+		
+		We require that the average number of edges joining $k$ and a point vertex is at most $d$, that is we require
+		$$\frac{(d+1)p}{|P|} \leq d.$$
+		However, since $|P| = d|D|$, we have
+		$$(d+1)p \leq d^2|D|,$$
+		and since we assume $p$ is linear in $n$, and $d$ is not a function of $n$, we can find a sufficiently large $n$ such that this inequality fails.  Therefore, for sufficiently large $n$ (and/or $p$), every finite metric space on $n$ points satisfying $|P| = d|D|$ has $|D|$ distance vertices with degree at least $dp$.  That is, each distance vertex in $D$ has degree $dp$.  This means that there are at least $|D|$ distances with multiplicity at least $dp/2$.  Since the distance multiplicities are uniformly distributed on $[1,M]$,
+	\end{proof}
 	
 	\section{Proof of the Theorem}
 	
@@ -256,6 +269,29 @@
 		 We contradict each of the three cases for $|P|$ using a geometric argument.
 		 Suppose $|P| = 3\ell$.  Then the average degree of a distance vertex is $3\ell p /\ell = 3p$.
 	\end{proof}
+	
+	\section{Nullstellensatz}
+	
+	\section{Structure of the $\mathcal{U}$ Sub-Multigraph}
+	
+	\begin{enumerate}
+		\item Divisibility of the number of points.  Indeed, $|P| > d |D|$ cannot happen without a distance vertex having more than $d$ edges with some point vertex.
+		\item Most distances of the points in $P$ are in $\mathcal{U}$
+		\item We have that $\Delta(\mathcal{U}) \leq d|P|$.  Proof: The max degree distance vertex cannot have more than $d$ edges with some point vertex (and of course distance vertex degrees are at least $p$).  The average distance degree in $\mathcal{U}$ is $\tfrac{|P|p}{|D|}$.  Proof: total number of edges is $|P|p$ and there are $|D|$ distance vertices.
+		\item We get that the distance vertices all have degree $pd$ when $|P| = d|D|$.  By similar reasoning, $\mathcal{U}$ is $p$-regular when $|P| = |D|$.
+	\end{enumerate}
+	
+	\section{Small Values of $d$}
+	
+	The case when $d=3$ ensures general position with respect to the circle of configurations in $\R^2$.  We deduce necessary distance multiplicity conditions in this case.
+	
+	\section{Crescent Configurations}
+	
+	Deduce that $|P| = |D|$ or $|P| = 2|D|$.
+	
+	\section{Questions}
+	
+	The divisibility of $|P|$ has not been thoroughly explored above -- we only used basic deductions about average distance vertex degree.  For example, when $|P| = |D|$, then $p$ is an eigenvalue for the all ones vector for the matrix $B_{\mathcal{U}}$.  Also, since $d$ is small, the neighbourhoods of each vertex are large, namely, they are at least size $\ceil{p/3} = \ceil{\tfrac{n+1}{6}}$, but at most $p = \tfrac{n+1}{2}$.
 	
 	\newpage
 	\begin{thebibliography}{100}
