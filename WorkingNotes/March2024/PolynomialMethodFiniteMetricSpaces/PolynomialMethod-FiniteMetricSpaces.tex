@@ -1,0 +1,187 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{tkz-berge}
+\usepackage{tkz-graph}
+\usepackage{booktabs} % See the package documentation for guidelines on formal tables: https://ctan.org/pkg/booktabs
+\usepackage{verbatim} % Used to typeset, for example, code snippets or pseudo-code for algorithms.
+\usepackage{dsfont} % Extra fontset for helpful mathematics symbols, e.g. \mathds{1}
+\usepackage{etoolbox} % Used to allow boolean variables for use in the title page
+\usepackage{import}
+\usepackage{lipsum}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{pdfpages}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\usepackage{mathbbol}
+\usepackage{caption}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\set}[2]{\left\{#1 \ : \ #2\right\}}
+\newcommand{\conv}[1]{\underset{#1}\longrightarrow}
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+\newcommand{\Supp}[0]{\ \mathrm{Supp}\ }
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\DeclareMathOperator{\lcm}{lcm}
+
+\newcommand{\Cross}{\mathbin{\tikz [x=1.4ex,y=1.4ex,line width=.2ex] \draw (0,0) -- (1,1) (0,1) -- (1,0);}}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+		\left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+		#1 % the function
+		\vphantom{\big|} % pretend it's a little taller at normal size
+		\right|_{#2} % this is the delimiter
+}}
+% Custom math operators (analogous to \lim, \sup, etc).
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\od}{od}
+\DeclareMathOperator{\subspan}{span}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\rad}{rad}
+%\DeclareMathOperator{\span}{span}
+
+\newtheorem{thm}{Theorem}[section] % Numbering is impacted by [chapter]; could do [section] or [subsection] also.
+\newtheorem{lem}{Lemma} % The [thm] argument says to number Lemma in sequence with Theorem.
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{question}{Question}
+% These environments are unnumbered and will not count toward the numbering.
+%\newtheorem*{question}{Question}
+\newtheorem*{answer}{Answer}
+\newtheorem*{conjecture}{Conjecture}
+\newtheorem*{claim}{Claim}
+% These environments are definitions; they have a different style (bold label, standard font).
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition} % These definitions are also numbered in sequence with Theorem.
+\newtheorem{eg}{Example}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{obs}{Observation}
+
+\title{ \vspace{-3cm} Relation Partitions}
+\author{Tao Gaede}
+
+\begin{document}
+	\maketitle
+	
+	\section{Summary}
+	
+	\section{Preliminaries}
+	
+	Bipartite Distance Multigraph, Distance Graphs, Distance Multiplicities as adj mat (or Laplacian) traces,
+	
+	Combinatorial Nullstellensatz, Eigenvalue interlacing theorem
+	
+	\section{Nullstellensatz Shows Existence of Dense Subgraph}
+	
+	\section{General Position (Max Distance Degree) Permits Large Order}
+	
+	\begin{thm}
+		Let $X$ be a finite metric space with $n$ points and $r$ distinct distances $d_1, \ldots, d_r$ whereby either $n/2$ or $(n+1)/2$ is a prime $p$.  Let $d \in \Z^+$.  Suppose $\Delta(D_{d_k}) \leq d$ for all $k \in [1,r]$.  Then there is a set of $P$ points and $D$ distances satisfying $|P| \geq |D| \geq p/d$ such that 
+		\begin{enumerate}
+			\item for each $v \in P$, there are $p$ points $u \in P \setminus \{v\}$ such that $d(u,v) \in D$; and
+			\item for each $d_k \in D$, there is an $\ell_k \in \Z^+$ such that there are $\ell_k p$ points $P$ at distance $d_k$ with some other point in $X$.
+		\end{enumerate}
+	\end{thm}
+
+	\begin{cor}
+		The average multiplicity of distances in $D$ is at least $\frac{|P|p}{2|D|}$.
+	\end{cor}
+	
+	\section{Eigenvalue Interlacing and Distance Multiplicity Stability}
+	Let $A_k$ be the adjacency matrix for distance $d_k$ in $X$.  Then $2m(d_k) = Tr(A_k^2) = \deg_{\mathcal{M}}(d_k)$.  We say that a point $v \in X$ is \emph{distance independent} if for all $u,w \in X \setminus \{v\}$, $d_{X \setminus \{v\}}(u,w) = d_{X}(u,w)$.
+	
+	Let $v$ be a distance independent vertex of $X$.  Let $\alpha_1^{(k)} \geq \alpha_2^{(k)} \geq \cdots \geq \alpha_n^{(k)}$, and $\beta_1^{(k)} \geq \beta_2^{(k)} \geq \cdots \geq \beta_{n-1}^{(k)}$ be the eigenvalues of $A_k(X)$ and $A_k(X \setminus \{v\})$, respectively.  Similarly, let $\lambda_1^{(k)} \geq \lambda_2^{(k)} \geq \cdots \geq \lambda_n^{(k)}$, and $\mu_1^{(k)} \geq \mu_2^{(k)} \geq \cdots \geq \mu_{n-1}^{(k)}$ be the eigenvalues of $\mathcal{L}(A_k(X))$ and $\mathcal{L}(A_k(X \setminus \{v\}))$, respectively.
+	\begin{thm}
+		  Let $X$ and $Y$ finite metric spaces that differ by a single distance independent point.  Then for every $k \in [1,r]$, 
+		$$|m_X(k) - m_{Y}(k)| < \tfrac{1}{2}(\alpha_1^2 + \alpha_n^2),$$
+		and
+		$$|m_X(k) - m_{Y}(k)| \leq \tfrac{\lambda_1}{2}.$$
+	\end{thm}
+	\begin{proof}
+		Without loss of generality, suppose $Y = X \setminus \{v\}$, where $v$ is a distance independent point.  For ease of notation, we omit the $(k)$ superscripts in the eigenvalues for this proof.  
+		
+		For the Laplacians $\mathcal{L}(A_k(X))$ and $\mathcal{L}(A_k(Y))$, we have by eigenvalue interlacing that $\lambda_1 \geq \mu_1 \geq \cdots \geq \mu_{n-1} \geq \lambda_n$, which immediately implies
+		$$Tr\mathcal{L}(A_k(X)) - \lambda_1 = \sum_{j=2}^n \lambda_j \leq \sum_{j=1}^{n-1}\mu_j \leq \sum_{j = 1}^{n-1}\lambda_j = Tr\mathcal{L}(A_k(X)) - \lambda_n.$$
+		Since $Tr\mathcal{L}(A_k(Y)) = \sum_{j=1}^{n-1}\mu_j$, we have that $|m_X(k) - m_Y(k)| \leq \tfrac{1}{2}(\lambda_1 - \lambda_n)$.  But the laplacian is singular with all eigenvalues non-negative, so $\lambda_n = 0$.
+		
+		For the adjacency squares, since $v$ is independent, by eigenvalue interlacing, we again have
+		$$\alpha_1 \geq \beta_1 \geq \alpha_2 \geq \beta_2 \geq \cdots \geq \alpha_{n-1} \geq \beta_{n-1} \geq \alpha_n.$$
+		Let $i$ be the smallest integer satisfying $\alpha_i< 0$.  Then for all $j \in [i,n-1]$, $\alpha_j^2 \leq \beta_j^2 \leq \alpha_{j+1}^2$, and similarly, for all $j \in [1,i-2]$, $\alpha_j^2 \geq \beta_j^2 \geq \alpha_{j+1}^2$.  Note that if $i = 2$, then $\beta_1$ and $\alpha_1$ are the only positive eigenvalue of $A_k(Y)$ and $A_k(X)$, respectively, which means that $\beta_1 = \sum_{j=2}^{n-1}|\beta_j| \geq \sum_{j=2}^{n-1}|\alpha_j| \geq |\alpha_2|$.  Thus we have that
+		$$\sum_{j=1}^n\alpha_j^2 - \alpha_1^2 - \alpha_n^2 \leq \sum_{j = 1}^{n-1}\beta_j^2 = \sum_{j=1}^{i-1} \beta_j^2 + \sum_{j=i}^{n-1}\beta_j^2 \leq \sum_{j=1}^{n}\alpha_j^2 - \alpha_i^2.$$
+		Thus the multiplicity gap for distance $d_k$ between $X$ and $Y$ is 
+		$$|m_X(k) - m_Y(k)| \leq \frac{1}{2}(\alpha_1^2 + \alpha_n^2 - \alpha_i^2) < \frac{1}{2}(\alpha_1^2 + \alpha_n^2).$$
+		Note that $\alpha_i$ is one of the eigenvalues of $A_k(X)$ with smallest magnitude.
+	\end{proof}
+
+	\begin{thm}
+		Let $X$ be a finite metric space with $n$ points and $r$ distinct distances $d_1, d_2, \ldots, d_r$.  Let $p$ be a prime satisfying $p-1 < \tfrac{n(n-1)}{n+r}$.  Let $\mathcal{U} = (P,D)$ be a subgraph of $\mathcal{M}(X)$ such that for all $v \in P$, $\deg_{\mathcal{U}}(v) = h_vp$ with $h_v \in \Z^+$ and for all $d_k \in D$, $\deg_{\mathcal{U}}(d_k) = \ell_k p $ with $\ell_k \in \Z^+$.  Then for all $d_k \in D$, it holds that
+		$$\sum_{j=n-|P|+1}^n \lambda_j^{(k)} \leq \ell_k p.$$
+	\end{thm}
+	\newpage
+	\section{Relation Partition and Their Cardinalities}
+	Let $X$ be a finite set of $n$ elements, called points.  Let $R_1, \ldots, R_r$ be symmetric relations that partition the unordered pairs of points in $X$.  We call such a partition a \emph{relation partition of $X$}.  Then for each $k \in [r]$, we define $G_k$ to be the graph corresponding to $R_k$; that is, $G_k$ has vertex set $X$ where $u\sim v$ if and only if $\{u,v\} \in R_k$.  
+	
+	We are interested in the set $\{|R_k|: k \in [r]\}$.  Observe that $|R_k| = \tfrac{1}{2}Tr(L(G_k))$, where $L$ denotes the Laplacian matrix.
+	\begin{lem}\label{Lem-NullstellensatzEigenvalueInterlacing}
+		For any finite set $X$ and relation partition of $X$, for any prime $p$ satisfying $p-1 < \tfrac{n(n-1)}{n+r}$, there exist nonempty subsets $D \subseteq [r]$ and $P \subseteq X$, such that for all $k \in D$, there is a positive integer $\ell_k$ such that
+		$$\ell_k p \leq \sum_{j =1}^{|P|}\lambda_j^{(k)},$$
+		where $\lambda_j^{(k)}$ is the $j$-th largest eigenvalue of $L(G_k)$.
+	\end{lem}
+	\begin{proof}
+		
+		[nullstellensatz]
+		
+		[eigenvalue interlacing]
+	\end{proof}
+	
+	Lemma \ref{Lem-NullstellensatzEigenvalueInterlacing} on its own is not so powerful because we cannot in general control $|P|$ or $|D|$.  What follows are conditions that enable us to control these quantities, which will enable us to prove necessary lower bounds on the relation cardinalities.
+	
+	There is a special case when $n/2$ or $(n+1)/2$ is prime since in this case the point vertices of the subgraph of $\mathcal{M}$ given by the nullstellensatz must have degree $p$.
+	
+	\begin{cor}
+		If $\ceil{n/2}$ is prime, then $m \geq |D|$ and 
+		$$m p \leq \sum_{k \in D}\sum_{j =1}^{m}\lambda_j^{(k)}.$$
+	\end{cor}
+	\begin{proof}
+		We have $m = \sum_{k \in D}\ell_k$.
+	\end{proof}
+	
+	Let $X_1, \ldots, X_s$ be finite sets with cardinalities $n_1,\ldots, n_s$, respectively.  Let $R_1, \ldots, R_r$ be a relation partition of the union of unordered pairs from each of $X_1, \ldots, X_s$.  Let $p$ be the largest prime satisfying $p-1 < \tfrac{n_i(n_i-1)}{n_i+r}$ for all $i \in [s]$.  Then there exists a $D \subseteq [r]$ and $m \geq 1$ such that for all $k \in D$, there exists a nonnegative integer sequence $(\ell_k^{(1)}, \ldots, \ell_k^{(s)})$, not all $0$ such that
+	$$ \sum_{i = 1}^s\ell_k^{(i)}p \leq \sum_{j=1}^m \lambda_j^{(k)}.$$
+	
+	[proof of something like this]
+	
+	Under what conditions can we ensure that all subgraphs given by the nullstellensatz share a relation vertex?  Such conditions provide a natural lower bound on a maximum cardinality of a relation.  The next theorem presents such a condition.
+	
+	\begin{thm}
+		Suppose there exists an integer $t$ satisfying $t(t-1) = \sum_{i=1}^s n_i(n_i-1)$.  Suppose each $G_k$ has max degree $d$, $r = t-1$, and $s \geq Cd^2$... other conditions needed.  Then there exists a $k \in [r]$ such that $|R_k| \geq t$.
+	\end{thm}
+
+	\begin{rem}
+		Notice that the above theorem provides a general necessary condition for the existence of a crescent family.
+	\end{rem}
+	
+\end{document}
