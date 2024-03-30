@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.26)  24 MAR 2024 10:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.26)  30 MAR 2024 00:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -911,25 +911,58 @@ LaTeX Font Info:    Trying to load font information for U+bbold on input line 8
 (c:/texlive/2022/texmf-dist/tex/latex/bbold/Ubbold.fd) [1
 
 {c:/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-Overfull \hbox (16.33516pt too wide) in paragraph at lines 172--173
-[]\OT1/cmr/m/n/12 Let $\OML/cmm/m/it/12 X[]; [] ; X[]$ \OT1/cmr/m/n/12 be fi-ni
-te sets with car-di-nal-i-ties $\OML/cmm/m/it/12 n[]; [] ; n[]$\OT1/cmr/m/n/12 
-, re-spec-tively. Let $\OML/cmm/m/it/12 R[]; [] ; R[]$
+Overfull \hbox (8.44577pt too wide) in paragraph at lines 150--151
+[][]\OT1/cmr/bx/n/12 Lemma 1 \OT1/cmr/m/n/12 (Com-bi-na-to-rial Null-stel-len-s
+atz)\OT1/cmr/bx/n/12 . []\OT1/cmr/m/it/12 Let $\U/bbold/m/n/12 F$ \OT1/cmr/m/it
+/12 be a field and let $\OML/cmm/m/it/12 f \OMS/cmsy/m/n/12 2 \U/bbold/m/n/12 F
+\OT1/cmr/m/n/12 [\OML/cmm/m/it/12 x[]; x[]; [] ; x[]\OT1/cmr/m/n/12 ]$
  []
 
-[4] [5] (./PolynomialMethod-FiniteMetricSpaces.aux)
+
+LaTeX Warning: Citation `alon' on page 4 undefined on input line 166.
+
+[4]
+
+LaTeX Warning: Reference `Lemma-CombinatorialNullstellensatz' on page 5 undefin
+ed on input line 176.
+
+[5] [6] [7]
+
+Package amsmath Warning: Foreign command \atopwithdelims;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 236.
+
+[8]
+Overfull \hbox (29.68948pt too wide) in paragraph at lines 271--272
+[][]\OT1/cmr/bx/n/12 Corollary 7.2. []\OT1/cmr/m/it/12 If $\OML/cmm/m/it/12 X[]
+; [] ; X[]$ \OT1/cmr/m/it/12 are fi-nite sets with sym-met-ric re-la-tion par-t
+i-tions $\OML/cmm/m/it/12 P[]; [] ; P[] \OMS/cmsy/m/n/12 ^^R
+ []
+
+
+Overfull \hbox (39.57997pt too wide) in paragraph at lines 271--272
+\OMS/cmsy/m/n/12 f\OML/cmm/m/it/12 R[]; [] ; R[]\OMS/cmsy/m/n/12 g$ \OT1/cmr/m/
+it/12 with max de-gree $\OML/cmm/m/it/12 d$\OT1/cmr/m/it/12 . Let $\OML/cmm/m/i
+t/12 p$ \OT1/cmr/m/it/12 be the largest prime sat-is-fy-ing $\OML/cmm/m/it/12 p
+ \OMS/cmsy/m/n/12 ^^T [][] [][][]$\OT1/cmr/m/it/12 .
+ []
+
+[9] (./PolynomialMethod-FiniteMetricSpaces.aux)
+
+LaTeX Warning: There were undefined references.
+
 Package rerunfilecheck Info: File `PolynomialMethod-FiniteMetricSpaces.out' has
  not changed.
-(rerunfilecheck)             Checksum: B14B37CB1EBA59B19C02363AA8706A38;1462.
+(rerunfilecheck)             Checksum: 7F5D912CB8C420A546ABCF92CA4FA431;1611.
  ) 
 Here is how much of TeX's memory you used:
- 26232 strings out of 478037
- 488106 string characters out of 5843053
- 871392 words of memory out of 5000000
- 44193 multiletter control sequences out of 15000+600000
- 479175 words of font info for 68 fonts, out of 8000000 for 9000
+ 26251 strings out of 478037
+ 488376 string characters out of 5843053
+ 871556 words of memory out of 5000000
+ 44202 multiletter control sequences out of 15000+600000
+ 479796 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,6n,131p,592b,545s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,7n,131p,1838b,567s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2022/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pfb><c:/te
 xlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/202
 2/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2022/texmf-d
@@ -940,13 +973,14 @@ ts/cm/cmr12.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 7.pfb><c:/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/t
 exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2022
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2022/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2022/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmti12.pfb>
-Output written on PolynomialMethod-FiniteMetricSpaces.pdf (5 pages, 158701 byte
+st/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2022/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmti12.pfb>
+Output written on PolynomialMethod-FiniteMetricSpaces.pdf (9 pages, 196350 byte
 s).
 PDF statistics:
- 138 PDF objects out of 1000 (max. 8388607)
- 103 compressed objects within 2 object streams
- 22 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 183 PDF objects out of 1000 (max. 8388607)
+ 142 compressed objects within 2 object streams
+ 30 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
