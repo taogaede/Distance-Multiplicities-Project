@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.26)  30 MAR 2024 17:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.6.26)  30 MAR 2024 17:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**PolynomialMethod-FiniteMetricSpaces.tex
-(./PolynomialMethod-FiniteMetricSpaces.tex
+**PolynomialMethod-RelationPartitions.tex
+(./PolynomialMethod-RelationPartitions.tex
 LaTeX2e <2022-06-01> patch level 3
 L3 programming layer <2022-06-16>
 (c:/texlive/2022/texmf-dist/tex/latex/base/article.cls
@@ -795,8 +795,8 @@ Package: mathbbol 1995/01/01
 \c@eg=\count346
 \c@obs=\count347
 
-(./PolynomialMethod-FiniteMetricSpaces.aux)
-\openout1 = `PolynomialMethod-FiniteMetricSpaces.aux'.
+(./PolynomialMethod-RelationPartitions.aux)
+\openout1 = `PolynomialMethod-RelationPartitions.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
 LaTeX Font Info:    ... okay on input line 86.
@@ -888,10 +888,10 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
 Package hyperref Info: Link coloring OFF on input line 86.
 
-(./PolynomialMethod-FiniteMetricSpaces.out)
-(./PolynomialMethod-FiniteMetricSpaces.out)
+(./PolynomialMethod-RelationPartitions.out)
+(./PolynomialMethod-RelationPartitions.out)
 \@outlinefile=\write4
-\openout4 = `PolynomialMethod-FiniteMetricSpaces.out'.
+\openout4 = `PolynomialMethod-RelationPartitions.out'.
 
 LaTeX Font Info:    Trying to load font information for U+msa on input line 88.
 
@@ -933,8 +933,8 @@ Overfull \hbox (23.27336pt too wide) in paragraph at lines 255--256
 /m/n/12 .
  []
 
-[5] [6] [7] [8] [9] (./PolynomialMethod-FiniteMetricSpaces.aux)
-Package rerunfilecheck Info: File `PolynomialMethod-FiniteMetricSpaces.out' has
+[5] [6] [7] [8] [9] (./PolynomialMethod-RelationPartitions.aux)
+Package rerunfilecheck Info: File `PolynomialMethod-RelationPartitions.out' has
  not changed.
 (rerunfilecheck)             Checksum: 1AADD45DB6E04787035CF1240C1EDC7F;860.
  ) 
@@ -959,7 +959,7 @@ exlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2022
 st/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2022/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2022/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmti12.pfb>
-Output written on PolynomialMethod-FiniteMetricSpaces.pdf (9 pages, 200107 byte
+Output written on PolynomialMethod-RelationPartitions.pdf (9 pages, 200107 byte
 s).
 PDF statistics:
  194 PDF objects out of 1000 (max. 8388607)
